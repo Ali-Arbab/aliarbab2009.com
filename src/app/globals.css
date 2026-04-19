@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Site-default theme (dark editorial)
+   All tokens here are read by Tailwind v4 utilities via @theme.
+   Per-project route layouts override via .theme-* class.
+   ============================================================ */
+
+@theme {
+  /* Site-default palette */
+  --color-bg: #0b0b0f;
+  --color-fg: #f5f5f2;
+  --color-muted: #8c8c96;
+  --color-primary: oklch(0.74 0.14 190);
+  --color-primary-fg: #0b0b0f;
+  --color-surface: #14141a;
+  --color-surface-2: #1c1c24;
+  --color-border: #2a2a34;
+  --color-success: oklch(0.7 0.18 150);
+  --color-warning: oklch(0.85 0.15 80);
+  --color-danger: oklch(0.7 0.2 20);
+  --color-glow: color-mix(in oklch, var(--color-primary), transparent 60%);
+
+  /* Typography */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Radii + motion */
+  --radius-base: 12px;
+  --radius-pill: 9999px;
+  --motion-fast: 120ms;
+  --motion-base: 240ms;
+  --motion-slow: 480ms;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ============================================================
+   Per-project theme worlds
+   Applied on <main className="theme-*"> in each project layout.
+   Shell (Nav/Footer) stays on site-default theme.
+   ============================================================ */
+
+.theme-stocksaathi {
+  --color-primary: #00b386;
+  --color-primary-fg: #0a0b0f;
+  --color-bg: #0a0b0f;
+  --color-fg: #e8ecef;
+  --color-muted: #8892a0;
+  --color-surface: #0a0b0f;
+  --color-surface-2: #12141a;
+  --color-border: #1f2430;
+  --color-glow: color-mix(in oklch, #00b386, transparent 55%);
+  --radius-base: 12px;
+}
+
+.theme-bolhisaab {
+  --color-primary: #4f46e5;
+  --color-primary-fg: #fafaf9;
+  --color-bg: #fafaf9;
+  --color-fg: #18181b;
+  --color-muted: #71717a;
+  --color-surface: #fafaf9;
+  --color-surface-2: #f3f3ef;
+  --color-border: #e7e5e0;
+  --color-success: #10b981;
+  --color-danger: #f43f5e;
+  --color-glow: color-mix(in oklch, #4f46e5, transparent 70%);
+  --radius-base: 16px;
+}
+
+.theme-maglock {
+  --color-primary: #00ff9d;
+  --color-primary-fg: #030306;
+  --color-bg: #030306;
+  --color-fg: #b8c4d8;
+  --color-muted: #7080a0;
+  --color-surface: #030306;
+  --color-surface-2: #0a0a15;
+  --color-border: #1e1e36;
+  --color-danger: #ff3366;
+  --color-warning: #ffd700;
+  --color-glow: color-mix(in oklch, #00ff9d, transparent 50%);
+  --radius-base: 2px; /* sharp cyberpunk corners */
+}
+
+/* ============================================================
+   Base element styling
+   ============================================================ */
+
+html {
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1,
+    "ss01" 1;
+  min-height: 100dvh;
+}
+
+main {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  transition: background-color var(--motion-base) var(--motion-ease);
+}
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+}
+
+/* Focus ring — theme-colored, never removed */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced-motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
