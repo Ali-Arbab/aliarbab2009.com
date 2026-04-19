@@ -10,8 +10,7 @@ export default function Icon() {
         style={{
           width: "100%",
           height: "100%",
-          background:
-            "conic-gradient(from 0deg at 50% 50%, #00B386 0deg, #4F46E5 140deg, #00FF9D 270deg, #00B386 360deg)",
+          background: "linear-gradient(135deg, #00B386 0%, #4F46E5 50%, #00FF9D 100%)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

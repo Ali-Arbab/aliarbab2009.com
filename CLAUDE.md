@@ -1,10 +1,10 @@
-# CLAUDE.md — conventions for `aliarbab.com`
+# CLAUDE.md — conventions for `aliarbab2009.com`
 
 Context for future Claude sessions working in this repo.
 
 ## Project overview
 
-Personal portfolio at `aliarbab.com`. Three project worlds (StockSaathi, BolHisaab, MagLock Protocol) composed into one site. Ali Arbab is a Class XII student building this to share with college admissions officers, recruiters, and collaborators.
+Personal portfolio at `aliarbab2009.com`. Three project worlds (StockSaathi, BolHisaab, MagLock Protocol) composed into one site. Ali Arbab is a Class XII student building this to share with college admissions officers, recruiters, and collaborators.
 
 Plan file (read before major new phases): `C:\Users\Alig\.claude\plans\i-own-stocksaathi-aliarbab2009-stocksaat-kind-pine.md`.
 

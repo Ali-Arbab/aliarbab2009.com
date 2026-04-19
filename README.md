@@ -1,6 +1,6 @@
-# aliarbab.com
+# aliarbab2009.com
 
-Personal portfolio. Three project worlds (StockSaathi, BolHisaab, MagLock Protocol) composed into a single site at `aliarbab.com`.
+Personal portfolio. Three project worlds (StockSaathi, BolHisaab, MagLock Protocol) composed into a single site at `aliarbab2009.com`.
 
 ## Stack
 
@@ -53,4 +53,4 @@ Internal deadlines live in `PRIVATE_CALENDAR.md` which is gitignored. Never comm
 
 ## Deploy
 
-Every push to `main` auto-deploys to Vercel. Preview deploys on every PR. DNS points `aliarbab.com` apex + `www` to Vercel via A + CNAME records. HSTS is set in `next.config.ts` headers.
+Every push to `main` auto-deploys to Vercel. Preview deploys on every PR. DNS points `aliarbab2009.com` apex + `www` to Vercel via A + CNAME records. HSTS is set in `next.config.ts` headers.

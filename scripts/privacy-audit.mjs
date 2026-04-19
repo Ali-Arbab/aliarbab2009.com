@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Privacy audit — CI gate for aliarbab.com.
+ * Privacy audit — CI gate for aliarbab2009.com.
  *
  * Recursively scans the built `.next` output + the `public/` directory
  * for a forbidden-token list. Fails the process with exit code 1 on
@@ -188,7 +188,7 @@ async function main() {
     console.error(
       `\n\x1b[31m✗ Privacy audit FAILED.\x1b[0m ${violations} violation${violations === 1 ? "" : "s"} found.`,
     );
-    console.error(`   See aliarbab.com's CLAUDE.md for the privacy rules.`);
+    console.error(`   See aliarbab2009.com's CLAUDE.md for the privacy rules.`);
     process.exit(1);
   }
 

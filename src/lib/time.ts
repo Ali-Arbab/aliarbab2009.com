@@ -1,7 +1,7 @@
 /**
  * Pure time utilities — zero external input.
  *
- * All countdown math on aliarbab.com runs through these functions.
+ * All countdown math on aliarbab2009.com runs through these functions.
  * ISO dates live in src/config/milestones.ts and are baked into the
  * bundle at build time. The client ticks purely from `new Date()`
  * on a setInterval — no fetches, no server round-trips.

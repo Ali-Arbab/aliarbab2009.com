@@ -42,7 +42,7 @@ jobs:
 
       - name: Build
         env:
-          NEXT_PUBLIC_SITE_URL: https://aliarbab.com
+          NEXT_PUBLIC_SITE_URL: https://aliarbab2009.com
         run: pnpm build
 
       - name: Privacy audit

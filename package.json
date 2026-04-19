@@ -1,8 +1,8 @@
 {
-  "name": "aliarbab-com",
+  "name": "aliarbab2009-com",
   "version": "0.1.0",
   "private": true,
-  "description": "Personal portfolio — aliarbab.com",
+  "description": "Personal portfolio — aliarbab2009.com",
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
