@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/resume.pdf",
+      "destination": "/resume/ali-arbab-resume.pdf",
+      "permanent": false
+    }
+  ]
+}
