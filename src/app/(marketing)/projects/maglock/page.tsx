@@ -1,9 +1,7 @@
 import Link from "next/link";
 
 import { getProjectBySlug } from "@/config/projects";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
 const project = getProjectBySlug("maglock")!;
 
@@ -14,43 +12,163 @@ export const metadata = {
 
 export default function MagLockPage() {
   return (
-    <article className="mx-auto w-full max-w-6xl px-6 pt-20 pb-16">
-      <header className="flex flex-col gap-6">
-        <div className="flex flex-wrap items-center gap-3">
-          <Badge variant="muted">◆ {project.statusLabel}</Badge>
-          <span className="font-mono text-xs text-[var(--color-muted)]">{project.year}</span>
+    <div className="relative mx-auto w-full max-w-[1400px] px-6 pt-16 pb-16 sm:pt-20">
+      <div className="brutalist-grid" aria-hidden />
+
+      {/* MASTHEAD */}
+      <header className="mb-16 grid grid-cols-12 gap-4 border-b-2 border-[var(--color-border)] pb-6">
+        <div className="col-span-6 flex flex-col gap-2 md:col-span-3">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            Author
+          </p>
+          <p className="font-mono text-sm font-medium">{siteConfig.author}</p>
         </div>
-        <h1 className="font-display text-5xl leading-tight tracking-tight text-[var(--color-primary)] sm:text-7xl">
-          {project.name}
-        </h1>
-        <p className="max-w-3xl text-xl leading-relaxed text-[var(--color-fg)]">
-          {project.tagline}.
-        </p>
-        <p className="max-w-3xl text-base leading-relaxed text-[var(--color-muted)]">
-          {project.description}
-        </p>
+        <div className="col-span-6 flex flex-col gap-2 md:col-span-3">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            Project
+          </p>
+          <p className="font-mono text-sm font-medium">03 / {project.name}</p>
+        </div>
+        <div className="col-span-6 flex flex-col gap-2 md:col-span-3">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            Status
+          </p>
+          <p className="font-mono text-sm font-medium text-[var(--color-primary)]">
+            ◆ {project.statusLabel}
+          </p>
+        </div>
+        <div className="col-span-6 flex flex-col gap-2 md:col-span-3">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            Navigate
+          </p>
+          <p className="font-mono text-sm font-medium">
+            <Link href="/projects" className="hover:text-[var(--color-primary)]">
+              ← projects
+            </Link>
+          </p>
+        </div>
       </header>
 
-      <section className="mt-14 flex flex-wrap items-center gap-3 text-sm">
-        <Link
-          href={project.repoUrl}
-          target="_blank"
-          rel="noreferrer"
-          className={cn(buttonVariants({ variant: "primary", size: "md" }))}
-        >
-          View source on GitHub
-        </Link>
+      {/* § 01 — HEADLINE + PITCH */}
+      <section className="mb-20 grid grid-cols-12 gap-4">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 01
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Pitch
+          </p>
+        </div>
+        <div className="col-span-12 flex flex-col gap-8 md:col-span-10">
+          <h1
+            className="text-[clamp(3rem,7vw,6rem)] leading-[0.9] font-medium tracking-[-0.02em] text-[var(--color-primary)]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {project.name}
+          </h1>
+          <p
+            className="max-w-3xl text-2xl leading-snug font-medium text-[var(--color-fg)]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {project.tagline}.
+          </p>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
+            {project.description}
+          </p>
+        </div>
       </section>
 
-      <section className="mt-16 rounded-[var(--radius-base)] border border-dashed border-[var(--color-border)] p-8 text-center">
-        <p className="font-mono text-xs tracking-[0.2em] text-[var(--color-muted)] uppercase">
-          Case study — coming soon
-        </p>
-        <p className="mt-2 text-sm text-[var(--color-muted)]">
-          Architecture diagrams of the Flutter → ESP32 REST loop + the ESP32-CAM MJPEG pipeline,
-          a gallery of 27 real snapshots, and a demo video of the dual-relay unlock ship in Phase 2.
-        </p>
+      {/* § 02 — ACCESS */}
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 02
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Access
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-10">
+          <ul className="grid grid-cols-1 gap-0 border-2 border-[var(--color-border)] md:grid-cols-2">
+            <li className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0">
+              <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
+                Deployment
+              </p>
+              <p className="mt-2 font-mono text-lg font-medium text-[var(--color-muted)]">
+                Hardware-dependent
+              </p>
+              <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
+                Flutter + ESP32 · local-network only
+              </p>
+            </li>
+            <li className="p-6">
+              <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
+                Source
+              </p>
+              <Link
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-flex items-baseline gap-2 font-mono text-lg font-medium hover:text-[var(--color-primary)]"
+              >
+                github.com/aliarbab2009/MagLock-Protocol <span aria-hidden>↗</span>
+              </Link>
+              <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
+                Flutter · Dart · ESP32 · Arduino C++
+              </p>
+            </li>
+          </ul>
+        </div>
       </section>
-    </article>
+
+      {/* § 03 — STACK */}
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 03
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Stack
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-10">
+          <ul className="flex flex-wrap gap-0">
+            {project.stack.map((tech) => (
+              <li
+                key={tech}
+                className="-mr-px -mb-px border border-[var(--color-border)] px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* § 04 — COMING SOON */}
+      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 04
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Case
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-10">
+          <div className="border-2 border-dashed border-[var(--color-border)] p-10 text-center">
+            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+              Case study — coming soon
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
+              Architecture diagrams of the Flutter → ESP32 REST loop + the ESP32-CAM MJPEG
+              pipeline, a gallery of 27 real camera snapshots, two demo videos of the dual-relay
+              unlock + Maggy voice interaction, and a write-up of the hardcoded-WiFi-creds
+              security incident ship in Phase 2.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
