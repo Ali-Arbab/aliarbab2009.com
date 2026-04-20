@@ -138,25 +138,27 @@
   --radius-base: 2px;
 }
 
-/* Variant 4 — BRUTALIST / MONO-GRID / GLASS HYBRID
-   Swiss/brutalist grid, hairline black borders, mono type,
-   one cobalt accent, zero radius. Glass panels on hover
-   (backdrop-blur + translucent). Visible grid overlay. */
+/* Variant 4 — BRUTALIST / MONO-GRID / GLASS HYBRID (DARK)
+   Swiss/brutalist grid, hairline off-white borders, mono type,
+   one bright cobalt accent, zero radius. Glass panels on hover
+   (backdrop-blur + translucent). Visible grid overlay.
+   Dark-mode so it doesn't blind viewers at night. */
 .variant-brutalist {
-  --color-bg: #f4f4f0;
-  --color-fg: #0a0a0a;
-  --color-muted: #4a4a4a;
-  --color-primary: #0033ff; /* cobalt */
-  --color-primary-fg: #f4f4f0;
-  --color-surface: #f4f4f0;
-  --color-surface-2: #ebebe5;
-  --color-border: #0a0a0a;
-  --color-glow: color-mix(in oklch, #0033ff, transparent 80%);
+  --color-bg: #0a0a0a;
+  --color-fg: #f0f0ea;
+  --color-muted: #8a8a8a;
+  --color-primary: #6b82ff; /* brighter cobalt, ~4.8:1 on #0a0a0a */
+  --color-primary-fg: #0a0a0a;
+  --color-surface: #0a0a0a;
+  --color-surface-2: #141414;
+  --color-border: #f0f0ea;
+  --color-glow: color-mix(in oklch, #6b82ff, transparent 70%);
+  --color-grid-line: rgba(240, 240, 234, 0.06);
   --font-display: var(--font-space-grotesk), sans-serif;
   --font-body: var(--font-space-grotesk), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
   --radius-base: 0px;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 /* ============================================================
@@ -289,13 +291,16 @@ main {
   background-blend-mode: multiply;
 }
 
-/* Brutalist grid overlay */
+/* Brutalist grid overlay — uses --color-grid-line so it adapts to bg luminance */
 .variant-brutalist-grid {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(10, 10, 10, 0.06) 1px, transparent 1px);
+  background-image: linear-gradient(
+    to right,
+    var(--color-grid-line, rgba(10, 10, 10, 0.06)) 1px,
+    transparent 1px
+  );
   background-size: calc(100% / 12) 100%;
 }
 
@@ -314,6 +319,6 @@ main {
     backdrop-filter 240ms var(--motion-ease);
 }
 .variant-brutalist-glass-hover:hover {
-  background-color: rgba(244, 244, 240, 0.6);
+  background-color: color-mix(in srgb, var(--color-surface-2), transparent 30%);
   backdrop-filter: blur(14px);
 }
