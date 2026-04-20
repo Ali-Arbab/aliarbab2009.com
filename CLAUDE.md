@@ -22,11 +22,19 @@ Internal/private dates (application freeze dates, etc.) live in `PRIVATE_CALENDA
 
 All countdowns must be purely client-local. ISO dates baked into `src/config/milestones.ts`. `src/lib/time.ts#timeUntil()` is a pure function. `<LiveCountdown>` is a client component that ticks from `new Date()` via `setInterval(1000)` — no API calls, ever. Works offline after first paint. In written docs, use absolute dates only (never "+N days" snapshots).
 
+### Site aesthetic — brutalist dark (with light toggle)
+
+The site default is **Swiss/brutalist**: 12-col mono-grid, hairline off-white borders on near-black, Space Grotesk + JetBrains Mono, single bright cobalt accent `#6b82ff`, zero radius. Light mode flips to cream `#f4f4f0` with black hairlines and pure cobalt `#0033ff`.
+
+The mode is controlled by `data-theme="dark"` / `data-theme="light"` on `<html>`, set by `<ThemeScript>` (inline, pre-paint) and flipped by `<ThemeToggle>` in the nav. User preference persists to `localStorage.theme`; first-visit defaults respect `prefers-color-scheme` and fall back to dark.
+
+Tokens live in `src/app/globals.css` as a root `@theme` block (dark) plus `:root[data-theme="light"]` override.
+
 ### Per-project theming
 
-Each of the three project detail pages is a distinct world — palette, typography, motion language, background texture. Implementation: CSS custom properties + Tailwind v4 `@theme` + a route-scoped `.theme-*` class on `<main>` (NOT on the shell — nav + footer stay on site-default). See `src/app/globals.css` for the three theme blocks.
+Project detail pages (`/projects/<slug>`) each wrap their `<main>` in a `.theme-<slug>` class that overrides the brutalist tokens. Three project worlds live in `src/app/globals.css`: `.theme-stocksaathi` (teal on deep-black), `.theme-bolhisaab` (indigo on cream), `.theme-maglock` (neon green on pure black). Shell (nav, footer) stays on the site-default brutalist tokens, so visitors feel "inside Ali's site but now in a project's world."
 
-Do not introduce separate `<Button>` variants like `<StockSaathiButton>` — the single `<Button>` auto-themes because its `bg-primary` reads from `--color-primary` which is overridden by the theme class.
+Do not introduce separate `<Button>` variants like `<StockSaathiButton>` — the single `<Button>` auto-themes because its `bg-primary` reads from `--color-primary` which is overridden by the project theme class.
 
 ## Conventions
 
@@ -47,6 +55,7 @@ Do not introduce separate `<Button>` variants like `<StockSaathiButton>` — the
 - `public/{fonts,textures,projects,resume,og,social}`
 - `scripts` — `optimize-media.mjs`, `scrub-metadata.mjs`, `privacy-audit.mjs`, `clone-reference-repos.sh`
 - `_repos/` (gitignored) — reference clones of StockSaathi + BolHisaab
+- `_archive/` (tracked) — dormant code kept for reference (archived aesthetic variants). Never import from here.
 - `maglock_protocol/` (gitignored) — local MagLock source
 
 ### Styling
@@ -77,3 +86,5 @@ Do not introduce separate `<Button>` variants like `<StockSaathiButton>` — the
 - `_repos/StockSaathi/` and `_repos/BolHisaab/` are likewise gitignored reference clones. Read them; don't depend on them at build time.
 - Tailwind v4 has no `tailwind.config.ts` by default — tokens live in `@theme` directive inside `src/app/globals.css`. If we ever add a plugin, we can re-introduce a config file for plugins only.
 - MDX pipeline via `velite` is added in Phase 1 (not Phase 0). Phase 0 is "coming soon" stubs + deploy.
+- Fonts: only `Space_Grotesk` + `JetBrains_Mono` are loaded (via `next/font/google`). The earlier Fraunces / Instrument Serif / Orbitron / Rajdhani / Inter imports were dropped when brutalist was promoted — the archived variants in `_archive/` still reference them in CSS comments but the actual `next/font/google` calls are gone.
+- The `<LiveCountdown>` component at `src/components/shell/live-countdown.tsx` is not yet used in any visible page after the neon-minimal home was archived. It stays because (a) it's lightweight and (b) Phase 3 /about academic snapshot will use it for AP exam countdowns. Do not delete it prematurely.

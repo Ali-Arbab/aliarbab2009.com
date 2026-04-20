@@ -1,62 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Fraunces,
-  Inter,
-  Instrument_Serif,
-  JetBrains_Mono,
-  Orbitron,
-  Rajdhani,
-  Space_Grotesk,
-} from "next/font/google";
+import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 
+import { ThemeScript } from "@/components/shell/theme-script";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-space-grotesk",
   display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  axes: ["opsz"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  display: "swap",
-  style: ["normal", "italic"],
-});
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  variable: "--font-orbitron",
-  display: "swap",
-});
-
-const rajdhani = Rajdhani({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-rajdhani",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -102,8 +61,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0b0b0f" },
-    { media: "(prefers-color-scheme: light)", color: "#faf7f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f4f0" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -113,21 +72,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={cn(
-        inter.variable,
-        fraunces.variable,
-        jetbrainsMono.variable,
-        instrumentSerif.variable,
-        orbitron.variable,
-        rajdhani.variable,
-        spaceGrotesk.variable,
-      )}
+      className={cn(spaceGrotesk.variable, jetbrainsMono.variable)}
       suppressHydrationWarning
     >
-      <body className="min-h-dvh font-[family-name:var(--font-inter)] antialiased">
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="min-h-dvh antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-[var(--color-primary)] focus:px-3 focus:py-2 focus:text-[var(--color-primary-fg)]"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-[var(--color-primary)] focus:px-3 focus:py-2 focus:text-[var(--color-primary-fg)]"
         >
           Skip to content
         </a>

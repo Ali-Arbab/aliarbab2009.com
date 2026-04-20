@@ -4,18 +4,12 @@ import { siteConfig } from "@/config/site";
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-[var(--color-border)]/60 py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 sm:flex-row sm:items-center">
-        <div className="flex flex-col gap-1">
-          <p className="font-mono text-sm">
-            ali arbab<span className="text-[var(--color-muted)]">.com</span>
-          </p>
-          <p className="text-xs text-[var(--color-muted)]">
-            {siteConfig.shortDescription}
-          </p>
-        </div>
-
-        <ul className="flex items-center gap-5 text-sm text-[var(--color-muted)]">
+    <footer className="mt-24 border-t-2 border-[var(--color-border)] py-8">
+      <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-4 px-6 text-xs sm:flex-row sm:items-center">
+        <p className="font-mono tracking-[0.2em] text-[var(--color-muted)] uppercase">
+          © 2026 / {siteConfig.author} / Set in Space Grotesk + JetBrains Mono
+        </p>
+        <ul className="flex items-center gap-5 font-mono tracking-[0.2em] text-[var(--color-muted)] uppercase">
           <li>
             <Link
               href={siteConfig.github}
@@ -27,18 +21,12 @@ export function Footer() {
             </Link>
           </li>
           <li>
-            <Link
-              href="/contact"
-              className="transition-colors hover:text-[var(--color-fg)]"
-            >
+            <Link href="/contact" className="transition-colors hover:text-[var(--color-fg)]">
               Contact
             </Link>
           </li>
           <li>
-            <Link
-              href="/resume"
-              className="transition-colors hover:text-[var(--color-fg)]"
-            >
+            <Link href="/resume" className="transition-colors hover:text-[var(--color-fg)]">
               Resume
             </Link>
           </li>
