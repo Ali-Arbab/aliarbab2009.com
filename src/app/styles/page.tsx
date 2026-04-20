@@ -47,10 +47,10 @@ const VARIANTS = [
     number: "04",
     name: "Brutalist / mono-grid",
     summary:
-      "Swiss grid, hairline black borders, Space Grotesk, cobalt accent, glass on hover, zero radius.",
-    bg: "#f4f4f0",
-    fg: "#0a0a0a",
-    accent: "#0033ff",
+      "Swiss grid, hairline off-white borders on near-black, Space Grotesk, bright cobalt accent, glass on hover, zero radius.",
+    bg: "#0a0a0a",
+    fg: "#f0f0ea",
+    accent: "#6b82ff",
     tagline: "Systematic. Typographic. One accent.",
   },
 ] as const;
