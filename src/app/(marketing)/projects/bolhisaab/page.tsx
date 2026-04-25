@@ -1,14 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { getProjectBySlug } from "@/config/projects";
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
 const project = getProjectBySlug("bolhisaab")!;
 
-export const metadata = {
-  title: project.name,
-  description: project.tagline,
-};
+export const metadata: Metadata = buildMetadata({
+  title: "BolHisaab — Voice-first Hindi ledger",
+  description:
+    "BolHisaab is a voice-first Hindi ledger for shopkeepers. Speak a transaction, watch the entry write itself. Whisper, Llama three, append-only Supabase.",
+  path: "/projects/bolhisaab",
+  ogImage: "/og/projects/bolhisaab.png",
+  ogImageAlt: "BolHisaab — voice-first Hindi ledger for shopkeepers",
+  ogType: "article",
+  publishedTime: `${project.year}-10-15T00:00:00.000Z`,
+  keywords: ["BolHisaab", "Voice", "Hindi", "Ledger", "Shopkeepers", "Whisper"],
+});
 
 export default function BolHisaabPage() {
   return (
