@@ -53,6 +53,13 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Test (vitest)
+        # Pure-function unit tests for the live-countdown stack,
+        # XSS-safe JSON serializer, milestones data integrity, and
+        # buildMetadata canonicals. Fails fast on regressions to the
+        # privacy-load-bearing parts of the site.
+        run: pnpm test
+
       - name: Build
         env:
           NEXT_PUBLIC_SITE_URL: https://aliarbab2009.com
