@@ -1,3 +1,4 @@
+import { CommandPalette } from "@/components/shell/command-palette";
 import { Footer } from "@/components/shell/footer";
 import { Nav } from "@/components/shell/nav";
 
@@ -9,6 +10,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
         {children}
       </main>
       <Footer />
+      <CommandPalette />
     </>
   );
 }
