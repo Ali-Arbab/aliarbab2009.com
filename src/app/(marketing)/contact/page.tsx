@@ -1,11 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Contact",
-  description: "Get in touch — form + email + socials.",
-};
+  description:
+    "Email or send a message via the form. I read everything that lands within forty-eight hours and reply if there is something specific to say back.",
+  path: "/contact",
+  ogImage: "/og/contact.png",
+  ogImageAlt: "Contact Ali Arbab — email and form",
+});
 
 export default function ContactPage() {
   return (

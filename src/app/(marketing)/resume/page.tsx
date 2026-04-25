@@ -1,11 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Resume",
-  description: "Download Ali Arbab's resume (PDF).",
-};
+  description:
+    "Class XII student with four AP exams in progress and three live projects in AI, voice, and IoT. Download the one-page resume as PDF or read it on this page.",
+  path: "/resume",
+  ogImage: "/og/resume.png",
+  ogImageAlt: "Resume of Ali Arbab — Class XII builder",
+});
 
 export default function ResumePage() {
   return (
