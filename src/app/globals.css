@@ -208,3 +208,216 @@ main {
   background-color: color-mix(in srgb, var(--color-surface-2), transparent 30%);
   backdrop-filter: blur(14px);
 }
+
+/* ============================================================
+   PRINT — admissions-officer-friendly PDF / paper output
+   Goal: black ink on white paper, no shell chrome, no decoration,
+   page-break-aware, URLs visible inline. Forces light-style tokens
+   regardless of data-theme so the result is monochrome regardless
+   of the user's screen mode at print time.
+   ============================================================ */
+
+@media print {
+  /* Page geometry — 0.75in margins comfortable on Letter + A4 */
+  @page {
+    margin: 0.75in;
+  }
+
+  /* Force monochrome light tokens across every theme branch.
+     !important is required because per-component utilities also write these. */
+  :root,
+  :root[data-theme="dark"],
+  :root[data-theme="light"],
+  .theme-stocksaathi,
+  .theme-bolhisaab,
+  .theme-maglock {
+    --color-bg: #ffffff !important;
+    --color-fg: #000000 !important;
+    --color-muted: #555555 !important;
+    --color-primary: #000000 !important;
+    --color-primary-fg: #ffffff !important;
+    --color-surface: #ffffff !important;
+    --color-surface-2: #ffffff !important;
+    --color-border: #000000 !important;
+    --color-glow: transparent !important;
+    --color-grid-line: transparent !important;
+    color-scheme: light !important;
+  }
+
+  /* Body / typography baseline */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  main {
+    background: #ffffff !important;
+    color: #000000 !important;
+    transition: none !important;
+  }
+
+  /* Replace clamp(...) viewport-width units with fixed pt sizes */
+  h1 {
+    font-size: 24pt !important;
+    line-height: 1.1 !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h2 {
+    font-size: 18pt !important;
+    line-height: 1.15 !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h3 {
+    font-size: 14pt !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h4,
+  h5,
+  h6 {
+    font-size: 12pt !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    font-size: 11pt;
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Hide every shell-chrome / decoration element */
+  .no-print,
+  nav,
+  footer,
+  .brutalist-grid,
+  [data-theme-toggle],
+  [data-no-print] {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  /* Hairline borders → 0.5pt solid black */
+  *,
+  *::before,
+  *::after {
+    border-color: #000000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+  .border-2,
+  [class*="border-b-2"],
+  [class*="border-t-2"],
+  [class*="border-l-2"],
+  [class*="border-r-2"] {
+    border-width: 0.5pt !important;
+  }
+  .border-dashed {
+    border-style: solid !important;
+  }
+
+  /* Force opacity-tinted text to readable black */
+  [class*="text-[var(--color-fg)]"],
+  [class*="text-[var(--color-muted)]"],
+  [class*="text-[var(--color-primary)]"] {
+    color: #000000 !important;
+  }
+
+  /* Links — show external URLs inline */
+  a,
+  a:visited {
+    color: #000000 !important;
+    text-decoration: underline;
+    text-decoration-thickness: 0.5pt;
+    text-underline-offset: 2pt;
+  }
+  a[href^="http"]::after,
+  a[href^="https"]::after,
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85em;
+    font-weight: normal;
+    word-break: break-all;
+  }
+  /* Skip annotation on internal links + same-page anchors */
+  a[href^="/"]::after,
+  a[href^="#"]::after,
+  a[href^="."]::after,
+  a:not([href])::after {
+    content: "" !important;
+  }
+
+  /* Page-break helpers + common no-split rows */
+  .page-break-before {
+    page-break-before: always;
+    break-before: page;
+  }
+  .page-break-after {
+    page-break-after: always;
+    break-after: page;
+  }
+  .no-page-break,
+  tr,
+  li {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Live countdown <time> renders as inline mono text */
+  time {
+    display: inline !important;
+    color: #000000 !important;
+  }
+
+  /* Resume PDF embed: hide inline viewer, show HTML fallback */
+  .resume-embed-inline,
+  object[type="application/pdf"],
+  iframe[src*=".pdf"] {
+    display: none !important;
+  }
+  .resume-fallback {
+    display: block !important;
+  }
+
+  /* Images keep aspect, no orphan splits */
+  img,
+  svg {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Container resets — @page margin already gives us 0.75in;
+     don't waste page-tops with pt-16 (4rem) wrapper padding. */
+  [class*="max-w-["] {
+    max-width: 100% !important;
+  }
+  main > div,
+  main > article,
+  main > section {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Sticky / fixed positioning is meaningless on paper */
+  .sticky,
+  .fixed,
+  [class*="sticky"],
+  [class*="fixed"] {
+    position: static !important;
+  }
+}
