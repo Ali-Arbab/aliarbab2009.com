@@ -7,7 +7,7 @@
  * INSTITUTION (where it happened).
  *
  *   ✅ "Editor — student literary magazine, 2024-26"
- *   ❌ "Editor — The Modern School Quill, Delhi"
+ *   ❌ "Editor — The [REDACTED] Quill, [REDACTED city]"
  *
  * Categories group the table visually. Order within a category is
  * descending by `from` (newest first).
