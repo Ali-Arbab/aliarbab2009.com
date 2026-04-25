@@ -30,8 +30,8 @@ export type ResumeContent = {
   summary: string;
   /**
    * Free-form coursework / accolades that supplement the APs already
-   * surfaced from milestones.ts. Keep generic — no "Modern School
-   * advanced math seminar" (identifies institution).
+   * surfaced from milestones.ts. Keep generic — no entry whose
+   * wording identifies the institution Ali attended.
    */
   coursework: readonly string[];
   /** Skill groups, rendered as pill-rows. */
