@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 
+import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeScript } from "@/components/shell/theme-script";
 import { siteConfig } from "@/config/site";
+import { personJsonLd } from "@/lib/json-ld";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -77,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <ThemeScript />
+        <JsonLd data={personJsonLd()} />
       </head>
       <body className="min-h-dvh antialiased">
         <a
