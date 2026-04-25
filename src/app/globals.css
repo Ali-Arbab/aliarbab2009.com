@@ -161,6 +161,44 @@ main {
   border-radius: 0;
 }
 
+/* ============================================================
+   VIEW TRANSITIONS — cross-document fade between routes.
+   Enabled in Chromium 126+ / WebKit 18+; harmless no-op in
+   browsers without support (Firefox, older Safari). The
+   prefers-reduced-motion override below collapses the fade
+   to instant for visitors who've requested less motion.
+   ============================================================ */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--motion-base);
+  animation-timing-function: var(--motion-ease);
+}
+
+::view-transition-old(root) {
+  animation-name: vt-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: vt-fade-in;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -169,6 +207,11 @@ main {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* Collapse view-transition fades to instant under reduced motion. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
 
