@@ -1,14 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { getProjectBySlug } from "@/config/projects";
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
 const project = getProjectBySlug("maglock")!;
 
-export const metadata = {
-  title: project.name,
-  description: project.tagline,
-};
+export const metadata: Metadata = buildMetadata({
+  title: "MagLock Protocol — Cyberpunk IoT smart lock",
+  description:
+    "MagLock Protocol is a dual-door smart lock with live ESP32-CAM video and an optional Hinglish voice assistant. Flutter app, two ESP32s, no cloud servers.",
+  path: "/projects/maglock",
+  ogImage: "/og/projects/maglock.png",
+  ogImageAlt: "MagLock Protocol — neon dual-door smart lock UI",
+  ogType: "article",
+  publishedTime: `${project.year}-11-20T00:00:00.000Z`,
+  keywords: ["MagLock", "ESP32", "IoT", "Smart lock", "Flutter", "Voice assistant"],
+});
 
 export default function MagLockPage() {
   return (
