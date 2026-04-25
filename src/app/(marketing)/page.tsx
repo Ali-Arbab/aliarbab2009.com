@@ -1,7 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PROJECTS } from "@/config/projects";
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: `${siteConfig.name} — Builds AI, voice, and IoT systems`,
+  description:
+    "Ali Arbab is a Class XII student building AI, voice, and IoT systems. Three live projects: StockSaathi, BolHisaab, and MagLock Protocol.",
+  path: "/",
+  ogImage: "/og/home.png",
+  ogImageAlt: "Ali Arbab — three project worlds",
+  isHome: true,
+});
 
 export default function HomePage() {
   return (
