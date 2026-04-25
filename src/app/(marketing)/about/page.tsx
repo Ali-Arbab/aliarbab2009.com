@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MILESTONES } from "@/config/milestones";
 import { siteConfig } from "@/config/site";
 import { JourneySection } from "@/components/about/journey-section";
+import { WhyIBuiltSection } from "@/components/about/why-i-built-section";
 import { LiveCountdown } from "@/components/shell/live-countdown";
 import { JsonLd } from "@/components/seo/json-ld";
 import { aboutPageJsonLd } from "@/lib/json-ld";
@@ -193,6 +194,9 @@ export default function AboutPage() {
 
       {/* § 03 — JOURNEY · § 04 — ACTIVITIES · § 05 — AWARDS */}
       <JourneySection />
+
+      {/* § 06 — WHY I BUILT (per-project motivation essays) */}
+      <WhyIBuiltSection />
     </div>
   );
 }
