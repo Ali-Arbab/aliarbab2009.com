@@ -89,11 +89,11 @@ export default function BolHisaabPage() {
             {project.description}
           </p>
           <blockquote
-            className="mt-2 max-w-2xl border-l-4 border-[var(--color-primary)] pl-6 text-xl leading-snug italic text-[var(--color-fg)]/85"
+            className="mt-2 max-w-2xl border-l-4 border-[var(--color-primary)] pl-6 text-xl leading-snug text-[var(--color-fg)]/85 italic"
             style={{ fontFamily: "var(--font-display)" }}
           >
             &ldquo;Ram ne 500 udhaar liya.&rdquo;
-            <span className="mt-2 block text-sm not-italic text-[var(--color-muted)]">
+            <span className="mt-2 block text-sm text-[var(--color-muted)] not-italic">
               — and the ledger writes itself.
             </span>
           </blockquote>
@@ -199,8 +199,8 @@ export default function BolHisaabPage() {
             </p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
               An interactive voice-demo mockup, the full architecture (mic → Groq Whisper → Llama
-              intent parser → Supabase → Hindi TTS), a code walkthrough of the intent extractor,
-              and screenshots ship in Phase 2 of the build.
+              intent parser → Supabase → Hindi TTS), a code walkthrough of the intent extractor, and
+              screenshots ship in Phase 2 of the build.
             </p>
           </div>
         </div>

@@ -18,11 +18,7 @@ import { useEffect } from "react";
  *
  * Inline styles only. Plain <a> tags. Self-contained.
  */
-export default function GlobalError({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
+export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {
     Sentry.captureException(error);
     if (process.env.NODE_ENV !== "production") {
@@ -71,8 +67,7 @@ export default function GlobalError({
           500 — <span style={{ color: "#6b82ff" }}>Server error.</span>
         </h1>
         <p style={{ maxWidth: "60ch", fontSize: "1.05rem", lineHeight: 1.55, margin: 0 }}>
-          Something went wrong at a level that broke even the page shell. I&apos;ve been
-          notified.
+          Something went wrong at a level that broke even the page shell. I&apos;ve been notified.
         </p>
         <a
           href="/"

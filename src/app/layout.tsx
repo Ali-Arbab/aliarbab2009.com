@@ -29,9 +29,7 @@ const spaceGrotesk = localFont({
 });
 
 const jetbrainsMono = localFont({
-  src: [
-    { path: "../../public/fonts/JetBrainsMono-Regular.woff2", weight: "400", style: "normal" },
-  ],
+  src: [{ path: "../../public/fonts/JetBrainsMono-Regular.woff2", weight: "400", style: "normal" }],
   variable: "--font-jetbrains-mono",
   display: "swap",
   preload: true,

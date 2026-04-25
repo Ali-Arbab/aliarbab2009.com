@@ -23,7 +23,10 @@ export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElemen
 
 export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3 className={cn("text-lg leading-tight font-semibold tracking-tight", className)} {...props} />
+    <h3
+      className={cn("text-lg leading-tight font-semibold tracking-tight", className)}
+      {...props}
+    />
   );
 }
 

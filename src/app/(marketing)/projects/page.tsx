@@ -118,9 +118,7 @@ export default function ProjectsIndexPage() {
                   >
                     {p.name}
                   </h2>
-                  <p className="text-sm leading-relaxed text-[var(--color-fg)]/80">
-                    {p.tagline}.
-                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--color-fg)]/80">{p.tagline}.</p>
                   <p className="text-[13px] leading-relaxed text-[var(--color-fg)]/70">
                     {p.description}
                   </p>
@@ -141,10 +139,7 @@ export default function ProjectsIndexPage() {
                   </div>
                   <div className="flex justify-between gap-4">
                     <dt className="text-[var(--color-muted)]">Accent</dt>
-                    <dd
-                      className="text-right font-medium"
-                      style={{ color: p.primaryColor }}
-                    >
+                    <dd className="text-right font-medium" style={{ color: p.primaryColor }}>
                       {p.primaryColor.toLowerCase()}
                     </dd>
                   </div>

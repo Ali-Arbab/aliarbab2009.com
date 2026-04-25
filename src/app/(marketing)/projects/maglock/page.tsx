@@ -189,10 +189,10 @@ export default function MagLockPage() {
               Full case study — coming soon
             </p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
-              Architecture diagrams of the Flutter → ESP32 REST loop + the ESP32-CAM MJPEG
-              pipeline, a gallery of 27 real camera snapshots, two demo videos of the dual-relay
-              unlock + Maggy voice interaction, and a write-up of the hardcoded-WiFi-creds
-              security incident ship in Phase 2.
+              Architecture diagrams of the Flutter → ESP32 REST loop + the ESP32-CAM MJPEG pipeline,
+              a gallery of 27 real camera snapshots, two demo videos of the dual-relay unlock +
+              Maggy voice interaction, and a write-up of the hardcoded-WiFi-creds security incident
+              ship in Phase 2.
             </p>
           </div>
         </div>

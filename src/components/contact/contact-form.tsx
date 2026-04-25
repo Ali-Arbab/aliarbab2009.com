@@ -45,8 +45,7 @@ const inputClass = cn(
   "aria-[invalid=true]:border-[var(--color-danger)]",
 );
 
-const labelClass =
-  "font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase";
+const labelClass = "font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase";
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
@@ -82,9 +81,7 @@ export function ContactForm() {
       setErrorMsg(data.error ?? "Something went wrong. Please try again.");
       setState("error");
     } catch {
-      setErrorMsg(
-        `Network error. Try emailing me directly at ${siteConfig.email}.`,
-      );
+      setErrorMsg(`Network error. Try emailing me directly at ${siteConfig.email}.`);
       setState("error");
     }
   }
@@ -100,8 +97,8 @@ export function ContactForm() {
           Message sent
         </p>
         <p className="mt-3 max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
-          Thanks &mdash; I read everything that lands in my inbox within 48 hours and reply
-          if there&apos;s something specific to say back.
+          Thanks &mdash; I read everything that lands in my inbox within 48 hours and reply if
+          there&apos;s something specific to say back.
         </p>
       </div>
     );
@@ -166,13 +163,7 @@ export function ContactForm() {
       >
         <label htmlFor="contact-company">
           Company (leave empty)
-          <input
-            id="contact-company"
-            name="company"
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-          />
+          <input id="contact-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
 
@@ -198,7 +189,7 @@ export function ContactForm() {
             "bg-[var(--color-primary)] px-5 py-3",
             "font-mono text-xs tracking-[0.2em] text-[var(--color-primary-fg)] uppercase",
             "transition-transform hover:-translate-y-0.5",
-            "disabled:cursor-not-allowed disabled:opacity-60 disabled:translate-y-0",
+            "disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60",
           )}
         >
           {state === "submitting" ? "Sending…" : "Send message"}

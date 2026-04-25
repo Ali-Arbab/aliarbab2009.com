@@ -209,7 +209,11 @@ function maglockJsonLd(p: Project): Json {
           { "@type": "PropertyValue", name: "Relay channels", value: "2" },
           { "@type": "PropertyValue", name: "Network", value: "Local-network only (no cloud)" },
           { "@type": "PropertyValue", name: "Client app", value: "Flutter (Android + iOS)" },
-          { "@type": "PropertyValue", name: "Voice assistant", value: "Optional Hinglish (Grok API)" },
+          {
+            "@type": "PropertyValue",
+            name: "Voice assistant",
+            value: "Optional Hinglish (Grok API)",
+          },
         ],
         isRelatedTo: { "@id": MAGLOCK_WORK_ID },
       },
@@ -217,7 +221,8 @@ function maglockJsonLd(p: Project): Json {
         "@type": "CreativeWork",
         "@id": MAGLOCK_WORK_ID,
         name: "MagLock Protocol — design + firmware + app",
-        description: "Source code, firmware, and Flutter client for the MagLock Protocol smart lock.",
+        description:
+          "Source code, firmware, and Flutter client for the MagLock Protocol smart lock.",
         creator: creatorRef(),
         codeRepository: p.repoUrl,
         programmingLanguage: ["Dart", "C++"],

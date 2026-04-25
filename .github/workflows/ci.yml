@@ -53,6 +53,11 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Format check (Prettier)
+        # endOfLine: auto in .prettierrc respects whatever line endings
+        # are checked in, so this gate doesn't fight Windows vs *nix.
+        run: pnpm format:check
+
       - name: Test (vitest)
         # Pure-function unit tests for the live-countdown stack,
         # XSS-safe JSON serializer, milestones data integrity, and

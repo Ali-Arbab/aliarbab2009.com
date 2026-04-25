@@ -24,7 +24,7 @@ export function ResumeActions() {
       <button
         type="button"
         onClick={onPrint}
-        className="border-2 border-[var(--color-fg)] bg-transparent px-5 py-2.5 font-mono text-[11px] tracking-[0.25em] uppercase transition-colors hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)]"
+        className="border-2 border-[var(--color-fg)] bg-transparent px-5 py-2.5 font-mono text-[11px] tracking-[0.25em] uppercase transition-colors hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)] focus:outline-none"
       >
         Print · Save as PDF
       </button>
@@ -33,7 +33,7 @@ export function ResumeActions() {
         <a
           href={`/resume/${RESUME.pdfFilename}`}
           download
-          className="border-2 border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-2.5 font-mono text-[11px] tracking-[0.25em] text-[var(--color-primary-fg)] uppercase transition-colors hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] hover:border-[var(--color-fg)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)]"
+          className="border-2 border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-2.5 font-mono text-[11px] tracking-[0.25em] text-[var(--color-primary-fg)] uppercase transition-colors hover:border-[var(--color-fg)] hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)] focus:outline-none"
         >
           Download PDF ↓
         </a>

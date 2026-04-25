@@ -15,9 +15,6 @@ type Payload = Record<string, unknown> | { "@graph": unknown[]; [key: string]: u
 
 export function JsonLd({ data }: { data: Payload }) {
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeStringify(data) }} />
   );
 }

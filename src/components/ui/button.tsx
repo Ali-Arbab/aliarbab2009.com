@@ -25,10 +25,7 @@ const buttonVariants = cva(
           "border border-[var(--color-border)]",
           "hover:border-[var(--color-primary)] hover:bg-[var(--color-surface)]",
         ].join(" "),
-        ghost: [
-          "text-[var(--color-fg)]",
-          "hover:bg-[var(--color-surface-2)]",
-        ].join(" "),
+        ghost: ["text-[var(--color-fg)]", "hover:bg-[var(--color-surface-2)]"].join(" "),
         outline: [
           "border border-[var(--color-primary)] text-[var(--color-primary)]",
           "bg-transparent",
@@ -53,11 +50,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => (
-    <button
-      ref={ref}
-      className={cn(buttonVariants({ variant, size }), className)}
-      {...props}
-    />
+    <button ref={ref} className={cn(buttonVariants({ variant, size }), className)} {...props} />
   ),
 );
 Button.displayName = "Button";

@@ -5,7 +5,8 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "404",
-  description: "This route doesn't exist on aliarbab2009.com. Try the projects index or the home page.",
+  description:
+    "This route doesn't exist on aliarbab2009.com. Try the projects index or the home page.",
   path: "/404",
   noIndex: true,
 });
