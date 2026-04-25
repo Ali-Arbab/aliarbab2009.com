@@ -37,7 +37,8 @@ export function ThemeToggle() {
     return (
       <span
         aria-hidden
-        className="inline-block h-8 w-8 border border-[var(--color-border)]"
+        data-theme-toggle
+        className="no-print inline-block h-8 w-8 border border-[var(--color-border)]"
       />
     );
   }
@@ -50,7 +51,9 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={label}
       title={label}
+      data-theme-toggle
       className={cn(
+        "no-print",
         "relative inline-flex h-8 w-8 items-center justify-center",
         "border border-[var(--color-border)]",
         "bg-transparent text-[var(--color-fg)]",

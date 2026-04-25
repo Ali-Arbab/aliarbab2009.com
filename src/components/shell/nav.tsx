@@ -9,6 +9,7 @@ export function Nav() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full",
+        "no-print",
         "border-b-2 border-[var(--color-border)]",
         "bg-[var(--color-bg)]/92 backdrop-blur-[6px]",
         "supports-[backdrop-filter]:bg-[var(--color-bg)]/80",
