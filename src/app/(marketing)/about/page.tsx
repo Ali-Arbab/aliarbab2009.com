@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { COURSEWORK } from "@/config/coursework";
 import { MILESTONES } from "@/config/milestones";
 import { siteConfig } from "@/config/site";
 import { JourneySection } from "@/components/about/journey-section";
@@ -18,13 +19,6 @@ export const metadata: Metadata = buildMetadata({
   ogImage: "/og/about.png",
   ogImageAlt: "About Ali Arbab — long-version bio",
 });
-
-const COURSEWORK = [
-  { id: "ap-calc-bc", label: "AP Calculus BC" },
-  { id: "ap-phys-c-mech", label: "AP Physics C: Mechanics" },
-  { id: "ap-eng-lang", label: "AP English Language & Composition" },
-  { id: "ap-csa", label: "AP Computer Science A" },
-] as const;
 
 export default function AboutPage() {
   const milestoneById = Object.fromEntries(MILESTONES.map((m) => [m.id, m]));
