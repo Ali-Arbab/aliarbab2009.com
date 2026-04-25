@@ -9,25 +9,25 @@ importers:
   .:
     dependencies:
       class-variance-authority:
-        specifier: ^0.7.1
+        specifier: 0.7.1
         version: 0.7.1
       clsx:
-        specifier: ^2.1.1
+        specifier: 2.1.1
         version: 2.1.1
       lucide-react:
-        specifier: ^0.468.0
+        specifier: 0.468.0
         version: 0.468.0(react@19.2.5)
       next:
-        specifier: ^15.3.0
+        specifier: 15.5.15
         version: 15.5.15(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.5
         version: 19.2.5
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.5
         version: 19.2.5(react@19.2.5)
       tailwind-merge:
-        specifier: ^2.5.5
+        specifier: 2.6.1
         version: 2.6.1
     devDependencies:
       '@eslint/eslintrc':
