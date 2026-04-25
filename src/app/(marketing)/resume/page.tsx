@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
+import { ResumeActions } from "@/components/resume/resume-actions";
+import { ResumeEmbed } from "@/components/resume/resume-embed";
 import { JsonLd } from "@/components/seo/json-ld";
 import { resumeJsonLd } from "@/lib/json-ld";
 import { buildMetadata } from "@/lib/seo";
@@ -9,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Resume",
   description:
-    "Class XII student with four AP exams in progress and three live projects in AI, voice, and IoT. Download the one-page resume as PDF or read it on this page.",
+    "Class XII student with four AP exams in progress and three live projects in AI, voice, and IoT. Read the resume on this page or print to PDF.",
   path: "/resume",
   ogImage: "/og/resume.png",
   ogImageAlt: "Resume of Ali Arbab — Class XII builder",
@@ -19,10 +21,10 @@ export default function ResumePage() {
   return (
     <div className="relative mx-auto w-full max-w-[1400px] px-6 pt-16 pb-16 sm:pt-20">
       <JsonLd data={resumeJsonLd()} />
-      <div className="brutalist-grid" aria-hidden />
+      <div className="brutalist-grid resume-print-hide" aria-hidden />
 
       {/* MASTHEAD */}
-      <header className="mb-16 grid grid-cols-12 gap-4 border-b-2 border-[var(--color-border)] pb-6">
+      <header className="resume-print-hide mb-16 grid grid-cols-12 gap-4 border-b-2 border-[var(--color-border)] pb-6">
         <div className="col-span-6 flex flex-col gap-2 md:col-span-3">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             Author
@@ -39,7 +41,7 @@ export default function ResumePage() {
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             Format
           </p>
-          <p className="font-mono text-sm font-medium">PDF · single page</p>
+          <p className="font-mono text-sm font-medium">HTML · print-ready</p>
         </div>
         <div className="col-span-6 flex flex-col gap-2 md:col-span-3">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
@@ -54,7 +56,7 @@ export default function ResumePage() {
       </header>
 
       {/* § 01 — HEADLINE */}
-      <section className="mb-16 grid grid-cols-12 gap-4">
+      <section className="resume-print-hide mb-12 grid grid-cols-12 gap-4">
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 01
@@ -63,47 +65,40 @@ export default function ResumePage() {
             CV
           </p>
         </div>
-        <div className="col-span-12 md:col-span-10">
+        <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
           <h1
             className="text-[clamp(3rem,7vw,6rem)] leading-[0.9] font-medium tracking-[-0.02em]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Resume.
           </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-fg)]/85">
-            The downloadable PDF is being finalized and will live at this URL shortly. Use the
-            full admissions-ready narrative at{" "}
+          <p className="max-w-2xl text-lg leading-relaxed text-[var(--color-fg)]/85">
+            One page, no buzzword stack. The HTML version below is the source of truth — it&apos;s
+            searchable, indexable, and prints cleanly. For a fuller narrative, see{" "}
             <Link
               href="/about"
               className="underline decoration-2 underline-offset-4 hover:text-[var(--color-primary)]"
             >
               /about
-            </Link>{" "}
-            in the meantime.
+            </Link>
+            .
           </p>
+          <ResumeActions />
         </div>
       </section>
 
-      {/* § 02 — PLACEHOLDER */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+      {/* § 02 — RESUME BODY */}
+      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10 print:border-0 print:pt-0">
+        <div className="resume-print-hide col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 02
           </p>
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            PDF
+            Body
           </p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <div className="border-2 border-dashed border-[var(--color-border)] p-10 text-center">
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-              Resume PDF — coming soon
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
-              Inline PDF viewer + prominent download + HTML-accessible fallback. Ships in Phase 3
-              once the PDF is finalized and scrubbed of address/phone/school metadata.
-            </p>
-          </div>
+          <ResumeEmbed />
         </div>
       </section>
     </div>
