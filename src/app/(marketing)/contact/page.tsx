@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
+import { ContactForm } from "@/components/contact/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import { contactPageJsonLd } from "@/lib/json-ld";
 import { buildMetadata } from "@/lib/seo";
@@ -127,7 +128,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* § 03 — FORM PLACEHOLDER */}
+      {/* § 03 — CONTACT FORM */}
       <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
@@ -138,15 +139,7 @@ export default function ContactPage() {
           </p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <div className="border-2 border-dashed border-[var(--color-border)] p-10 text-center">
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-              Contact form — coming soon
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
-              A proper form (name / email / message / honeypot) with Resend delivery ships in
-              Phase 3. Until then, email works.
-            </p>
-          </div>
+          <ContactForm />
         </div>
       </section>
     </div>
