@@ -1,0 +1,40 @@
+name: Dependency review
+
+# Runs only on pull requests. Inspects what the PR proposes to add
+# under `dependencies` / `devDependencies` and fails if any new
+# transitive dep has a known moderate-or-higher CVE, or a license
+# outside the allowlist.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Review new dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Dependency review
+        uses: actions/dependency-review-action@bc41886e18ea39df68b1b1245f4184881938e050 # v4.7.3
+        with:
+          fail-on-severity: moderate
+          # OFL-1.1 keeps Noto + Inter + similar OFL fonts buildable.
+          # CC-BY-4.0 covers some doc-only deps.
+          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, OFL-1.1, CC-BY-4.0, CC0-1.0, Unlicense, 0BSD
