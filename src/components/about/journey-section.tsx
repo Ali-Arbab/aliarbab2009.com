@@ -1,6 +1,7 @@
 import { ACTIVITIES, ACTIVITY_CATEGORY_LABELS, type Activity } from "@/config/activities";
 import { AWARDS } from "@/config/awards";
 import { TIMELINE, type TimelineEntry } from "@/config/timeline";
+import { formatTimelineDate } from "@/lib/format-timeline-date";
 
 /**
  * /about § Journey + § Activities + § Awards.
@@ -12,27 +13,6 @@ import { TIMELINE, type TimelineEntry } from "@/config/timeline";
  * Server component — no client interactivity. All values resolved at
  * build/render time.
  */
-
-function formatTimelineDate(iso: string): string {
-  // YYYY-MM or YYYY-MM-DD → "Mon YYYY"
-  const [year, month] = iso.split("-");
-  const monthIndex = month ? parseInt(month, 10) - 1 : 0;
-  const monthName = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ][monthIndex];
-  return `${monthName} ${year}`;
-}
 
 function TimelineRow({
   entry,
