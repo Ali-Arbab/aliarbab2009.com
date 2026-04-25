@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { MILESTONES } from "@/config/milestones";
 import { siteConfig } from "@/config/site";
+import { JourneySection } from "@/components/about/journey-section";
 import { LiveCountdown } from "@/components/shell/live-countdown";
 import { JsonLd } from "@/components/seo/json-ld";
 import { aboutPageJsonLd } from "@/lib/json-ld";
@@ -146,29 +147,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* § 03 — COMING SOON */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 03
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Long
-          </p>
-        </div>
-        <div className="col-span-12 md:col-span-10">
-          <div className="border-2 border-dashed border-[var(--color-border)] p-10 text-center">
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-              The long version — coming soon
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
-              Journey timeline, three per-project &ldquo;why I built this&rdquo; essays,
-              activities and leadership, awards and recognition, embedded resume. Ships in Phase 3
-              of the build.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* § 03 — JOURNEY · § 04 — ACTIVITIES · § 05 — AWARDS */}
+      <JourneySection />
     </div>
   );
 }
