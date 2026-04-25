@@ -27,7 +27,6 @@ export function JsonLd({ data }: { data: Payload }) {
   return (
     <script
       type="application/ld+json"
-      // eslint-disable-next-line react/no-danger -- server-rendered known-shape JSON
       dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
     />
   );
