@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { getProjectBySlug } from "@/config/projects";
 import { siteConfig } from "@/config/site";
+import { OriginBlock } from "@/components/project/origin-block";
 import { JsonLd } from "@/components/seo/json-ld";
 import { projectJsonLd } from "@/lib/json-ld";
 import { buildMetadata } from "@/lib/seo";
@@ -162,11 +163,26 @@ export default function StockSaathiPage() {
         </div>
       </section>
 
-      {/* § 04 — COMING SOON */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      {/* § 04 — ORIGIN (problem · why me · learned + pull-quote) */}
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 04
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Origin
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-10">
+          <OriginBlock slug="stocksaathi" />
+        </div>
+      </section>
+
+      {/* § 05 — CASE STUDY (Phase 1 prose lands May 16+) */}
+      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 05
           </p>
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Case
@@ -175,7 +191,7 @@ export default function StockSaathiPage() {
         <div className="col-span-12 md:col-span-10">
           <div className="border-2 border-dashed border-[var(--color-border)] p-10 text-center">
             <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-              Case study — coming soon
+              Full case study — coming soon
             </p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
               Architecture diagrams, live iframe embed, screenshot gallery, a demo video with
