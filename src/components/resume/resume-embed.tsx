@@ -6,6 +6,7 @@ import { MILESTONES } from "@/config/milestones";
 import { PROJECTS } from "@/config/projects";
 import { RESUME } from "@/config/resume";
 import { siteConfig } from "@/config/site";
+import { formatDateRange } from "@/lib/format-date-range";
 
 /**
  * <ResumeEmbed /> — HTML-canonical resume rendered on /resume.
@@ -24,14 +25,6 @@ import { siteConfig } from "@/config/site";
  * Server component — no client state. All values resolve at build /
  * render time.
  */
-
-function formatDateRange(from: string, to?: string): string {
-  if (!to) {
-    const currentYear = new Date().getFullYear().toString();
-    return from === currentYear ? from : `${from}–present`;
-  }
-  return `${from}–${to}`;
-}
 
 export function ResumeEmbed() {
   const apMilestones = MILESTONES;
