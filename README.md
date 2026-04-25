@@ -4,12 +4,16 @@ Personal portfolio. Three project worlds (StockSaathi, BolHisaab, MagLock Protoc
 
 ## Stack
 
-- Next.js 15 (App Router, RSC)
+- Next.js 15 (App Router, RSC) on React 19
 - TypeScript strict
 - Tailwind CSS v4 + CSS custom properties for per-project theming
-- MDX via velite (added in Phase 1)
-- Radix primitives + class-variance-authority
-- Framer Motion (added as needed)
+- Sentry (privacy-first config — no replays, query strings scrubbed)
+- Resend for the contact form
+- Vitest 4 for unit tests
+- Native `<dialog>` element for the ⌘K command palette (no Radix/floating-ui dependency)
+- View Transitions API for cross-document fades
+- Self-hosted fonts (Space Grotesk + JetBrains Mono via `next/font/local`)
+- MDX via velite (Phase 1+ — case studies land May 16+)
 - Deployed to Vercel
 
 ## Quickstart
@@ -20,37 +24,51 @@ cp .env.example .env.local   # fill in Resend key, etc.
 pnpm dev                     # → http://localhost:3000
 ```
 
-Scripts:
+## Scripts
 
-- `pnpm dev` — start dev server (Turbopack)
-- `pnpm build` — production build
-- `pnpm start` — run built server
-- `pnpm lint` — ESLint
-- `pnpm typecheck` — `tsc --noEmit`
-- `pnpm privacy-audit` — grep built output for forbidden tokens (see `scripts/privacy-audit.mjs`)
+| Script | Description |
+| --- | --- |
+| `pnpm dev` | Start dev server |
+| `pnpm build` | Production build |
+| `pnpm start` | Run built server |
+| `pnpm typecheck` | `tsc --noEmit` |
+| `pnpm lint` | ESLint |
+| `pnpm format` | Apply Prettier across `src` + `scripts` |
+| `pnpm format:check` | Read-only Prettier check (CI-enforced) |
+| `pnpm test` | Vitest run-once (50 tests) |
+| `pnpm test:watch` | Vitest watch mode |
+| `pnpm privacy-audit` | Grep built output + public assets for forbidden tokens |
+
+CI runs typecheck → lint → format:check → test → build → privacy-audit on every push and PR. All five gates must pass.
 
 ## Architecture
 
-See the full blueprint at `C:\Users\Alig\.claude\plans\i-own-stocksaathi-aliarbab2009-stocksaat-kind-pine.md` (local) — or the `CLAUDE.md` in this repo for conventions.
+See `CLAUDE.md` for conventions. Plan blueprint lives off-repo at the path captured there.
 
 Key directories:
 
-- `src/app` — routes (App Router)
-- `src/components/{ui,shell,home,project,about,mdx,decoration,icons}` — UI
-- `src/lib` — utilities (`time.ts` for countdowns, `utils.ts` for `cn()`, etc.)
-- `src/config/milestones.ts` — **single source of truth** for public academic dates (AP exams)
-- `scripts/privacy-audit.mjs` — CI gate that fails the build if any forbidden token leaks into the deployed output
+- `src/app` — routes (App Router; `(marketing)` route group)
+- `src/components/{ui,shell,home,project,about,resume,seo,decoration,icons}` — UI
+- `src/lib` — pure utilities (`time.ts` for countdowns, `safe-json.ts` for XSS-escaped JSON-LD, `seo.ts` for metadata, `utils.ts` for `cn()`, etc.)
+- `src/config` — typed content (`site`, `projects`, `milestones`, `timeline`, `activities`, `awards`, `resume`, `why-i-built`)
+- `scripts/privacy-audit.mjs` — CI gate, three-tier severity (HIGH/MEDIUM/LOW)
 - `_repos/` (gitignored) — read-only clones of StockSaathi and BolHisaab for reference
 - `maglock_protocol/` (gitignored) — local MagLock source files
 
+## Live-countdown architecture
+
+All countdowns on the site (NowBar, /about academic snapshot, anywhere `<LiveCountdown>` lands) tick purely from `new Date()` against ISO strings baked into `src/config/milestones.ts` at build time. Zero fetches. Zero server round-trips. Works offline after first paint. Tested in `src/lib/time.test.ts` with 17 cases covering pure-math correctness, past-flip, decomposition, and offset-naive ISO local-time semantics.
+
+When AP scores release in July 2026, adding `score: 5` to the relevant milestone entry auto-replaces the countdown with a "Score 5" badge on /about and adds a chip on the resume embed — no other code change required.
+
 ## Privacy
 
-The deployed site publishes only: Ali Arbab (name), GitHub handle `aliarbab2009`, Class XII status, the three projects, AP exam countdowns, resume PDF.
+The deployed site publishes only: Ali Arbab (name), GitHub handle `aliarbab2009`, Class XII status, the three projects, AP exam countdowns, the HTML resume.
 
-It does **not** publish: city, school, phone, timezone, raw Gmail, any specific college name, any application deadline, any decision date. `scripts/privacy-audit.mjs` enforces this automatically.
+It does **not** publish: city, school, phone, timezone, raw Gmail, any specific college name, any application deadline, any decision date. The `privacy-audit` script enforces this on every build by grepping `.next/server`, `.next/static`, and `public/` for a forbidden-token list (with three severity tiers — HIGH always fails, MEDIUM fails under `STRICT_PRIVACY=1`, LOW reports only).
 
 Internal deadlines live in `PRIVATE_CALENDAR.md` which is gitignored. Never commit.
 
 ## Deploy
 
-Every push to `main` auto-deploys to Vercel. Preview deploys on every PR. DNS points `aliarbab2009.com` apex + `www` to Vercel via A + CNAME records. HSTS is set in `next.config.ts` headers.
+Every push to `main` auto-deploys to Vercel. Preview deploys on every PR. DNS points `aliarbab2009.com` apex + `www` to Vercel via A + CNAME records. HSTS, COOP, CORP, Permissions-Policy, and a strict CSP (Edge-runtime middleware with per-request nonces) are set in `next.config.ts` headers + `src/middleware.ts`.
