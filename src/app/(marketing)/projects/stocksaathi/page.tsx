@@ -1,14 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { getProjectBySlug } from "@/config/projects";
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
 const project = getProjectBySlug("stocksaathi")!;
 
-export const metadata = {
-  title: project.name,
-  description: project.tagline,
-};
+export const metadata: Metadata = buildMetadata({
+  title: "StockSaathi — AI investment coach",
+  description:
+    "StockSaathi is a virtual rupee trading simulator with an AI coach trained on behavioral finance. Real-time data on 3,000+ BSE and NSE stocks.",
+  path: "/projects/stocksaathi",
+  ogImage: "/og/projects/stocksaathi.png",
+  ogImageAlt: "StockSaathi — AI-coached investment simulator for Indian teens",
+  ogType: "article",
+  publishedTime: `${project.year}-09-01T00:00:00.000Z`,
+  keywords: ["StockSaathi", "AI", "Investing", "Fintech", "Behavioral finance"],
+});
 
 export default function StockSaathiPage() {
   return (
