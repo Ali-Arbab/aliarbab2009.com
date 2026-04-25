@@ -1,0 +1,67 @@
+# Dependabot configuration for aliarbab2009.com
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+#
+# Strategy:
+#   - Weekly Monday 06:00 UTC pulse keeps reviews batched
+#   - Group minor + patch updates by ecosystem so we get one PR per stack,
+#     not 12 PRs per week
+#   - Major bumps stay ungrouped — each gets its own PR so the changelog
+#     can be read carefully
+version: 2
+updates:
+  # ---- npm packages ----
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    versioning-strategy: "increase"
+    groups:
+      next-ecosystem:
+        patterns:
+          - "next"
+          - "react"
+          - "react-dom"
+          - "@next/*"
+          - "eslint-config-next"
+        update-types: ["minor", "patch"]
+      tailwind-ecosystem:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "prettier-plugin-tailwindcss"
+        update-types: ["minor", "patch"]
+      types-ecosystem:
+        patterns:
+          - "@types/*"
+        update-types: ["minor", "patch"]
+      eslint-prettier:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "prettier"
+        update-types: ["minor", "patch"]
+      dev-dependencies:
+        dependency-type: "development"
+        update-types: ["minor", "patch"]
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # ---- GitHub Actions ----
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "github-actions"]
+    commit-message:
+      prefix: "chore(actions)"
+      include: "scope"
