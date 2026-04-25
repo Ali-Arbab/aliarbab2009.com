@@ -1,12 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PROJECTS } from "@/config/projects";
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Projects",
-  description: "Three project worlds: StockSaathi, BolHisaab, and MagLock Protocol.",
-};
+  description:
+    "Three projects across AI, voice, and IoT. StockSaathi coaches teen investors, BolHisaab takes Hindi voice ledger entries, and MagLock locks doors.",
+  path: "/projects",
+  ogImage: "/og/projects.png",
+  ogImageAlt: "Three project worlds — StockSaathi, BolHisaab, MagLock Protocol",
+});
 
 export default function ProjectsIndexPage() {
   return (
