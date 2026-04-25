@@ -1,13 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { MILESTONES } from "@/config/milestones";
 import { siteConfig } from "@/config/site";
 import { LiveCountdown } from "@/components/shell/live-countdown";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "About",
-  description: "The long version: three projects, a resume, and how I got here.",
-};
+  description:
+    "Class XII student building AI, voice, and IoT systems. The long version: three projects, the journey behind them, the resume, and how I work.",
+  path: "/about",
+  ogImage: "/og/about.png",
+  ogImageAlt: "About Ali Arbab — long-version bio",
+});
 
 const COURSEWORK = [
   { id: "ap-calc-bc", label: "AP Calculus BC" },
