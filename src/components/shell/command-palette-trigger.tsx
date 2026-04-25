@@ -29,7 +29,7 @@ export function CommandPaletteTrigger() {
       type="button"
       onClick={open}
       aria-label="Open command palette"
-      className="inline-flex items-center gap-2 border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-[var(--color-muted)] uppercase transition-colors hover:border-[var(--color-fg)] hover:text-[var(--color-fg)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)]"
+      className="inline-flex items-center gap-2 border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-[var(--color-muted)] uppercase transition-colors hover:border-[var(--color-fg)] hover:text-[var(--color-fg)] focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)] focus:outline-none"
     >
       <span className="hidden sm:inline">Search</span>
       <kbd className="font-mono text-[10px] text-[var(--color-fg)]/80">

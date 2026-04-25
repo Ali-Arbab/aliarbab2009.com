@@ -188,9 +188,7 @@ export default function HomePage() {
                   >
                     {p.name}
                   </h3>
-                  <p className="text-sm leading-relaxed text-[var(--color-fg)]/80">
-                    {p.tagline}.
-                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--color-fg)]/80">{p.tagline}.</p>
                   <p className="text-[13px] leading-relaxed text-[var(--color-fg)]/70">
                     {p.description}
                   </p>

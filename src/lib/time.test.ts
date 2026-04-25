@@ -111,7 +111,9 @@ describe("timeUntil", () => {
 
 describe("formatTimeRemaining", () => {
   it("renders ✓ when past", () => {
-    expect(formatTimeRemaining({ ms: -1000, days: 0, hours: 0, minutes: 0, seconds: 1, past: true })).toBe("✓");
+    expect(
+      formatTimeRemaining({ ms: -1000, days: 0, hours: 0, minutes: 0, seconds: 1, past: true }),
+    ).toBe("✓");
   });
 
   it("includes days when days > 0", () => {

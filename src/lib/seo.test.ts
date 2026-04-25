@@ -30,18 +30,18 @@ describe("buildMetadata", () => {
   });
 
   it("sets canonical to the path verbatim (preserves trailing slash for /)", () => {
-    expect(
-      buildMetadata({ title: "x", description: "y", path: "/" }).alternates?.canonical,
-    ).toBe("/");
+    expect(buildMetadata({ title: "x", description: "y", path: "/" }).alternates?.canonical).toBe(
+      "/",
+    );
     expect(
       buildMetadata({ title: "x", description: "y", path: "/about" }).alternates?.canonical,
     ).toBe("/about");
   });
 
   it("throws when path lacks a leading slash", () => {
-    expect(() =>
-      buildMetadata({ title: "x", description: "y", path: "about" }),
-    ).toThrow(/path must start with/);
+    expect(() => buildMetadata({ title: "x", description: "y", path: "about" })).toThrow(
+      /path must start with/,
+    );
   });
 
   it("builds an absolute openGraph URL from metadataBase + path", () => {

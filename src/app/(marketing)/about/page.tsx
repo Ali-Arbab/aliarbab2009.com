@@ -107,10 +107,10 @@ export default function AboutPage() {
             </p>
             <p>
               The through-line is people, not tech. Indian teenagers who don&apos;t have a safe
-              place to learn how markets actually behave. Hindi-first shopkeepers who
-              shouldn&apos;t have to translate &ldquo;Ram took 500 rupees on credit&rdquo; into
-              English to keep their books. A house that locks itself when the family forgets,
-              without sending door state to a server in a different country.
+              place to learn how markets actually behave. Hindi-first shopkeepers who shouldn&apos;t
+              have to translate &ldquo;Ram took 500 rupees on credit&rdquo; into English to keep
+              their books. A house that locks itself when the family forgets, without sending door
+              state to a server in a different country.
             </p>
             <p>
               Whoever you are &mdash; admissions officer, recruiter, collaborator, curious reader
@@ -223,9 +223,9 @@ export default function AboutPage() {
             </p>
             <p>
               A note on this site itself: built in Next.js 15 + Tailwind v4 + TypeScript strict,
-              deployed to Vercel. The brutalist Swiss-grid is deliberate &mdash; everything
-              reduces to type and hairline borders so the work in the project pages can shout.
-              Source is open at{" "}
+              deployed to Vercel. The brutalist Swiss-grid is deliberate &mdash; everything reduces
+              to type and hairline borders so the work in the project pages can shout. Source is
+              open at{" "}
               <a
                 href={siteConfig.github}
                 target="_blank"
@@ -237,8 +237,8 @@ export default function AboutPage() {
               if you want to see how it&apos;s put together.
             </p>
             <p>
-              If anything here matches something you&apos;re building or weighing, the shortest
-              path is{" "}
+              If anything here matches something you&apos;re building or weighing, the shortest path
+              is{" "}
               <Link
                 href="/contact"
                 className="underline decoration-2 underline-offset-4 hover:text-[var(--color-primary)]"
@@ -274,10 +274,7 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-12 flex flex-wrap items-baseline justify-between gap-3 border-t-2 border-[var(--color-border)] pt-4">
-            <p
-              className="text-2xl tracking-tight"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
+            <p className="text-2xl tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
               &mdash; Ali
             </p>
             <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">

@@ -42,9 +42,7 @@ export function OriginBlock({ slug }: { slug: string }) {
           <p className="mb-3 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Problem
           </p>
-          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">
-            {entry.problem}
-          </p>
+          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">{entry.problem}</p>
         </div>
         <div className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0">
           <p className="mb-3 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
@@ -66,7 +64,7 @@ export function OriginBlock({ slug }: { slug: string }) {
         </p>
         <Link
           href="/about"
-          className="font-mono text-[11px] tracking-[0.25em] text-[var(--color-primary)] underline-offset-4 uppercase hover:underline"
+          className="font-mono text-[11px] tracking-[0.25em] text-[var(--color-primary)] uppercase underline-offset-4 hover:underline"
         >
           /about &rarr;
         </Link>

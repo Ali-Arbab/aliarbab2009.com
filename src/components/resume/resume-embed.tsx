@@ -40,7 +40,10 @@ export function ResumeEmbed() {
   const awards = [...AWARDS].sort((a, b) => b.year - a.year);
 
   return (
-    <article id="resume" className="resume-embed border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-12">
+    <article
+      id="resume"
+      className="resume-embed border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-12"
+    >
       {/* Print-only stylesheet — flips dark tokens to a paper-friendly
           black-on-white layout when the user hits Ctrl/Cmd+P. Also
           unwraps any parent grid/section so the resume claims the
@@ -101,7 +104,7 @@ export function ResumeEmbed() {
             </span>
             <Link
               href="/contact"
-              className="font-medium hover:text-[var(--color-primary)] underline-offset-4 hover:underline"
+              className="font-medium underline-offset-4 hover:text-[var(--color-primary)] hover:underline"
             >
               /contact (form)
             </Link>
@@ -114,7 +117,7 @@ export function ResumeEmbed() {
               href={siteConfig.github}
               target="_blank"
               rel="noreferrer"
-              className="font-medium hover:text-[var(--color-primary)] underline-offset-4 hover:underline"
+              className="font-medium underline-offset-4 hover:text-[var(--color-primary)] hover:underline"
             >
               @{siteConfig.githubHandle}
             </a>
@@ -125,7 +128,7 @@ export function ResumeEmbed() {
             </span>
             <a
               href={siteConfig.url}
-              className="font-medium hover:text-[var(--color-primary)] underline-offset-4 hover:underline"
+              className="font-medium underline-offset-4 hover:text-[var(--color-primary)] hover:underline"
             >
               aliarbab2009.com
             </a>
@@ -170,7 +173,9 @@ export function ResumeEmbed() {
         <ul className="mt-4 flex flex-col gap-2 text-sm leading-relaxed text-[var(--color-fg)]/85">
           {RESUME.coursework.map((line, i) => (
             <li key={i} className="flex gap-3">
-              <span aria-hidden className="text-[var(--color-muted)]">→</span>
+              <span aria-hidden className="text-[var(--color-muted)]">
+                →
+              </span>
               <span>{line}</span>
             </li>
           ))}
@@ -189,7 +194,7 @@ export function ResumeEmbed() {
                 <p className="text-base font-medium">
                   <Link
                     href={`/projects/${p.slug}`}
-                    className="hover:text-[var(--color-primary)] underline-offset-4 hover:underline"
+                    className="underline-offset-4 hover:text-[var(--color-primary)] hover:underline"
                   >
                     {p.name}
                   </Link>
@@ -199,9 +204,7 @@ export function ResumeEmbed() {
                   {p.statusLabel} · {p.year}
                 </span>
               </div>
-              <p className="text-sm leading-relaxed text-[var(--color-fg)]/85">
-                {p.description}
-              </p>
+              <p className="text-sm leading-relaxed text-[var(--color-fg)]/85">{p.description}</p>
               <ul className="flex flex-wrap gap-1.5">
                 {p.stack.map((s) => (
                   <li

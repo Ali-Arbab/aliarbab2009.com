@@ -80,9 +80,7 @@ function WhyBlock({ entry, index }: { entry: WhyIBuiltEntry; index: number }) {
         <dl className="flex flex-col gap-3 font-mono text-[10px] tracking-[0.25em] uppercase">
           <div className="flex flex-col gap-1">
             <dt className="text-[var(--color-muted)]">Stack</dt>
-            <dd className="text-[var(--color-fg)]/85">
-              {project.stack.slice(0, 4).join(" / ")}
-            </dd>
+            <dd className="text-[var(--color-fg)]/85">{project.stack.slice(0, 4).join(" / ")}</dd>
           </div>
           <div className="flex flex-col gap-1">
             <dt className="text-[var(--color-muted)]">Year</dt>
@@ -107,7 +105,7 @@ function WhyBlock({ entry, index }: { entry: WhyIBuiltEntry; index: number }) {
 
         <Link
           href={`/projects/${project.slug}`}
-          className="mt-auto inline-flex items-center justify-between gap-3 border-2 border-[var(--color-border)] bg-transparent px-4 py-2.5 font-mono text-[10px] tracking-[0.25em] uppercase transition-colors hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-fg)] hover:border-[var(--color-primary)]"
+          className="mt-auto inline-flex items-center justify-between gap-3 border-2 border-[var(--color-border)] bg-transparent px-4 py-2.5 font-mono text-[10px] tracking-[0.25em] uppercase transition-colors hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-fg)]"
         >
           <span>Read the case study</span>
           <span aria-hidden>→</span>

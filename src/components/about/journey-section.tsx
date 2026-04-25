@@ -34,7 +34,15 @@ function formatTimelineDate(iso: string): string {
   return `${monthName} ${year}`;
 }
 
-function TimelineRow({ entry, index, total }: { entry: TimelineEntry; index: number; total: number }) {
+function TimelineRow({
+  entry,
+  index,
+  total,
+}: {
+  entry: TimelineEntry;
+  index: number;
+  total: number;
+}) {
   const isLast = index === total - 1;
   return (
     <li
@@ -46,7 +54,7 @@ function TimelineRow({ entry, index, total }: { entry: TimelineEntry; index: num
       <span className="col-span-12 font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase sm:col-span-2">
         {formatTimelineDate(entry.date)}
       </span>
-      <span className="col-span-12 text-base font-medium leading-snug sm:col-span-10">
+      <span className="col-span-12 text-base leading-snug font-medium sm:col-span-10">
         {entry.title}
       </span>
       <span className="col-span-12 text-sm leading-relaxed text-[var(--color-fg)]/80 sm:col-span-10 sm:col-start-3">
@@ -124,43 +132,45 @@ export function JourneySection() {
           </h2>
 
           <div className="flex flex-col gap-10">
-            {(Object.keys(ACTIVITY_CATEGORY_LABELS) as Array<keyof typeof ACTIVITY_CATEGORY_LABELS>).map(
-              (cat) => {
-                const items = grouped.get(cat) ?? [];
-                if (items.length === 0) return null;
-                return (
-                  <div key={cat} className="flex flex-col gap-4">
-                    <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-                      {ACTIVITY_CATEGORY_LABELS[cat]}
-                    </p>
-                    <ul className="border-2 border-[var(--color-border)]">
-                      {items.map((a, i) => (
-                        <li
-                          key={a.id}
-                          className={
-                            "grid grid-cols-12 items-baseline gap-x-4 gap-y-1 p-5" +
-                            (i < items.length - 1
-                              ? " border-b-2 border-[var(--color-border)]"
-                              : "")
-                          }
-                        >
-                          <span className="col-span-12 text-base font-medium leading-snug sm:col-span-9">
-                            {a.role}
-                          </span>
-                          <span className="col-span-12 font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase sm:col-span-3 sm:text-right">
-                            {a.from}
-                            {a.to ? `–${a.to}` : a.from === new Date().getFullYear().toString() ? "" : "–present"}
-                          </span>
-                          <span className="col-span-12 text-sm leading-relaxed text-[var(--color-fg)]/80 sm:col-span-9">
-                            {a.blurb}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              },
-            )}
+            {(
+              Object.keys(ACTIVITY_CATEGORY_LABELS) as Array<keyof typeof ACTIVITY_CATEGORY_LABELS>
+            ).map((cat) => {
+              const items = grouped.get(cat) ?? [];
+              if (items.length === 0) return null;
+              return (
+                <div key={cat} className="flex flex-col gap-4">
+                  <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+                    {ACTIVITY_CATEGORY_LABELS[cat]}
+                  </p>
+                  <ul className="border-2 border-[var(--color-border)]">
+                    {items.map((a, i) => (
+                      <li
+                        key={a.id}
+                        className={
+                          "grid grid-cols-12 items-baseline gap-x-4 gap-y-1 p-5" +
+                          (i < items.length - 1 ? " border-b-2 border-[var(--color-border)]" : "")
+                        }
+                      >
+                        <span className="col-span-12 text-base leading-snug font-medium sm:col-span-9">
+                          {a.role}
+                        </span>
+                        <span className="col-span-12 font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase sm:col-span-3 sm:text-right">
+                          {a.from}
+                          {a.to
+                            ? `–${a.to}`
+                            : a.from === new Date().getFullYear().toString()
+                              ? ""
+                              : "–present"}
+                        </span>
+                        <span className="col-span-12 text-sm leading-relaxed text-[var(--color-fg)]/80 sm:col-span-9">
+                          {a.blurb}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -193,12 +203,10 @@ export function JourneySection() {
                   key={a.id}
                   className={
                     "grid grid-cols-12 items-baseline gap-x-4 gap-y-1 p-5" +
-                    (i < AWARDS.length - 1
-                      ? " border-b-2 border-[var(--color-border)]"
-                      : "")
+                    (i < AWARDS.length - 1 ? " border-b-2 border-[var(--color-border)]" : "")
                   }
                 >
-                  <span className="col-span-12 text-base font-medium leading-snug sm:col-span-7">
+                  <span className="col-span-12 text-base leading-snug font-medium sm:col-span-7">
                     {a.title}
                     {a.pending && (
                       <span className="ml-2 font-mono text-[10px] tracking-[0.25em] text-[var(--color-primary)] uppercase">

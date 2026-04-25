@@ -49,8 +49,7 @@ type CommandItem = {
 
 function flipTheme() {
   if (typeof window === "undefined") return;
-  const next =
-    document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", next);
   try {
     window.localStorage.setItem("theme", next);
@@ -62,7 +61,13 @@ function flipTheme() {
 function buildCommands(): CommandItem[] {
   const navItems: CommandItem[] = [
     { id: "nav-home", label: "Home", hint: "/", kind: "nav", href: "/" },
-    { id: "nav-projects", label: "All projects", hint: "/projects", kind: "nav", href: "/projects" },
+    {
+      id: "nav-projects",
+      label: "All projects",
+      hint: "/projects",
+      kind: "nav",
+      href: "/projects",
+    },
     ...PROJECTS.map<CommandItem>((p) => ({
       id: `nav-project-${p.slug}`,
       label: p.name,
@@ -232,7 +237,7 @@ export function CommandPalette() {
       ref={dialogRef}
       onMouseDown={onBackdropMouseDown}
       aria-label="Command palette"
-      className="m-0 ml-auto mr-auto mt-[10vh] w-[min(640px,90vw)] border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-fg)] backdrop:bg-black/60 open:flex open:flex-col"
+      className="m-0 mt-[10vh] mr-auto ml-auto w-[min(640px,90vw)] border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-fg)] backdrop:bg-black/60 open:flex open:flex-col"
     >
       <div onKeyDown={onKeyDown} className="flex flex-col">
         <header className="border-b-2 border-[var(--color-border)] px-4 py-3">
@@ -253,11 +258,7 @@ export function CommandPalette() {
           />
         </header>
 
-        <ul
-          id="command-palette-list"
-          role="listbox"
-          className="max-h-[50vh] overflow-y-auto"
-        >
+        <ul id="command-palette-list" role="listbox" className="max-h-[50vh] overflow-y-auto">
           {filtered.length === 0 ? (
             <li className="p-6 text-center font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
               No matches — try a different query
@@ -318,7 +319,9 @@ export function CommandPalette() {
             <span>↵ select</span>
             <span>ESC close</span>
           </div>
-          <span>{filtered.length} result{filtered.length === 1 ? "" : "s"}</span>
+          <span>
+            {filtered.length} result{filtered.length === 1 ? "" : "s"}
+          </span>
         </footer>
       </div>
 
