@@ -254,18 +254,14 @@ IF NOT FOUND THEN RAISE EXCEPTION 'insufficient_cash'; END IF;`}
       </section>
 
       {/* § 06 — AI COACH */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 06
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            AI coach
-          </p>
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
+        <div className="col-span-12 flex flex-col gap-1 md:col-span-2">
+          <p data-ss-section-number>§ 06</p>
+          <p data-ss-section-label>AI coach</p>
         </div>
         <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
           <h2
-            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
+            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-bold tracking-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Deterministic where stakes are high, generative where they aren&apos;t.
@@ -309,7 +305,7 @@ IF NOT FOUND THEN RAISE EXCEPTION 'insufficient_cash'; END IF;`}
             <code className="font-mono text-sm">historical_context</code>, and{" "}
             <code className="font-mono text-sm">suggested_q</code> for 25 forbidden phrases.
           </p>
-          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+          <pre data-ss-code className="overflow-x-auto p-4 font-mono text-[11px] leading-relaxed">
             {`# SEBI-SAFE GUARDRAILS (ABSOLUTE)
 - You can state a current price. That's public info.
 - You CANNOT say: "should buy", "should sell", "recommend", "target price",
