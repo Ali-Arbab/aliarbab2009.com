@@ -47,7 +47,8 @@ export default function BolHisaabPage() {
             Status
           </p>
           <p className="font-mono text-sm font-medium text-[var(--color-primary)]">
-            ◐ {project.statusLabel}
+            <span data-bh-mic-pulse className="mr-2 inline-block align-middle"></span>
+            {project.statusLabel}
           </p>
         </div>
         <div className="col-span-6 flex flex-col gap-2 md:col-span-3">
@@ -356,7 +357,9 @@ VOCAB:
 RULES:
 - ALWAYS include every key from the schema. Use null (not omit) when
   unknown. This is mandatory.
-- Input may be Devanagari (राम ने पाँच सौ उधार लिया) or romanized.`}
+- Input may be Devanagari (`}
+            <span lang="hi">राम ने पाँच सौ उधार लिया</span>
+            {`) or romanized.`}
           </pre>
           <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             The Indian numerals table is the differentiator. Generic ASR keeps mis-hearing{" "}
@@ -585,20 +588,22 @@ $$;`}
         </div>
         <div className="col-span-12 md:col-span-10">
           <ul className="grid grid-cols-2 gap-0 border-2 border-[var(--color-border)] md:grid-cols-4">
-            {[
-              ["~200ms", "Llama 8B intent parse"],
-              ["~150ms", "saved per turn by RPC"],
-              ["~500–800ms", "saved end-to-end"],
-              ["0.85", "auto-commit threshold"],
-              ["200", "LRU intent-cache entries"],
-              ["3 + 2", "ASR backends + LLM tiers"],
-              ["5", "JSON-defense layers"],
-              ["88px", "mic FAB diameter"],
-              ["500ms", "min recording duration"],
-              ["63M", "Indian shopkeepers (TAM)"],
-              ["27", "documented gotchas fixed"],
-              ["8", "voice-state machine states"],
-            ].map(([num, label], i) => (
+            {(
+              [
+                ["~200ms", "Llama 8B intent parse", null],
+                ["~150ms", "saved per turn by RPC", "credit"],
+                ["~500–800ms", "saved end-to-end", "credit"],
+                ["0.85", "auto-commit threshold", null],
+                ["200", "LRU intent-cache entries", null],
+                ["3 + 2", "ASR backends + LLM tiers", null],
+                ["5", "JSON-defense layers", null],
+                ["88px", "mic FAB diameter", null],
+                ["500ms", "min recording duration", null],
+                ["63M", "Indian shopkeepers (TAM)", null],
+                ["27", "documented gotchas fixed", null],
+                ["8", "voice-state machine states", null],
+              ] as Array<[string, string, "credit" | "debit" | null]>
+            ).map(([num, label, semantic], i) => (
               <li
                 key={label}
                 className={
@@ -609,7 +614,14 @@ $$;`}
                   (i < 8 ? "md:border-b-2" : "")
                 }
               >
-                <p className="font-mono text-2xl font-medium text-[var(--color-primary)] tabular-nums">
+                <p
+                  className="font-mono text-2xl font-medium text-[var(--color-primary)] tabular-nums"
+                  {...(semantic === "credit"
+                    ? { "data-bh-credit-text": "" }
+                    : semantic === "debit"
+                      ? { "data-bh-debit-text": "" }
+                      : {})}
+                >
                   {num}
                 </p>
                 <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
