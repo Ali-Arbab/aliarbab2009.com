@@ -766,66 +766,117 @@ _streamSub = res.stream.listen((chunk) {
       <div data-maglock-double-rule className="mb-10"></div>
 
       {/* § 10 — LIMITATIONS */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div data-maglock-section-header className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 10
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Honest limits
-          </p>
+      <section className="mb-20 grid grid-cols-12 gap-4">
+        <div data-maglock-section-label className="col-span-12 md:col-span-2">
+          <span>§ 10</span>
+          <span>Honest limits</span>
         </div>
-        <div className="col-span-12 flex flex-col gap-3 md:col-span-10">
-          <ul className="ml-6 max-w-prose list-disc space-y-3 text-base leading-relaxed text-[var(--color-fg)]">
-            <li>
-              <strong className="font-medium">Brand mid-rename.</strong>{" "}
-              <code className="font-mono text-sm">pubspec.yaml</code> says{" "}
-              <code className="font-mono text-sm">MagLock_Protocol</code>; the Android manifest
-              launcher label says <code className="font-mono text-sm">NEXUS LOCK</code>; the README
-              still uses the old <code className="font-mono text-sm">nexus_lock/</code> folder
-              structure. The repo shows the seams of an in-progress rename.
-            </li>
-            <li>
-              <strong className="font-medium">Hardcoded WiFi credentials in firmware.</strong> Both{" "}
-              <code className="font-mono text-sm">lock_controller.ino</code> and{" "}
-              <code className="font-mono text-sm">cam_firmware.ino</code> carry literals; they must
-              be redacted in any quoted snippet. The v2 path is provisioning via NVS or a one-time
-              SoftAP captive portal.
-            </li>
-            <li>
-              <strong className="font-medium">No TLS, no auth on the lock REST endpoints.</strong>{" "}
-              Anyone reachable on the closed subnet can{" "}
-              <code className="font-mono text-sm">curl -X POST .../unlock?relay=all</code>.
-              Deliberate — the trust boundary is the AP. The natural v2 step is HMAC-signed requests
-              with a shared secret in NVS.
-            </li>
-            <li>
-              <strong className="font-medium">Default app passcode 1234.</strong>{" "}
-              Settings-configurable, but it ships as a placeholder and gates only the UI, not the
-              network protocol.
-            </li>
-            <li>
-              <strong className="font-medium">Only Android is realistically tested.</strong> iOS /
-              macOS / Windows / Linux / Web platform builds are stock{" "}
-              <code className="font-mono text-sm">flutter create</code> scaffolds. No Podfile for
-              iOS, no <code className="font-mono text-sm">NSMicrophoneUsageDescription</code>, no
-              ATS exception for HTTP-to-LAN-IP.
-            </li>
-            <li>
-              <strong className="font-medium">Web is architecturally non-viable.</strong> A
-              LAN-control app cannot run in a browser: the ESP32 doesn&apos;t send CORS headers; an
-              HTTPS-hosted build hits mixed-content blocking on HTTP-to-LAN-IP requests. The case
-              study&apos;s &ldquo;I learned the browser&apos;s security model says no&rdquo; beat.
-            </li>
-            <li>
-              <strong className="font-medium">Tests are zero-meaningful.</strong>{" "}
-              <code className="font-mono text-sm">test/widget_test.dart</code> is the unmodified{" "}
-              <code className="font-mono text-sm">flutter create</code> counter smoke test. The case
-              study should not claim test coverage.
-            </li>
+        <div className="col-span-12 md:col-span-10">
+          <ul
+            data-maglock-brackets
+            className="grid grid-cols-1 gap-0 border-2 border-[color-mix(in_srgb,var(--color-primary)_30%,var(--color-border))]"
+          >
+            {(
+              [
+                {
+                  title: "Brand mid-rename",
+                  body: (
+                    <>
+                      <code className="font-mono text-sm">pubspec.yaml</code> says{" "}
+                      <code className="font-mono text-sm">MagLock_Protocol</code>; the Android
+                      manifest launcher label says{" "}
+                      <code className="font-mono text-sm">NEXUS LOCK</code>; the README still uses
+                      the old <code className="font-mono text-sm">nexus_lock/</code> folder
+                      structure. The repo shows the seams of an in-progress rename.
+                    </>
+                  ),
+                },
+                {
+                  title: "Hardcoded WiFi credentials in firmware",
+                  body: (
+                    <>
+                      Both <code className="font-mono text-sm">lock_controller.ino</code> and{" "}
+                      <code className="font-mono text-sm">cam_firmware.ino</code> carry literals;
+                      they must be redacted in any quoted snippet. The v2 path is provisioning via
+                      NVS or a one-time SoftAP captive portal.
+                    </>
+                  ),
+                },
+                {
+                  title: "No TLS, no auth on the lock REST endpoints",
+                  body: (
+                    <>
+                      Anyone reachable on the closed subnet can{" "}
+                      <code className="font-mono text-sm">curl -X POST .../unlock?relay=all</code>.
+                      Deliberate — the trust boundary is the AP. The natural v2 step is HMAC-signed
+                      requests with a shared secret in NVS.
+                    </>
+                  ),
+                },
+                {
+                  title: "Default app passcode 1234",
+                  body: (
+                    <>
+                      Settings-configurable, but it ships as a placeholder and gates only the UI,
+                      not the network protocol.
+                    </>
+                  ),
+                },
+                {
+                  title: "Only Android is realistically tested",
+                  body: (
+                    <>
+                      iOS / macOS / Windows / Linux / Web platform builds are stock{" "}
+                      <code className="font-mono text-sm">flutter create</code> scaffolds. No
+                      Podfile for iOS, no{" "}
+                      <code className="font-mono text-sm">NSMicrophoneUsageDescription</code>, no
+                      ATS exception for HTTP-to-LAN-IP.
+                    </>
+                  ),
+                },
+                {
+                  title: "Web is architecturally non-viable",
+                  body: (
+                    <>
+                      A LAN-control app cannot run in a browser: the ESP32 doesn&apos;t send CORS
+                      headers; an HTTPS-hosted build hits mixed-content blocking on HTTP-to-LAN-IP
+                      requests. The case study&apos;s &ldquo;I learned the browser&apos;s security
+                      model says no&rdquo; beat.
+                    </>
+                  ),
+                },
+                {
+                  title: "Tests are zero-meaningful",
+                  body: (
+                    <>
+                      <code className="font-mono text-sm">test/widget_test.dart</code> is the
+                      unmodified <code className="font-mono text-sm">flutter create</code> counter
+                      smoke test. The case study should not claim test coverage.
+                    </>
+                  ),
+                },
+              ] as const
+            ).map((limit, i, arr) => (
+              <li
+                key={limit.title}
+                className={
+                  "p-6" + (i < arr.length - 1 ? " border-b-2 border-[var(--color-border)]" : "")
+                }
+              >
+                <div data-maglock-double-rule className="mb-4"></div>
+                <p data-maglock-uppercase-label data-tone="primary" data-size="lg" className="mb-3">
+                  {limit.title}
+                </p>
+                <p className="max-w-prose text-[15px] leading-relaxed text-[var(--color-fg)]">
+                  {limit.body}
+                </p>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
+
+      <div data-maglock-double-rule className="mb-10"></div>
 
       {/* § 11 — NUMBERS */}
       <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
