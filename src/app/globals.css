@@ -19,6 +19,7 @@
   --color-surface: #0a0a0a;
   --color-surface-2: #141414;
   --color-border: #f0f0ea;
+  --color-backdrop: rgba(0, 0, 0, 0.6);
   --color-glow: color-mix(in oklch, #6b82ff, transparent 70%);
   --color-grid-line: rgba(240, 240, 234, 0.06);
   --color-success: oklch(0.72 0.18 150);
@@ -54,6 +55,7 @@
   --color-surface: #f4f4f0;
   --color-surface-2: #ebebe5;
   --color-border: #0a0a0a;
+  --color-backdrop: rgba(10, 10, 10, 0.4);
   --color-glow: color-mix(in oklch, #0033ff, transparent 80%);
   --color-grid-line: rgba(10, 10, 10, 0.06);
   color-scheme: light;

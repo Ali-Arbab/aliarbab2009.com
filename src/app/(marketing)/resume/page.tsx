@@ -72,7 +72,7 @@ export default function ResumePage() {
           >
             Resume.
           </h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-[var(--color-fg)]/85">
+          <p className="max-w-2xl text-lg leading-relaxed text-[var(--color-fg)]">
             One page, no buzzword stack. The HTML version below is the source of truth — it&apos;s
             searchable, indexable, and prints cleanly. For a fuller narrative, see{" "}
             <Link

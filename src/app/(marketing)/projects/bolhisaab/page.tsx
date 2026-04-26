@@ -85,11 +85,11 @@ export default function BolHisaabPage() {
           >
             {project.tagline}.
           </p>
-          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             {project.description}
           </p>
           <blockquote
-            className="mt-2 max-w-2xl border-l-4 border-[var(--color-primary)] pl-6 text-xl leading-snug text-[var(--color-fg)]/85 italic"
+            className="mt-2 max-w-2xl border-l-4 border-[var(--color-primary)] pl-6 text-xl leading-snug text-[var(--color-fg)] italic"
             style={{ fontFamily: "var(--font-display)" }}
           >
             &ldquo;Ram ne 500 udhaar liya.&rdquo;
@@ -197,7 +197,7 @@ export default function BolHisaabPage() {
             <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
               Full case study — coming soon
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
+            <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
               An interactive voice-demo mockup, the full architecture (mic → Groq Whisper → Llama
               intent parser → Supabase → Hindi TTS), a code walkthrough of the intent extractor, and
               screenshots ship in Phase 2 of the build.

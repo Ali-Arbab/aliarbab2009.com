@@ -72,7 +72,7 @@ export default function ProjectsIndexPage() {
           >
             Three worlds.
           </h1>
-          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             Each project picks a specific audience and ships for them. Click into a tile to enter
             that project&apos;s own world — palette, typography, and motion all invert to its
             identity. The shell stays brutalist so you know you&apos;re still on Ali&apos;s site.
@@ -118,8 +118,8 @@ export default function ProjectsIndexPage() {
                   >
                     {p.name}
                   </h2>
-                  <p className="text-sm leading-relaxed text-[var(--color-fg)]/80">{p.tagline}.</p>
-                  <p className="text-[13px] leading-relaxed text-[var(--color-fg)]/70">
+                  <p className="text-sm leading-relaxed text-[var(--color-fg)]">{p.tagline}.</p>
+                  <p className="text-[13px] leading-relaxed text-[var(--color-muted)]">
                     {p.description}
                   </p>
                 </div>

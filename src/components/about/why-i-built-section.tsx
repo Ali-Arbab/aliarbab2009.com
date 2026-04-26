@@ -50,19 +50,19 @@ function WhyBlock({ entry, index }: { entry: WhyIBuiltEntry; index: number }) {
           <p className="mb-1.5 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Problem
           </p>
-          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">{entry.problem}</p>
+          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]">{entry.problem}</p>
         </div>
         <div>
           <p className="mb-1.5 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Why me
           </p>
-          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">{entry.why}</p>
+          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]">{entry.why}</p>
         </div>
         <div>
           <p className="mb-1.5 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Learned
           </p>
-          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">{entry.learned}</p>
+          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]">{entry.learned}</p>
         </div>
       </div>
 
@@ -70,7 +70,7 @@ function WhyBlock({ entry, index }: { entry: WhyIBuiltEntry; index: number }) {
       <aside className="col-span-12 flex flex-col gap-5 md:col-span-4 md:border-l-2 md:border-[var(--color-border)] md:pl-6">
         {entry.pullQuote && (
           <blockquote
-            className="border-l-2 border-[var(--color-primary)] pl-4 text-lg leading-snug text-[var(--color-fg)]/90 italic"
+            className="border-l-2 border-[var(--color-primary)] pl-4 text-lg leading-snug text-[var(--color-fg)] italic"
             style={{ fontFamily: "var(--font-display)" }}
           >
             &ldquo;{entry.pullQuote}&rdquo;
@@ -80,11 +80,11 @@ function WhyBlock({ entry, index }: { entry: WhyIBuiltEntry; index: number }) {
         <dl className="flex flex-col gap-3 font-mono text-[10px] tracking-[0.25em] uppercase">
           <div className="flex flex-col gap-1">
             <dt className="text-[var(--color-muted)]">Stack</dt>
-            <dd className="text-[var(--color-fg)]/85">{project.stack.slice(0, 4).join(" / ")}</dd>
+            <dd className="text-[var(--color-fg)]">{project.stack.slice(0, 4).join(" / ")}</dd>
           </div>
           <div className="flex flex-col gap-1">
             <dt className="text-[var(--color-muted)]">Year</dt>
-            <dd className="text-[var(--color-fg)]/85">{project.year}</dd>
+            <dd className="text-[var(--color-fg)]">{project.year}</dd>
           </div>
           {project.liveUrl ? (
             <div className="flex flex-col gap-1">

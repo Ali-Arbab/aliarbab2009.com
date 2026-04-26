@@ -9,7 +9,7 @@ const buttonVariants = cva(
     "font-medium text-sm",
     "transition-[background-color,color,box-shadow,transform] duration-200",
     "disabled:pointer-events-none disabled:opacity-50",
-    "focus-visible:outline-2 focus-visible:outline-offset-2",
+    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]",
   ].join(" "),
   {
     variants: {

@@ -37,7 +37,7 @@ function TimelineRow({
       <span className="col-span-12 text-base leading-snug font-medium sm:col-span-10">
         {entry.title}
       </span>
-      <span className="col-span-12 text-sm leading-relaxed text-[var(--color-fg)]/80 sm:col-span-10 sm:col-start-3">
+      <span className="col-span-12 text-sm leading-relaxed text-[var(--color-muted)] sm:col-span-10 sm:col-start-3">
         {entry.note}
       </span>
     </li>
@@ -142,7 +142,7 @@ export function JourneySection() {
                               ? ""
                               : "–present"}
                         </span>
-                        <span className="col-span-12 text-sm leading-relaxed text-[var(--color-fg)]/80 sm:col-span-9">
+                        <span className="col-span-12 text-sm leading-relaxed text-[var(--color-muted)] sm:col-span-9">
                           {a.blurb}
                         </span>
                       </li>
@@ -201,7 +201,7 @@ export function JourneySection() {
                     {a.year}
                   </span>
                   {a.blurb && (
-                    <span className="col-span-12 text-sm leading-relaxed text-[var(--color-fg)]/75">
+                    <span className="col-span-12 text-sm leading-relaxed text-[var(--color-muted)]">
                       {a.blurb}
                     </span>
                   )}

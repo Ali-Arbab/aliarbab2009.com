@@ -42,19 +42,19 @@ export function OriginBlock({ slug }: { slug: string }) {
           <p className="mb-3 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Problem
           </p>
-          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">{entry.problem}</p>
+          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]">{entry.problem}</p>
         </div>
         <div className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0">
           <p className="mb-3 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Why me
           </p>
-          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">{entry.why}</p>
+          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]">{entry.why}</p>
         </div>
         <div className="p-6">
           <p className="mb-3 font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
             Learned
           </p>
-          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]/85">{entry.learned}</p>
+          <p className="text-[15px] leading-relaxed text-[var(--color-fg)]">{entry.learned}</p>
         </div>
       </div>
 

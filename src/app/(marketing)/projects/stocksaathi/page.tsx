@@ -85,7 +85,7 @@ export default function StockSaathiPage() {
           >
             {project.tagline}.
           </p>
-          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             {project.description}
           </p>
         </div>
@@ -193,7 +193,7 @@ export default function StockSaathiPage() {
             <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
               Full case study — coming soon
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
+            <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
               Architecture diagrams, live iframe embed, screenshot gallery, a demo video with
               chapter markers, a code walkthrough of the Groq streaming coach, and a challenges
               section ship in Phase 1 of the build (after APs, starts May 16).

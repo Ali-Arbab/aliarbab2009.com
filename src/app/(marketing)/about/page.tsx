@@ -77,7 +77,7 @@ export default function AboutPage() {
           >
             Hi &mdash; I&apos;m Ali.
           </h1>
-          <div className="mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-[var(--color-fg)]/85">
+          <div className="mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-[var(--color-fg)]">
             <p>
               I&apos;m a Class XII student finishing high school in 2026, sitting four AP exams in
               May, and shipping software in the meantime. This page is the long version: the
@@ -209,7 +209,7 @@ export default function AboutPage() {
           >
             That&apos;s the long version.
           </h2>
-          <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-[var(--color-fg)]/85">
+          <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-[var(--color-fg)]">
             <p>
               Three projects, four AP exams, one site. If you&apos;ve scrolled this far, thank you
               &mdash; that&apos;s a meaningful slice of attention and I don&apos;t take it for

@@ -96,7 +96,7 @@ export function ContactForm() {
         <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
           Message sent
         </p>
-        <p className="mt-3 max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
+        <p className="mt-3 max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
           Thanks &mdash; I read everything that lands in my inbox within 48 hours and reply if
           there&apos;s something specific to say back.
         </p>

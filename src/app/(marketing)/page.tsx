@@ -104,7 +104,7 @@ export default function HomePage() {
             <br />
             <span className="italic">working.</span>
           </h1>
-          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             I&apos;m Ali. I&apos;m in Class XII. I build software for people who are usually
             designed around &mdash; not for. An AI investment coach for teens, a voice-first ledger
             for shopkeepers, a smart lock running on two ESP32s.
@@ -188,8 +188,8 @@ export default function HomePage() {
                   >
                     {p.name}
                   </h3>
-                  <p className="text-sm leading-relaxed text-[var(--color-fg)]/80">{p.tagline}.</p>
-                  <p className="text-[13px] leading-relaxed text-[var(--color-fg)]/70">
+                  <p className="text-sm leading-relaxed text-[var(--color-fg)]">{p.tagline}.</p>
+                  <p className="text-[13px] leading-relaxed text-[var(--color-muted)]">
                     {p.description}
                   </p>
                 </div>

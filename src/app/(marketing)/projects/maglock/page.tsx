@@ -85,7 +85,7 @@ export default function MagLockPage() {
           >
             {project.tagline}.
           </p>
-          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]/85">
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             {project.description}
           </p>
         </div>
@@ -188,7 +188,7 @@ export default function MagLockPage() {
             <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
               Full case study — coming soon
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]/75">
+            <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
               Architecture diagrams of the Flutter → ESP32 REST loop + the ESP32-CAM MJPEG pipeline,
               a gallery of 27 real camera snapshots, two demo videos of the dual-relay unlock +
               Maggy voice interaction, and a write-up of the hardcoded-WiFi-creds security incident

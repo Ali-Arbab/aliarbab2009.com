@@ -237,7 +237,7 @@ export function CommandPalette() {
       ref={dialogRef}
       onMouseDown={onBackdropMouseDown}
       aria-label="Command palette"
-      className="m-0 mt-[10vh] mr-auto ml-auto w-[min(640px,90vw)] border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-fg)] backdrop:bg-black/60 open:flex open:flex-col"
+      className="m-0 mt-[10vh] mr-auto ml-auto w-[min(640px,90vw)] border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-fg)] backdrop:bg-[var(--color-backdrop)] open:flex open:flex-col"
     >
       <div onKeyDown={onKeyDown} className="flex flex-col">
         <header className="border-b-2 border-[var(--color-border)] px-4 py-3">

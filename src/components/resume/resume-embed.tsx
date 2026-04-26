@@ -87,7 +87,7 @@ export function ResumeEmbed() {
         >
           {siteConfig.author}
         </h1>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-fg)]/85">
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-fg)]">
           {RESUME.summary}
         </p>
         <ul className="mt-5 grid grid-cols-1 gap-2 font-mono text-[11px] tracking-wide sm:grid-cols-3">
@@ -135,7 +135,7 @@ export function ResumeEmbed() {
           Education
         </h2>
         <p className="text-base font-medium">Class XII — final year</p>
-        <p className="mt-1 text-sm leading-relaxed text-[var(--color-fg)]/80">
+        <p className="mt-1 text-sm leading-relaxed text-[var(--color-muted)]">
           AP exam track sitting May 2026:
         </p>
         <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -163,7 +163,7 @@ export function ResumeEmbed() {
             </li>
           ))}
         </ul>
-        <ul className="mt-4 flex flex-col gap-2 text-sm leading-relaxed text-[var(--color-fg)]/85">
+        <ul className="mt-4 flex flex-col gap-2 text-sm leading-relaxed text-[var(--color-fg)]">
           {RESUME.coursework.map((line, i) => (
             <li key={i} className="flex gap-3">
               <span aria-hidden className="text-[var(--color-muted)]">
@@ -197,12 +197,12 @@ export function ResumeEmbed() {
                   {p.statusLabel} · {p.year}
                 </span>
               </div>
-              <p className="text-sm leading-relaxed text-[var(--color-fg)]/85">{p.description}</p>
+              <p className="text-sm leading-relaxed text-[var(--color-fg)]">{p.description}</p>
               <ul className="flex flex-wrap gap-1.5">
                 {p.stack.map((s) => (
                   <li
                     key={s}
-                    className="resume-pill border border-[var(--color-border)] px-2 py-0.5 font-mono text-[10px] tracking-wide text-[var(--color-fg)]/75"
+                    className="resume-pill border border-[var(--color-border)] px-2 py-0.5 font-mono text-[10px] tracking-wide text-[var(--color-fg)]"
                   >
                     {s}
                   </li>
@@ -252,7 +252,7 @@ export function ResumeEmbed() {
                   {formatDateRange(a.from, a.to)}
                 </span>
               </div>
-              <p className="text-sm leading-relaxed text-[var(--color-fg)]/80">{a.blurb}</p>
+              <p className="text-sm leading-relaxed text-[var(--color-muted)]">{a.blurb}</p>
             </li>
           ))}
         </ul>
@@ -281,7 +281,7 @@ export function ResumeEmbed() {
                   </span>
                 </div>
                 {a.blurb && (
-                  <p className="text-sm leading-relaxed text-[var(--color-fg)]/75">{a.blurb}</p>
+                  <p className="text-sm leading-relaxed text-[var(--color-muted)]">{a.blurb}</p>
                 )}
               </li>
             ))}
@@ -305,7 +305,7 @@ export function ResumeEmbed() {
                   {g.items.map((it) => (
                     <li
                       key={it}
-                      className="resume-pill border border-[var(--color-border)] px-2 py-0.5 font-mono text-[10px] tracking-wide text-[var(--color-fg)]/85"
+                      className="resume-pill border border-[var(--color-border)] px-2 py-0.5 font-mono text-[10px] tracking-wide text-[var(--color-fg)]"
                     >
                       {it}
                     </li>

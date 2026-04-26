@@ -71,7 +71,7 @@ export default function ContactPage() {
           >
             Say hi.
           </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-fg)]/85">
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-fg)]">
             Reach out any time &mdash; a short note, a project question, or &ldquo;I&apos;d like to
             chat&rdquo; is all welcome. I reply within 48 hours.
           </p>
