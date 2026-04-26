@@ -254,7 +254,7 @@ IF NOT FOUND THEN RAISE EXCEPTION 'insufficient_cash'; END IF;`}
       </section>
 
       {/* § 06 — AI COACH */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 06
@@ -330,6 +330,71 @@ IF NOT FOUND THEN RAISE EXCEPTION 'insufficient_cash'; END IF;`}
               anthropic-dangerous-direct-browser-access: true
             </code>{" "}
             — no chat data ever leaves their device.
+          </p>
+        </div>
+      </section>
+
+      {/* § 07 — TIME TRAVEL */}
+      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 07
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Time travel
+          </p>
+        </div>
+        <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
+          <h2
+            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            The LLM picks the story. Yahoo data is the truth.
+          </h2>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            Pick (or invent) a market crisis; watch a ₹1,00,000 portfolio split into a held line and
+            a panic-sold-on-day-3 line over real historical closes. Three curated scenarios ship —
+            COVID March 2020, GFC 2008, demonetisation 2016 — with educator-tone narration. Anything
+            else routes through the custom-crash generator, a{" "}
+            <strong className="font-medium">three-phase grounded pipeline</strong>:
+          </p>
+          <ol className="ml-6 max-w-prose list-decimal space-y-3 text-base leading-relaxed text-[var(--color-fg)]">
+            <li>
+              <strong className="font-medium">Phase A — pick dates and ticker.</strong> Gemini Flash
+              with a colloquial-to-formal mapping table identifies any Indian market event from any
+              phrasing: <em>&ldquo;the soap guy scam&rdquo;</em> → Nirav Modi / PNB,{" "}
+              <em>&ldquo;demon&rdquo;</em> → demonetisation, <em>&ldquo;yes guy&rdquo;</em> → YES
+              Bank moratorium, <em>&ldquo;the short seller thing&rdquo;</em> → Adani-Hindenburg.
+            </li>
+            <li>
+              <strong className="font-medium">Phase B — fetch real historical data.</strong> No LLM.
+              Yahoo via <code className="font-mono text-sm">/api/ai?op=history</code>. Primary
+              symbol fires in parallel with up to three companion sector indices so Phase C can
+              write relativity-aware narration.
+            </li>
+            <li>
+              <strong className="font-medium">Phase C — narrate over real numbers.</strong> JSON
+              output with title, key moments, recovery days. Every numeric field is then overwritten
+              with the Yahoo-real value before persistence — the LLM&apos;s job is the story, the
+              numbers are facts.
+            </li>
+          </ol>
+          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+            {`// Overwrite any hallucinated numbers with the REAL ones. The LLM's
+// numbers are a sanity cross-check; the real-data numbers are truth.
+meta.startIndex = Math.round(startIdx * 100) / 100;
+meta.troughIndex = Math.round(troughIdx * 100) / 100;
+meta.endIndex = Math.round(endIdx * 100) / 100;
+meta.troughDay = troughDayIdx;
+meta.indexDrop = Math.round(realDropPct * 10) / 10;`}
+          </pre>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            Scenarios are <strong className="font-medium">shareable across users by URL</strong>.
+            The cache key is SHA-256 of an aggressively normalised prompt — split letter/digit runs,
+            lowercase, non-alnum to spaces, tokenise, dedupe, sort, hash. So{" "}
+            <em>&quot;Adani Hindenburg 2023&quot;</em>, <em>&quot;hindenburg 2023 adani&quot;</em>,
+            and <em>&quot;AdaniHindenburg2023&quot;</em> collapse to one cache row, one shareable
+            URL, one LLM cost amortised across every user who follows the link.
           </p>
         </div>
       </section>
