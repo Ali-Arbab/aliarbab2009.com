@@ -81,7 +81,9 @@
 
 .theme-stocksaathi {
   /* DARK variant — applied when site is dark (default), or when
-     the data-theme attribute hasn't been set yet (SSR phase). */
+     the data-theme attribute hasn't been set yet (SSR phase).
+     Palette + typography sourced from StockSaathi's actual app
+     (G:/StockSaathi/app/css/main.css). */
   --color-bg: #0a0b0f;
   --color-fg: #e8ecef;
   --color-muted: #8892a0;
@@ -91,7 +93,19 @@
   --color-surface-2: #12141a;
   --color-border: #1f2430;
   --color-glow: color-mix(in oklch, #00b386, transparent 55%);
-  --font-display: var(--font-space-grotesk), sans-serif;
+  /* India-saffron secondary — used in StockSaathi for badges, gradient
+     avatars, and crash-replay callouts. Available as a free accent
+     when a section needs warmth against the teal. */
+  --color-saffron: #ff8a2a;
+  --color-saffron-soft: color-mix(in oklch, #ff8a2a, transparent 80%);
+  /* Typography swaps the brutalist Space Grotesk for Inter — StockSaathi's
+     actual product font, optimised for fintech tabular UI. JetBrains Mono
+     stays as the default mono so the existing nav/footer chrome doesn't
+     re-paint. */
+  --font-display: var(--font-inter), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  /* StockSaathi-native radius — 12px base, softer than the brutalist 0px
+     but tighter than BolHisaab's 16px. */
   --radius-base: 12px;
 }
 
@@ -107,6 +121,8 @@
   --color-surface-2: #ebebe5;
   --color-border: #c5c5be;
   --color-glow: color-mix(in oklch, #006d52, transparent 70%);
+  --color-saffron: #e06b00;
+  --color-saffron-soft: color-mix(in oklch, #e06b00, transparent 85%);
 }
 
 /* ── BolHisaab: indigo accent, cream default + dark variant ── */
