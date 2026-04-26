@@ -700,20 +700,61 @@ $$;`}
       </section>
 
       {/* § 11 — NUMBERS */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="grid grid-cols-12 gap-4 pt-10">
         <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 11
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Numbers
-          </p>
+          <div data-bh-section-header>
+            <span data-bh-section-badge>11</span>
+            <span data-bh-section-label>Numbers</span>
+          </div>
         </div>
-        <div className="col-span-12 md:col-span-10">
-          <ul
-            data-bh-rounded-card
-            className="grid grid-cols-2 gap-0 border-2 border-[var(--color-border)] md:grid-cols-4"
+        <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
+          {/* BalanceStrip mockup — the BolHisaab home-screen pattern made
+              concrete. Big indigo running balance, two smaller lines
+              underneath for credit-receivable ("Aapko milna hai") in
+              emerald and debit-payable ("Aapko dena hai") in rose.
+              Domain semantics on display: --color-credit + --color-debit
+              are first-class tokens, not utility colors. */}
+          <div
+            aria-label="BolHisaab home balance strip mockup"
+            data-bh-app-card
+            className="flex flex-col gap-3 rounded-2xl shadow-md"
+            style={{ padding: "20px 24px" }}
           >
+            <p
+              className="text-xs font-medium tracking-wide text-[var(--color-muted)] uppercase"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Aaj ka kaarobaar (Today&apos;s business)
+            </p>
+            <p
+              className="text-[clamp(2.5rem,5vw,3.5rem)] leading-none font-bold text-[var(--color-primary)] tabular-nums"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              ₹4,52,683
+            </p>
+            <div className="mt-1 flex flex-wrap gap-x-8 gap-y-2">
+              <p
+                className="flex items-baseline gap-2 text-sm"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <span className="text-[var(--color-muted)]">Aapko milna hai:</span>
+                <span data-bh-credit-text className="font-semibold tabular-nums">
+                  ₹1,23,500
+                </span>
+              </p>
+              <p
+                className="flex items-baseline gap-2 text-sm"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <span className="text-[var(--color-muted)]">Aapko dena hai:</span>
+                <span data-bh-debit-text className="font-semibold tabular-nums">
+                  ₹84,200
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <ul className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {(
               [
                 ["~200ms", "Llama 8B intent parse", null],
@@ -729,19 +770,10 @@ $$;`}
                 ["27", "documented gotchas fixed", null],
                 ["8", "voice-state machine states", null],
               ] as Array<[string, string, "credit" | "debit" | null]>
-            ).map(([num, label, semantic], i) => (
-              <li
-                key={label}
-                className={
-                  "border-[var(--color-border)] p-5 " +
-                  (i % 2 === 0 ? "border-r-2" : "") +
-                  (i < 10 ? "border-b-2" : "") +
-                  "md:border-r-2" +
-                  (i < 8 ? "md:border-b-2" : "")
-                }
-              >
+            ).map(([num, label, semantic]) => (
+              <li key={label} data-bh-stat-tile>
                 <p
-                  className="font-mono text-2xl font-medium text-[var(--color-primary)] tabular-nums"
+                  className="text-2xl font-medium text-[var(--color-primary)] tabular-nums"
                   {...(semantic === "credit"
                     ? { "data-bh-credit-text": "" }
                     : semantic === "debit"
@@ -750,9 +782,7 @@ $$;`}
                 >
                   {num}
                 </p>
-                <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
-                  {label}
-                </p>
+                <p className="mt-2 text-xs leading-snug text-[var(--color-muted)]">{label}</p>
               </li>
             ))}
           </ul>
