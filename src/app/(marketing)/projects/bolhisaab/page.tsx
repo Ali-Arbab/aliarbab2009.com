@@ -250,7 +250,7 @@ export default function BolHisaabPage() {
       </section>
 
       {/* § 06 — VOICE PIPELINE */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 06
@@ -308,6 +308,83 @@ export default function BolHisaabPage() {
             handler but still forces Turbopack to compile the heavy voice route end-to-end before
             the user&apos;s first real press. The &ldquo;first request is slow&rdquo; cliff vanishes
             during demos.
+          </p>
+        </div>
+      </section>
+
+      {/* § 07 — INTENT PARSER + HINGLISH */}
+      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 07
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Intent
+          </p>
+        </div>
+        <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
+          <h2
+            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Indian numerals as deterministic mappings, not LLM arithmetic.
+          </h2>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            The system prompt is the single biggest accuracy lever in the app. It was trimmed from
+            ~2000 tokens to ~600 because every input token costs roughly 1ms on Llama 8B-instant. It
+            teaches the model Hindi credit/debit polarity, Indian number words as deterministic
+            mappings, payment-mode synonyms, honorific stripping, and a strict JSON schema with{" "}
+            <code className="font-mono text-sm">null</code> (never omitted) for unknown fields:
+          </p>
+          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+            {`You parse Hindi / Hinglish / English shopkeeper voice transcripts into JSON.
+Output JSON ONLY — no prose, no markdown fences.
+
+VOCAB:
+- credit (shopkeeper GAVE udhaar): "udhaar liya/diya", "le gaya", "de diya"
+- debit (shopkeeper RECEIVED): "diye/diya" (party subject), "chukaya",
+  "vapas kiya", "paid", "mila/mile"
+- Numbers: "sau"=100, "hazaar"=1000, "lakh"=100000,
+  "dhai sau"=250, "sava sau"=125, "pauna sau"=75,
+  "saade"+X = X+50 (e.g. saade paanch sau=550)
+- Mode: "upi/gpay/phonepe/paytm/online/QR"→upi, "cash/nakad"→cash
+- Honorifics: strip "bhai/ji/chacha/didi/uncle/aunty"
+
+RULES:
+- ALWAYS include every key from the schema. Use null (not omit) when
+  unknown. This is mandatory.
+- Input may be Devanagari (राम ने पाँच सौ उधार लिया) or romanized.`}
+          </pre>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            The Indian numerals table is the differentiator. Generic ASR keeps mis-hearing{" "}
+            <em>dhai sau</em> as &ldquo;to son,&rdquo; <em>saade paanch sau</em> as &ldquo;say five
+            hundred,&rdquo; <em>pauna sau</em> as scrambled English. Encoding them as deterministic
+            numeric mappings inside the prompt — rather than asking the LLM to do arithmetic — turns
+            idiomatic Hindi numbers into reliable resolutions.
+          </p>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            Cross-script party matching is the most domain-specific code in the repo. Chrome&apos;s
+            Web Speech API returns &ldquo;Ram&rdquo; sometimes and &ldquo;राम&rdquo; other times for
+            the same utterance. Without normalisation, every other transaction would create a
+            duplicate party row. The phonetic key handles this in five passes: Devanagari → Latin
+            transliteration via a hand-built ITRANS-style map; honorific stripping in both scripts (
+            <code className="font-mono text-sm">bhai</code>,{" "}
+            <code className="font-mono text-sm">chacha</code>,{" "}
+            <code className="font-mono text-sm">didi</code>,{" "}
+            <code className="font-mono text-sm">जी</code>); spelling normalisation (
+            <code className="font-mono text-sm">ph→f</code>,{" "}
+            <code className="font-mono text-sm">th→t</code>); vowel folding (
+            <code className="font-mono text-sm">[aeiou]+ → a</code>) and consonant deduplication;
+            Levenshtein with two thresholds (0.85 auto-resolve, 0.6 disambiguation candidate).
+          </p>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            The <strong className="font-medium">0.85 auto-commit gate</strong> is the demo
+            wow-moment. When the model returns confidence ≥ 0.85, the matched party already exists,
+            and auto-commit isn&apos;t disabled, the route writes the transaction directly and the
+            client just shows an Undo toast — no confirmation modal, no extra tap. Llama 8B-instant
+            consistently reports 0.9+ on clean utterances, so most single-sentence commands are
+            saved in one round trip. The Undo is what makes this safe: voiding is a soft delete that
+            preserves the audit trail.
           </p>
         </div>
       </section>
