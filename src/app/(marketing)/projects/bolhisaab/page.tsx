@@ -370,15 +370,17 @@ RULES:
           </p>
           <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             Cross-script party matching is the most domain-specific code in the repo. Chrome&apos;s
-            Web Speech API returns &ldquo;Ram&rdquo; sometimes and &ldquo;राम&rdquo; other times for
-            the same utterance. Without normalisation, every other transaction would create a
-            duplicate party row. The phonetic key handles this in five passes: Devanagari → Latin
-            transliteration via a hand-built ITRANS-style map; honorific stripping in both scripts (
-            <code className="font-mono text-sm">bhai</code>,{" "}
+            Web Speech API returns &ldquo;Ram&rdquo; sometimes and &ldquo;<span lang="hi">राम</span>
+            &rdquo; other times for the same utterance. Without normalisation, every other
+            transaction would create a duplicate party row. The phonetic key handles this in five
+            passes: Devanagari → Latin transliteration via a hand-built ITRANS-style map; honorific
+            stripping in both scripts (<code className="font-mono text-sm">bhai</code>,{" "}
             <code className="font-mono text-sm">chacha</code>,{" "}
             <code className="font-mono text-sm">didi</code>,{" "}
-            <code className="font-mono text-sm">जी</code>); spelling normalisation (
-            <code className="font-mono text-sm">ph→f</code>,{" "}
+            <code className="font-mono text-sm" lang="hi">
+              जी
+            </code>
+            ); spelling normalisation (<code className="font-mono text-sm">ph→f</code>,{" "}
             <code className="font-mono text-sm">th→t</code>); vowel folding (
             <code className="font-mono text-sm">[aeiou]+ → a</code>) and consonant deduplication;
             Levenshtein with two thresholds (0.85 auto-resolve, 0.6 disambiguation candidate).
@@ -587,7 +589,10 @@ $$;`}
           </p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <ul className="grid grid-cols-2 gap-0 border-2 border-[var(--color-border)] md:grid-cols-4">
+          <ul
+            data-bh-rounded-card
+            className="grid grid-cols-2 gap-0 border-2 border-[var(--color-border)] md:grid-cols-4"
+          >
             {(
               [
                 ["~200ms", "Llama 8B intent parse", null],
