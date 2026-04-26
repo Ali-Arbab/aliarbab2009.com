@@ -417,22 +417,131 @@ RULES:
       </section>
 
       {/* § 08 — LEDGER */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
         <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 08
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Ledger
-          </p>
+          <div data-bh-section-header>
+            <span data-bh-section-badge>08</span>
+            <span data-bh-section-label>Ledger</span>
+          </div>
         </div>
         <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
           <h2
-            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
+            data-bh-section-heading
+            className="text-[clamp(1.75rem,3vw,2.75rem)]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Append-only by construction. One RPC, one round trip.
           </h2>
+
+          {/* After-commit confirmation card mockup — what a shopkeeper
+              sees the instant the 0.85 confidence gate auto-writes a
+              voice transaction. Counter-party "Ram", credit polarity
+              shown in --color-credit (emerald), new running balance in
+              indigo (--color-primary), Undo + Saved indicators. The
+              "Ram ne 500 udhaar liya" pull-quote from § 01 made
+              concrete. */}
+          <div
+            aria-label="BolHisaab post-commit confirmation card mockup"
+            data-bh-app-card
+            className="flex w-full max-w-[340px] flex-col gap-4 rounded-2xl shadow-lg"
+            style={{ padding: "20px 22px" }}
+          >
+            {/* Counter-party row */}
+            <div className="flex items-center gap-3">
+              <span
+                aria-hidden
+                className="flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold text-[var(--color-primary-fg)]"
+                style={{
+                  background: "var(--color-primary)",
+                  fontFamily: "var(--font-display)",
+                }}
+              >
+                R
+              </span>
+              <p
+                className="text-base font-medium text-[var(--color-fg)]"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Ram
+              </p>
+            </div>
+
+            {/* Big amount in credit (emerald) */}
+            <p
+              data-bh-credit-text
+              className="text-[32px] leading-none font-bold tabular-nums"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              ₹500
+            </p>
+
+            {/* Direction label */}
+            <p
+              className="-mt-2 text-sm text-[var(--color-muted)]"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              udhaar liya
+            </p>
+
+            {/* New running balance */}
+            <p
+              className="text-sm font-medium text-[var(--color-primary)] tabular-nums"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Naya baaki: ₹1,200
+            </p>
+
+            {/* Undo + Saved row */}
+            <div className="mt-2 flex items-center justify-between gap-3 border-t border-[var(--color-border)] pt-4">
+              <button
+                type="button"
+                tabIndex={-1}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-1.5 text-sm font-medium text-[var(--color-fg)] hover:border-[var(--color-primary)]"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M3 7v6h6" />
+                  <path d="M21 17a9 9 0 0 0-15-6.7L3 13" />
+                </svg>
+                <span>Undo</span>
+              </button>
+              <span
+                className="inline-flex items-center gap-1.5 text-xs font-medium tabular-nums"
+                style={{
+                  color: "var(--color-credit)",
+                  fontFamily: "var(--font-display)",
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>Saved</span>
+              </span>
+            </div>
+          </div>
+
           <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             The ledger is <strong className="font-medium">append-only with soft delete</strong>. The{" "}
             <code className="font-mono text-sm">transactions</code> table is the source of truth;
@@ -457,7 +566,7 @@ RULES:
             <code className="font-mono text-sm">security invoker</code> PL/pgSQL function that runs
             as the calling user so RLS still applies:
           </p>
-          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+          <pre data-bh-code-block>
             {`create or replace function commit_voice_tx(
   _shop_id uuid, _party_id uuid, _amount numeric,
   _direction text, _mode text,
@@ -468,6 +577,13 @@ language plpgsql security invoker as $$
   -- against the Singapore region's RTT from India.
 $$;`}
           </pre>
+          <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+            <span data-bh-credit-text className="font-medium">
+              ~150ms saved per turn
+            </span>{" "}
+            by collapsing the insert + balance-read into one PL/pgSQL round-trip — measured against
+            Supabase&apos;s Singapore region from typical Indian connections.
+          </p>
           <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             Authentication is a deliberate UX choice:{" "}
             <strong className="font-medium">anonymous Supabase auth</strong> with no email, phone,
