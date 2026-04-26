@@ -25,3 +25,7 @@ This file tracks notable changes to `aliarbab2009.com`. Format follows [Keep a C
 ### Fixed
 
 - `/projects/bolhisaab` was rendering dark-on-dark text in dark mode. The `.theme-bolhisaab` class re-binds tokens for cream-on-indigo, but the layout div didn't paint the cream background — so the body's dark `#0a0a0a` showed through and the dark `--color-fg` text became invisible. Layout now explicitly paints `bg-[var(--color-bg)] text-[var(--color-fg)]`. Same explicit paint applied to StockSaathi and MagLock layouts so the bug can't regress if root tokens change.
+
+### Infra
+
+- Vercel project migrated from Hobby to Pro. Hobby was blocking deploys because commit authors needed to match the Hobby owner exactly; Pro allows team-member contributions, so commits authored as Ali Arbab now deploy correctly. Domain, env vars, deployment history all carried over.
