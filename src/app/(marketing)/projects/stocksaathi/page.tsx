@@ -654,17 +654,13 @@ meta.indexDrop = Math.round(realDropPct * 10) / 10;`}
       </section>
 
       {/* § 11 — NUMBERS */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 11
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Numbers
-          </p>
+      <section className="grid grid-cols-12 gap-4 pt-10">
+        <div className="col-span-12 flex flex-col gap-1 md:col-span-2">
+          <p data-ss-section-number>§ 11</p>
+          <p data-ss-section-label>Numbers</p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <ul className="grid grid-cols-2 gap-0 border-2 border-[var(--color-border)] md:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
               ["2,686", "NSE equities + ETFs"],
               ["13,969", "AMFI mutual funds"],
@@ -678,29 +674,94 @@ meta.indexDrop = Math.round(realDropPct * 10) / 10;`}
               ["0", "pip dependencies"],
               ["16", "atomic SECURITY DEFINER RPCs"],
               ["paise", "all money as bigint"],
-            ].map(([num, label], i) => (
-              <li
-                key={label}
-                data-ss-stat-tile
-                className={
-                  "border-[var(--color-border)] p-5 " +
-                  (i % 2 === 0 ? "border-r-2" : "") +
-                  (i < 10 ? "border-b-2" : "") +
-                  "md:border-r-2" +
-                  (i < 8 ? "md:border-b-2" : "")
-                }
-              >
-                <p
-                  data-ss-stat-number
-                  className="font-mono text-2xl font-medium text-[var(--color-primary)] tabular-nums"
-                >
-                  {num}
-                </p>
-                <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
-                  {label}
-                </p>
-              </li>
-            ))}
+            ].map(([num, label]) =>
+              label === "cron windows daily" ? (
+                // Functional mockup — replace the bare "8" with an inline
+                // 8-bar sparkline visualising the daily cron firing pattern.
+                // First 3 bars at 60% height (lighter early-morning syncs:
+                // instruments, MF NAVs, holiday refresh), last 5 at 100%
+                // (full market-hours quote + fundamentals refreshes). Dotted
+                // "now" indicator sits between bars 5 and 6.
+                <li key={label} data-ss-stat-tile data-ss-rounded>
+                  <div className="flex items-end gap-3">
+                    <svg
+                      viewBox="0 0 80 24"
+                      role="img"
+                      aria-label="Sparkline showing 8 daily cron firings — three early-morning sync windows at 60% load and five full-operation windows at 100%."
+                      className="block h-6 w-20 shrink-0"
+                    >
+                      {/* baseline */}
+                      <line
+                        x1="1"
+                        y1="22"
+                        x2="79"
+                        y2="22"
+                        stroke="var(--color-border)"
+                        strokeWidth="1"
+                        opacity="0.5"
+                      />
+                      {/* 8 vertical bars: first 3 at 60% (12px), next 5 at 100% (20px). */}
+                      <rect
+                        x="1"
+                        y="10"
+                        width="8"
+                        height="12"
+                        fill="var(--color-primary)"
+                        opacity="0.55"
+                      />
+                      <rect
+                        x="11"
+                        y="10"
+                        width="8"
+                        height="12"
+                        fill="var(--color-primary)"
+                        opacity="0.55"
+                      />
+                      <rect
+                        x="21"
+                        y="10"
+                        width="8"
+                        height="12"
+                        fill="var(--color-primary)"
+                        opacity="0.55"
+                      />
+                      <rect x="31" y="2" width="8" height="20" fill="var(--color-primary)" />
+                      <rect x="41" y="2" width="8" height="20" fill="var(--color-primary)" />
+                      <rect x="51" y="2" width="8" height="20" fill="var(--color-primary)" />
+                      <rect x="61" y="2" width="8" height="20" fill="var(--color-primary)" />
+                      <rect x="71" y="2" width="8" height="20" fill="var(--color-primary)" />
+                      {/* dotted "now" indicator sitting between bar 5 and bar 6 */}
+                      <line
+                        x1="50"
+                        y1="0"
+                        x2="50"
+                        y2="24"
+                        stroke="var(--color-saffron)"
+                        strokeWidth="1"
+                        strokeDasharray="1.5 1.5"
+                      />
+                    </svg>
+                    <p
+                      data-ss-stat-number
+                      className="text-2xl leading-none font-bold text-[var(--color-primary)] tabular-nums"
+                    >
+                      {num}
+                    </p>
+                  </div>
+                  <p className="mt-2 text-[11px] font-medium text-[var(--color-muted)]">{label}</p>
+                </li>
+              ) : (
+                <li key={label} data-ss-stat-tile data-ss-rounded>
+                  <p
+                    data-ss-stat-number
+                    className="text-2xl font-bold text-[var(--color-primary)] tabular-nums"
+                  >
+                    {num}
+                  </p>
+                  <p className="mt-2 text-[11px] font-medium text-[var(--color-muted)]">{label}</p>
+                </li>
+              ),
+            )}
           </ul>
         </div>
       </section>
