@@ -136,7 +136,7 @@ export default function BolHisaabPage() {
                 github.com/aliarbab2009/BolHisaab <span aria-hidden>↗</span>
               </Link>
               <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
-                Next 16 · Supabase · Groq Whisper + Llama
+                Next 16 · Supabase · Sarvam · Groq Llama 3.1 / 3.3
               </p>
             </li>
           </ul>
