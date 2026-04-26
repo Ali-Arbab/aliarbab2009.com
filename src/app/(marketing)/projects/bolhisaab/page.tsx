@@ -600,17 +600,15 @@ $$;`}
       </section>
 
       {/* § 09 — POLISH */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
         <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 09
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Polish
-          </p>
+          <div data-bh-section-header>
+            <span data-bh-section-badge>09</span>
+            <span data-bh-section-label>Polish</span>
+          </div>
         </div>
         <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
-          <ul className="grid grid-cols-1 gap-0 border-2 border-[var(--color-border)] md:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {[
               [
                 "Domain-named CSS tokens",
@@ -636,19 +634,9 @@ $$;`}
                 "PrewarmVoice route compilation",
                 "A 12-line client component fires a useless POST to /api/voice on mount so Turbopack compiles the heavy route before the user records anything. Empty FormData hits the 400 early-return but still forces full-route compilation.",
               ],
-            ].map(([title, body], i, arr) => (
-              <li
-                key={title}
-                className={
-                  "p-6 " +
-                  (i < arr.length - 1 ? "border-b-2 border-[var(--color-border)]" : "") +
-                  (i % 2 === 0 ? "md:border-r-2 md:border-[var(--color-border)]" : "") +
-                  (i < arr.length - 2
-                    ? "md:border-b-2 md:border-[var(--color-border)]"
-                    : "md:border-b-0")
-                }
-              >
-                <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-primary)] uppercase">
+            ].map(([title, body]) => (
+              <li key={title} data-bh-app-card>
+                <p className="text-[13px] font-semibold tracking-[0] text-[var(--color-primary)]">
                   {title}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]">{body}</p>
