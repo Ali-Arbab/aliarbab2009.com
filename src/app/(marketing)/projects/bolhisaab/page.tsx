@@ -113,56 +113,49 @@ export default function BolHisaabPage() {
       </section>
 
       {/* § 02 — ACCESS */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
         <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 02
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Access
-          </p>
+          <div data-bh-section-header>
+            <span data-bh-section-badge>02</span>
+            <span data-bh-section-label>Access</span>
+          </div>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <ul className="grid grid-cols-1 gap-0 border-2 border-[var(--color-border)] md:grid-cols-2">
-            <li
-              data-bh-rounded-card
-              className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0"
-            >
-              <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
-                <span
-                  data-bh-icon-badge
-                  className="mr-2 inline-flex h-6 w-6 items-center justify-center align-middle"
-                >
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <li data-bh-app-card>
+              <div className="flex items-center gap-3">
+                <span data-bh-icon-badge aria-hidden>
                   🛒
                 </span>
-                Production
-              </p>
-              <p className="mt-2 font-mono text-lg font-medium text-[var(--color-muted)]">
+                <p className="text-[13px] font-semibold tracking-[0] text-[var(--color-primary)]">
+                  Production
+                </p>
+              </div>
+              <p className="mt-4 text-lg font-medium text-[var(--color-muted)]">
                 bolhisaab.in — coming soon
               </p>
-              <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
+              <p className="mt-2 text-xs text-[var(--color-muted)]">
                 Domain registered · deploy pending
               </p>
             </li>
-            <li data-bh-rounded-card className="p-6">
-              <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
-                <span
-                  data-bh-icon-badge
-                  className="mr-2 inline-flex h-6 w-6 items-center justify-center align-middle"
-                >
+            <li data-bh-app-card>
+              <div className="flex items-center gap-3">
+                <span data-bh-icon-badge aria-hidden>
                   🐙
                 </span>
-                Source
-              </p>
+                <p className="text-[13px] font-semibold tracking-[0] text-[var(--color-primary)]">
+                  Source
+                </p>
+              </div>
               <Link
                 href={project.repoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 inline-flex items-baseline gap-2 font-mono text-lg font-medium hover:text-[var(--color-primary)]"
+                className="mt-4 inline-flex items-baseline gap-2 font-mono text-lg font-medium hover:text-[var(--color-primary)]"
               >
                 github.com/aliarbab2009/BolHisaab <span aria-hidden>↗</span>
               </Link>
-              <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
+              <p className="mt-2 text-xs text-[var(--color-muted)]">
                 Next 16 · Supabase · Sarvam · Groq Llama 3.1 / 3.3
               </p>
             </li>
