@@ -153,22 +153,15 @@ export default function StockSaathiPage() {
       </section>
 
       {/* § 03 — STACK */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 03
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Stack
-          </p>
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
+        <div className="col-span-12 flex flex-col gap-1 md:col-span-2">
+          <p data-ss-section-number>§ 03</p>
+          <p data-ss-section-label>Stack</p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <ul className="flex flex-wrap gap-0">
+          <ul className="flex flex-wrap gap-2">
             {project.stack.map((tech) => (
-              <li
-                key={tech}
-                className="-mr-px -mb-px border border-[var(--color-border)] px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase transition-colors hover:border-[var(--color-saffron)] hover:bg-[var(--color-saffron-soft)] hover:text-[var(--color-saffron)]"
-              >
+              <li key={tech} data-ss-pill>
                 {tech}
               </li>
             ))}
