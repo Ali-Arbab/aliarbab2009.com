@@ -553,17 +553,13 @@ meta.indexDrop = Math.round(realDropPct * 10) / 10;`}
       </section>
 
       {/* § 09 — POLISH */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 09
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Polish
-          </p>
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
+        <div className="col-span-12 flex flex-col gap-1 md:col-span-2">
+          <p data-ss-section-number>§ 09</p>
+          <p data-ss-section-label>Polish</p>
         </div>
         <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
-          <ul className="grid grid-cols-1 gap-0 border-2 border-[var(--color-border)] md:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {[
               [
                 "800ms-debounced hottest-200 LRU cache",
@@ -589,23 +585,21 @@ meta.indexDrop = Math.round(realDropPct * 10) / 10;`}
                 "Limit-order matcher with market-closed guard",
                 "AMOs ghosted because the matcher ran every 12s regardless of market state and trivially 'filled' against stale after-hours closes. Fix: if (!marketStatus().open) return { skipped: 'market_closed' }; before any matcher pass.",
               ],
-            ].map(([title, body], i, arr) => (
+            ].map(([title, body]) => (
               <li
                 key={title}
-                data-ss-card-hover
-                className={
-                  "p-6 " +
-                  (i < arr.length - 1 ? "border-b-2 border-[var(--color-border)]" : "") +
-                  (i % 2 === 0 ? "md:border-r-2 md:border-[var(--color-border)]" : "") +
-                  (i < arr.length - 2
-                    ? "md:border-b-2 md:border-[var(--color-border)]"
-                    : "md:border-b-0")
-                }
+                data-ss-rounded-card
+                className="flex flex-col gap-3 px-6 py-6 sm:px-7"
               >
-                <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-primary)] uppercase">
-                  {title}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg)]">{body}</p>
+                <div className="flex items-start gap-3">
+                  <span data-ss-icon-square aria-hidden>
+                    ◇
+                  </span>
+                  <p className="text-sm leading-snug font-semibold text-[var(--color-primary)]">
+                    {title}
+                  </p>
+                </div>
+                <p className="text-sm leading-relaxed text-[var(--color-fg)]">{body}</p>
               </li>
             ))}
           </ul>
