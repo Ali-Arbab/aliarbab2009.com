@@ -80,16 +80,22 @@ export function JourneySection() {
           >
             Newest first.
           </h2>
-          <ul className="border-2 border-[var(--color-border)]">
-            {sortedTimeline.map((entry, i) => (
-              <TimelineRow
-                key={`${entry.date}-${entry.title}`}
-                entry={entry}
-                index={i}
-                total={sortedTimeline.length}
-              />
-            ))}
-          </ul>
+          {sortedTimeline.length === 0 ? (
+            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+              Journey entries coming soon
+            </p>
+          ) : (
+            <ul className="border-2 border-[var(--color-border)]">
+              {sortedTimeline.map((entry, i) => (
+                <TimelineRow
+                  key={`${entry.date}-${entry.title}`}
+                  entry={entry}
+                  index={i}
+                  total={sortedTimeline.length}
+                />
+              ))}
+            </ul>
+          )}
         </div>
       </section>
 
