@@ -120,6 +120,7 @@ export default function StockSaathiPage() {
                 stocksaathi.co.in <span aria-hidden>↗</span>
               </Link>
               <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
+                <span data-ss-pulse-dot className="mr-2 inline-block align-middle"></span>
                 Live at Vercel · 3,000+ BSE/NSE stocks
                 <span data-ss-saffron-badge className="ml-2">
                   India
@@ -181,7 +182,12 @@ export default function StockSaathiPage() {
           </p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <OriginBlock slug="stocksaathi" />
+          <div
+            data-ss-card-hover
+            className="border-2 border-[var(--color-border)] p-8 transition-colors"
+          >
+            <OriginBlock slug="stocksaathi" />
+          </div>
         </div>
       </section>
 
