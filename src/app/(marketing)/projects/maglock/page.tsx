@@ -683,19 +683,18 @@ _streamSub = res.stream.listen((chunk) {
       <div data-maglock-double-rule className="mb-10"></div>
 
       {/* § 09 — MAGGY VOICE ASSISTANT */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div data-maglock-section-header className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 09
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Maggy
-          </p>
+      <section className="mb-20 grid grid-cols-12 gap-4">
+        <div data-maglock-section-label className="col-span-12 md:col-span-2">
+          <span>§ 09</span>
+          <span>Maggy</span>
         </div>
-        <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
-          <div data-maglock-double-rule className="my-6"></div>
+        <div
+          data-maglock-brackets
+          className="col-span-12 flex flex-col gap-6 border-2 border-[color-mix(in_srgb,var(--color-primary)_30%,var(--color-border))] p-8 md:col-span-10"
+        >
           <h2
-            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
+            data-maglock-hud-heading
+            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium text-[var(--color-primary)]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             The lock is the system. The AI is icing.
@@ -726,8 +725,9 @@ _streamSub = res.stream.listen((chunk) {
             and dispatches the right relay:
           </p>
           <pre
+            data-maglock-brackets
             data-maglock-code-block
-            className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed"
+            className="overflow-x-auto border-2 border-[color-mix(in_srgb,var(--color-primary)_30%,var(--color-border))] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed"
           >
             {`String _detectOfflineLockIntent(String lower) {
   if (lower.contains('open') || lower.contains('khol') || lower.contains('unlock')) {
@@ -762,6 +762,8 @@ _streamSub = res.stream.listen((chunk) {
           </p>
         </div>
       </section>
+
+      <div data-maglock-double-rule className="mb-10"></div>
 
       {/* § 10 — LIMITATIONS */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
