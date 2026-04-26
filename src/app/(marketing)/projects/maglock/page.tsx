@@ -316,7 +316,7 @@ export default function MagLockPage() {
       </section>
 
       {/* § 07 — CAMERA FIRMWARE */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 07
@@ -390,6 +390,95 @@ export default function MagLockPage() {
             SVGA. <code className="font-mono text-sm">fb_count = 2</code> paired with{" "}
             <code className="font-mono text-sm">CAMERA_GRAB_LATEST</code> means frames are dropped,
             never queued — no accumulated latency.
+          </p>
+        </div>
+      </section>
+
+      {/* § 08 — FLUTTER APP */}
+      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 08
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Flutter
+          </p>
+        </div>
+        <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
+          <h2
+            className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            MJPEG decoder, by hand. Optimistic UI. 800ms cooldown.
+          </h2>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            <strong className="font-medium">MJPEG decoder, by hand.</strong>{" "}
+            <code className="font-mono text-sm">CameraFeedWidget</code> opens the stream as{" "}
+            <code className="font-mono text-sm">{`http.Request('GET').send()`}</code> and parses raw
+            JPEG markers out of the byte chunks — it deliberately ignores the{" "}
+            <code className="font-mono text-sm">multipart/x-mixed-replace</code> boundary headers
+            entirely. A 500KB runaway-buffer guard trims to the last 200KB if no frame is found, so
+            a corrupt stream can&apos;t OOM the app. A 66ms{" "}
+            <code className="font-mono text-sm">_frameInterval</code> throttles display to ~15fps
+            regardless of incoming rate, keeping <code className="font-mono text-sm">setState</code>{" "}
+            calls cheap.{" "}
+            <code className="font-mono text-sm">
+              Image.memory(_currentFrame!, gaplessPlayback: true)
+            </code>{" "}
+            is the critical render call — without{" "}
+            <code className="font-mono text-sm">gaplessPlayback: true</code>, Flutter would flash a
+            blank frame between bytes.
+          </p>
+          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+            {`List<int> buf = [];
+_streamSub = res.stream.listen((chunk) {
+  buf.addAll(chunk);
+  int start = -1;
+  for (int i = 0; i < buf.length - 1; i++) {
+    if (buf[i] == 0xFF && buf[i+1] == 0xD8) start = i;            // JPEG SOI
+    if (start != -1 && buf[i] == 0xFF && buf[i+1] == 0xD9) {     // JPEG EOI
+      final frame = Uint8List.fromList(buf.sublist(start, i + 2));
+      buf = buf.sublist(i + 2);
+      // throttle to ~15 fps + setState if mounted
+      break;
+    }
+  }
+  if (buf.length > 500000) buf = buf.sublist(buf.length - 200000); // OOM guard
+});`}
+          </pre>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            <strong className="font-medium">The snapshot dance.</strong> The ESP32-CAM cannot stream
+            and capture high-res simultaneously (shared DMA buffer), so a snapshot is six steps with
+            empirically-tuned delays: disconnect the MJPEG stream, wait 300ms; turn the LED flash
+            on, wait 200ms; <code className="font-mono text-sm">GET /capture</code> with a 20-second
+            timeout — firmware switches to QXGA internally; turn the flash off; write the bytes to
+            disk in the snapshots folder with a millisecond-stamped filename; wait 500ms, then
+            re-open the stream. The 300/200/500ms delays are empirical — the kind of timings you
+            only land on after a few rounds of &ldquo;why is my snapshot half green and half
+            correct.&rdquo;
+          </p>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            <strong className="font-medium">Optimistic UI corrected by polling.</strong> On a
+            successful HTTP response, the provider sets{" "}
+            <code className="font-mono text-sm">door.state = DoorState.locked</code> immediately
+            rather than waiting for the next 2-second poll. The poll is the eventual reconciler — if
+            the relay didn&apos;t actually click, the next poll corrects the UI visibly. This is
+            what makes the controls feel snappy on a 2-second polling cadence without ever lying
+            about hardware state. Every action is gated by an{" "}
+            <strong className="font-medium">800ms refractory period</strong> — hardware relay
+            debounce expressed at the application layer, protecting against double-tap from the user
+            AND from the voice assistant firing two actions in quick succession.
+          </p>
+          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            <strong className="font-medium">Auto-lock as a visible 1-second-tick countdown.</strong>{" "}
+            Rather than{" "}
+            <code className="font-mono text-sm">{`Timer(Duration(seconds: N), …)`}</code>, the
+            provider uses{" "}
+            <code className="font-mono text-sm">{`Timer.periodic(Duration(seconds: 1))`}</code> and
+            decrements <code className="font-mono text-sm">_autoLockCountdown</code> on every tick,
+            calling <code className="font-mono text-sm">notifyListeners()</code> so the status
+            banner renders <code className="font-mono text-sm">⏱ 7s … 6s … 5s …</code>. Sacrifices
+            the cleaner fire-once timer for tighter UX feedback.
           </p>
         </div>
       </section>
