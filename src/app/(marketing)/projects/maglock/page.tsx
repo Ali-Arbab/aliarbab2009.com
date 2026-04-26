@@ -74,32 +74,46 @@ export default function MagLockPage() {
 
       {/* § 01 — HEADLINE + PITCH */}
       <section className="mb-20 grid grid-cols-12 gap-4">
-        <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 01
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Pitch
-          </p>
+        <div data-maglock-section-label className="col-span-12 md:col-span-2">
+          <span>§ 01</span>
+          <span>Pitch</span>
         </div>
-        <div className="col-span-12 flex flex-col gap-8 md:col-span-10">
-          <h1
-            className="text-[clamp(3rem,7vw,6rem)] leading-[0.9] font-medium tracking-[-0.02em] text-[var(--color-primary)]"
-            style={{ fontFamily: "var(--font-display)" }}
+        <div className="col-span-12 md:col-span-10">
+          <div
+            data-maglock-brackets
+            data-maglock-neon-card
+            className="flex flex-col gap-8 p-8 md:p-10"
           >
-            {project.name}
-          </h1>
-          <p
-            className="max-w-3xl text-2xl leading-snug font-medium text-[var(--color-fg)]"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {project.tagline}.
-          </p>
-          <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
-            {project.description}
-          </p>
+            <h1
+              data-maglock-hud-heading
+              className="text-[clamp(3rem,7vw,6rem)] leading-[0.9] font-medium text-[var(--color-primary)]"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {project.name}
+            </h1>
+            <p
+              data-maglock-hud-heading
+              className="max-w-3xl text-[clamp(1.25rem,2vw,1.75rem)] leading-snug font-medium text-[var(--color-fg)]"
+              style={{ fontFamily: "var(--font-display)", letterSpacing: "0.04em" }}
+            >
+              {project.tagline}.
+            </p>
+            <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+              {project.description}
+            </p>
+
+            {/* Interactive Door Control Panel — hoisted above the fold so the
+                first thing past the headline is something the visitor can
+                actually click. State + countdown + activity log all run on
+                the client; no network. */}
+            <div className="mt-2">
+              <MagLockControlPanel />
+            </div>
+          </div>
         </div>
       </section>
+
+      <div data-maglock-double-rule className="mb-10"></div>
 
       {/* § 02 — ACCESS */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
