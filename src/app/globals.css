@@ -188,7 +188,9 @@
 
 .theme-maglock {
   /* DARK variant — pure-black surface, neon-green accent. The
-     sci-fi terminal world identity. */
+     sci-fi terminal world identity. Palette + typography sourced
+     from MagLock's Flutter theme (G:/maglock_protocol/lib/theme/
+     app_theme.dart). */
   --color-bg: #030306;
   --color-fg: #b8c4d8;
   --color-muted: #7080a0;
@@ -200,13 +202,35 @@
   --color-danger: #ff3366;
   --color-warning: #ffd700;
   --color-glow: color-mix(in oklch, #00ff9d, transparent 50%);
+  /* Cyan secondary for "info" states + the connection-pending colour
+     family. Sourced from AppColors.neonCyan in the Flutter app. */
+  --color-secondary: #00d4ff;
+  --color-secondary-fg: #030306;
+  /* Multi-color glow tokens — MagLock's AppGlows factory exposes one
+     glow recipe per accent. Replicated here as discrete tokens so
+     specific UI surfaces can pick the right glow without mixing. Each
+     is a paired box-shadow string (tight inner + soft outer) at the
+     same blur/spread proportions as the source. */
+  --glow-green: 0 0 10px rgb(0 255 157 / 0.5), 0 0 24px 2px rgb(0 255 157 / 0.2);
+  --glow-cyan: 0 0 10px rgb(0 212 255 / 0.5), 0 0 24px 2px rgb(0 212 255 / 0.2);
+  --glow-red: 0 0 10px rgb(255 51 102 / 0.5), 0 0 24px 2px rgb(255 51 102 / 0.2);
+  --glow-amber: 0 0 10px rgb(255 215 0 / 0.5), 0 0 24px 2px rgb(255 215 0 / 0.2);
+  --glow-purple: 0 0 12px rgb(199 125 255 / 0.4), 0 0 28px 3px rgb(199 125 255 / 0.15);
+  /* Typography — Orbitron for display (impact-first cyberpunk caps),
+     Rajdhani for body (technical-feeling counterpoint). VT323 reserved
+     for retro-terminal wordmark surfaces. Falls back to Space Grotesk
+     so an offline browser still renders. */
+  --font-display: var(--font-orbitron), var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-rajdhani), var(--font-space-grotesk), system-ui, sans-serif;
+  --font-mono: var(--font-vt323), var(--font-jetbrains-mono), ui-monospace, monospace;
   --radius-base: 2px;
 }
 
 :root[data-theme="light"] .theme-maglock {
   /* LIGHT variant — cream surface, darker green accent for AAA
-     contrast. Loses the pure-black terminal vibe but stays
-     readable for visitors who've explicitly chosen light mode. */
+     contrast. Loses the pure-black terminal vibe but stays readable
+     for visitors who've explicitly chosen light mode. Multi-color
+     glows are dimmed proportionally. */
   --color-bg: #f4f4f0;
   --color-fg: #0a0a0a;
   --color-muted: #4a5568;
@@ -216,6 +240,13 @@
   --color-surface-2: #ebebe5;
   --color-border: #0a0a0a;
   --color-glow: color-mix(in oklch, #006d4a, transparent 70%);
+  --color-secondary: #006080;
+  --color-secondary-fg: #f4f4f0;
+  --glow-green: 0 0 10px rgb(0 109 74 / 0.3), 0 0 24px 2px rgb(0 109 74 / 0.1);
+  --glow-cyan: 0 0 10px rgb(0 96 128 / 0.3), 0 0 24px 2px rgb(0 96 128 / 0.1);
+  --glow-red: 0 0 10px rgb(190 30 60 / 0.3), 0 0 24px 2px rgb(190 30 60 / 0.1);
+  --glow-amber: 0 0 10px rgb(180 130 0 / 0.3), 0 0 24px 2px rgb(180 130 0 / 0.1);
+  --glow-purple: 0 0 12px rgb(140 80 200 / 0.3), 0 0 28px 3px rgb(140 80 200 / 0.1);
 }
 
 /* ============================================================
