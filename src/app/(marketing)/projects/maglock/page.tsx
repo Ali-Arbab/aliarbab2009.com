@@ -113,7 +113,10 @@ export default function MagLockPage() {
         </div>
         <div className="col-span-12 md:col-span-10">
           <ul className="grid grid-cols-1 gap-0 border-2 border-[var(--color-border)] md:grid-cols-2">
-            <li className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0">
+            <li
+              data-maglock-state="connecting"
+              className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0"
+            >
               <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
                 Deployment
               </p>
@@ -124,7 +127,7 @@ export default function MagLockPage() {
                 Flutter + ESP32 · local-network only
               </p>
             </li>
-            <li className="p-6">
+            <li data-maglock-state="unlocked" className="p-6">
               <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
                 Source
               </p>
@@ -519,6 +522,7 @@ _streamSub = res.stream.listen((chunk) {
           </p>
         </div>
         <div className="col-span-12 flex flex-col gap-6 md:col-span-10">
+          <div data-maglock-double-rule className="my-6"></div>
           <h2
             className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
             style={{ fontFamily: "var(--font-display)" }}
@@ -661,6 +665,7 @@ _streamSub = res.stream.listen((chunk) {
           </p>
         </div>
         <div className="col-span-12 md:col-span-10">
+          <div data-maglock-double-rule className="my-6"></div>
           <ul
             data-maglock-brackets
             className="grid grid-cols-2 gap-0 border-2 border-[var(--color-border)] md:grid-cols-4"
