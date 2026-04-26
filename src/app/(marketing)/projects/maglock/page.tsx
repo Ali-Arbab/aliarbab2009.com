@@ -484,7 +484,7 @@ _streamSub = res.stream.listen((chunk) {
       </section>
 
       {/* § 09 — MAGGY VOICE ASSISTANT */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 09
@@ -557,6 +557,114 @@ _streamSub = res.stream.listen((chunk) {
             target +3, within ±7 days +1. ~40 lines of regex + scoring instead of a vector DB. Works
             because the dataset is one conversation.
           </p>
+        </div>
+      </section>
+
+      {/* § 10 — LIMITATIONS */}
+      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 10
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Honest limits
+          </p>
+        </div>
+        <div className="col-span-12 flex flex-col gap-3 md:col-span-10">
+          <ul className="ml-6 max-w-prose list-disc space-y-3 text-base leading-relaxed text-[var(--color-fg)]">
+            <li>
+              <strong className="font-medium">Brand mid-rename.</strong>{" "}
+              <code className="font-mono text-sm">pubspec.yaml</code> says{" "}
+              <code className="font-mono text-sm">MagLock_Protocol</code>; the Android manifest
+              launcher label says <code className="font-mono text-sm">NEXUS LOCK</code>; the README
+              still uses the old <code className="font-mono text-sm">nexus_lock/</code> folder
+              structure. The repo shows the seams of an in-progress rename.
+            </li>
+            <li>
+              <strong className="font-medium">Hardcoded WiFi credentials in firmware.</strong> Both{" "}
+              <code className="font-mono text-sm">lock_controller.ino</code> and{" "}
+              <code className="font-mono text-sm">cam_firmware.ino</code> carry literals; they must
+              be redacted in any quoted snippet. The v2 path is provisioning via NVS or a one-time
+              SoftAP captive portal.
+            </li>
+            <li>
+              <strong className="font-medium">No TLS, no auth on the lock REST endpoints.</strong>{" "}
+              Anyone reachable on the closed subnet can{" "}
+              <code className="font-mono text-sm">curl -X POST .../unlock?relay=all</code>.
+              Deliberate — the trust boundary is the AP. The natural v2 step is HMAC-signed requests
+              with a shared secret in NVS.
+            </li>
+            <li>
+              <strong className="font-medium">Default app passcode 1234.</strong>{" "}
+              Settings-configurable, but it ships as a placeholder and gates only the UI, not the
+              network protocol.
+            </li>
+            <li>
+              <strong className="font-medium">Only Android is realistically tested.</strong> iOS /
+              macOS / Windows / Linux / Web platform builds are stock{" "}
+              <code className="font-mono text-sm">flutter create</code> scaffolds. No Podfile for
+              iOS, no <code className="font-mono text-sm">NSMicrophoneUsageDescription</code>, no
+              ATS exception for HTTP-to-LAN-IP.
+            </li>
+            <li>
+              <strong className="font-medium">Web is architecturally non-viable.</strong> A
+              LAN-control app cannot run in a browser: the ESP32 doesn&apos;t send CORS headers; an
+              HTTPS-hosted build hits mixed-content blocking on HTTP-to-LAN-IP requests. The case
+              study&apos;s &ldquo;I learned the browser&apos;s security model says no&rdquo; beat.
+            </li>
+            <li>
+              <strong className="font-medium">Tests are zero-meaningful.</strong>{" "}
+              <code className="font-mono text-sm">test/widget_test.dart</code> is the unmodified{" "}
+              <code className="font-mono text-sm">flutter create</code> counter smoke test. The case
+              study should not claim test coverage.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* § 11 — NUMBERS */}
+      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+        <div className="col-span-12 md:col-span-2">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
+            § 11
+          </p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
+            Numbers
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-10">
+          <ul className="grid grid-cols-2 gap-0 border-2 border-[var(--color-border)] md:grid-cols-4">
+            {[
+              ["800ms", "relay-fire cooldown"],
+              ["~15fps", "MJPEG display throttle"],
+              ["500/200KB", "buffer guard / trim"],
+              ["2000ms", "status poll interval"],
+              ["3000ms", "stream reconnect backoff"],
+              ["20s", "GET /capture timeout"],
+              ["2048×1536", "QXGA snapshot @ q=1"],
+              ["800×600", "SVGA stream @ ~25fps"],
+              ["8KB", "FreeRTOS streaming stack"],
+              ["246 / 297", "lines (lock fw / cam fw)"],
+              ["~280", "lines in LockProvider"],
+              ["49.7 days", "millis() rollover safe"],
+            ].map(([num, label], i) => (
+              <li
+                key={label}
+                className={
+                  "border-[var(--color-border)] p-5 " +
+                  (i % 2 === 0 ? "border-r-2" : "") +
+                  (i < 10 ? "border-b-2" : "") +
+                  "md:border-r-2" +
+                  (i < 8 ? "md:border-b-2" : "")
+                }
+              >
+                <p className="font-mono text-2xl font-medium text-[var(--color-primary)]">{num}</p>
+                <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
+                  {label}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </div>
