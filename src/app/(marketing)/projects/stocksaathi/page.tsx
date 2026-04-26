@@ -103,7 +103,10 @@ export default function StockSaathiPage() {
         </div>
         <div className="col-span-12 md:col-span-10">
           <ul className="grid grid-cols-1 gap-0 border-2 border-[var(--color-border)] md:grid-cols-2">
-            <li className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0">
+            <li
+              data-ss-card-hover
+              className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0"
+            >
               <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
                 Production
               </p>
@@ -119,7 +122,7 @@ export default function StockSaathiPage() {
                 Live at Vercel · 3,000+ BSE/NSE stocks
               </p>
             </li>
-            <li className="p-6">
+            <li data-ss-card-hover className="p-6">
               <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
                 Source
               </p>
@@ -154,7 +157,7 @@ export default function StockSaathiPage() {
             {project.stack.map((tech) => (
               <li
                 key={tech}
-                className="-mr-px -mb-px border border-[var(--color-border)] px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase"
+                className="-mr-px -mb-px border border-[var(--color-border)] px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase transition-colors hover:border-[var(--color-saffron)] hover:bg-[var(--color-saffron-soft)] hover:text-[var(--color-saffron)]"
               >
                 {tech}
               </li>

@@ -178,7 +178,7 @@ export default function MagLockPage() {
 
       {/* § 05 — ARCHITECTURE */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+        <div data-maglock-section-header className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 05
           </p>
@@ -241,7 +241,7 @@ export default function MagLockPage() {
 
       {/* § 06 — LOCK FIRMWARE */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+        <div data-maglock-section-header className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 06
           </p>
@@ -284,7 +284,10 @@ export default function MagLockPage() {
             Door state is deliberately NOT persisted to NVS — the device always boots with both
             doors locked.
           </p>
-          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+          <pre
+            data-maglock-brackets
+            className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed"
+          >
             {`void setup() {
   Serial.begin(115200);
   pinMode(RELAY1_PIN, OUTPUT);
@@ -320,7 +323,7 @@ export default function MagLockPage() {
 
       {/* § 07 — CAMERA FIRMWARE */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+        <div data-maglock-section-header className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 07
           </p>
@@ -353,7 +356,10 @@ export default function MagLockPage() {
             from a 240MHz chip. The streaming task is pinned to core 1 with an 8KB stack, leaving
             core 0 free for the WebServer:
           </p>
-          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+          <pre
+            data-maglock-brackets
+            className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed"
+          >
             {`void streamTask(void* arg) {
   WiFiClient* client = (WiFiClient*)arg;
   client->print("HTTP/1.1 200 OK\\r\\nContent-Type: "
@@ -399,7 +405,7 @@ export default function MagLockPage() {
 
       {/* § 08 — FLUTTER APP */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+        <div data-maglock-section-header className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 08
           </p>
@@ -432,7 +438,10 @@ export default function MagLockPage() {
             <code className="font-mono text-sm">gaplessPlayback: true</code>, Flutter would flash a
             blank frame between bytes.
           </p>
-          <pre className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed">
+          <pre
+            data-maglock-brackets
+            className="overflow-x-auto border-2 border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 font-mono text-[11px] leading-relaxed"
+          >
             {`List<int> buf = [];
 _streamSub = res.stream.listen((chunk) {
   buf.addAll(chunk);
@@ -488,7 +497,7 @@ _streamSub = res.stream.listen((chunk) {
 
       {/* § 09 — MAGGY VOICE ASSISTANT */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+        <div data-maglock-section-header className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 09
           </p>
@@ -565,7 +574,7 @@ _streamSub = res.stream.listen((chunk) {
 
       {/* § 10 — LIMITATIONS */}
       <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+        <div data-maglock-section-header className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 10
           </p>
@@ -627,7 +636,7 @@ _streamSub = res.stream.listen((chunk) {
 
       {/* § 11 — NUMBERS */}
       <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
+        <div data-maglock-section-header className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 11
           </p>
