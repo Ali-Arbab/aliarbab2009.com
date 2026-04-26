@@ -75,7 +75,11 @@
    site-default brutalist tokens inside project detail routes.
    ============================================================ */
 
+/* ── StockSaathi: teal accent, dark default + cream-light variant ── */
+
 .theme-stocksaathi {
+  /* DARK variant — applied when site is dark (default), or when
+     the data-theme attribute hasn't been set yet (SSR phase). */
   --color-bg: #0a0b0f;
   --color-fg: #e8ecef;
   --color-muted: #8892a0;
@@ -89,7 +93,25 @@
   --radius-base: 12px;
 }
 
+:root[data-theme="light"] .theme-stocksaathi {
+  /* LIGHT variant — cream surface + darker teal accent for AAA
+     contrast on cream. Brand identity preserved via the teal hue. */
+  --color-bg: #f4f4f0;
+  --color-fg: #0f1419;
+  --color-muted: #4a5568;
+  --color-primary: #006d52;
+  --color-primary-fg: #f4f4f0;
+  --color-surface: #f4f4f0;
+  --color-surface-2: #ebebe5;
+  --color-border: #c5c5be;
+  --color-glow: color-mix(in oklch, #006d52, transparent 70%);
+}
+
+/* ── BolHisaab: indigo accent, cream default + dark variant ── */
+
 .theme-bolhisaab {
+  /* LIGHT variant — cream surface, indigo accent. The original
+     "indigo on cream" world identity. */
   --color-bg: #fafaf9;
   --color-fg: #18181b;
   --color-muted: #71717a;
@@ -105,7 +127,27 @@
   color-scheme: light;
 }
 
+:root[data-theme="dark"] .theme-bolhisaab {
+  /* DARK variant — deep indigo-tinted near-black surface, lighter
+     indigo accent that reads cleanly against it. Preserves the
+     indigo brand identity in dark site mode. */
+  --color-bg: #0e0e1a;
+  --color-fg: #ebeaff;
+  --color-muted: #8b8ba9;
+  --color-primary: #818cf8;
+  --color-primary-fg: #0e0e1a;
+  --color-surface: #0e0e1a;
+  --color-surface-2: #16162a;
+  --color-border: #2c2c52;
+  --color-glow: color-mix(in oklch, #818cf8, transparent 60%);
+  color-scheme: dark;
+}
+
+/* ── MagLock: neon-green accent, pure-black default + cream variant ── */
+
 .theme-maglock {
+  /* DARK variant — pure-black surface, neon-green accent. The
+     sci-fi terminal world identity. */
   --color-bg: #030306;
   --color-fg: #b8c4d8;
   --color-muted: #7080a0;
@@ -118,6 +160,21 @@
   --color-warning: #ffd700;
   --color-glow: color-mix(in oklch, #00ff9d, transparent 50%);
   --radius-base: 2px;
+}
+
+:root[data-theme="light"] .theme-maglock {
+  /* LIGHT variant — cream surface, darker green accent for AAA
+     contrast. Loses the pure-black terminal vibe but stays
+     readable for visitors who've explicitly chosen light mode. */
+  --color-bg: #f4f4f0;
+  --color-fg: #0a0a0a;
+  --color-muted: #4a5568;
+  --color-primary: #006d4a;
+  --color-primary-fg: #f4f4f0;
+  --color-surface: #f4f4f0;
+  --color-surface-2: #ebebe5;
+  --color-border: #0a0a0a;
+  --color-glow: color-mix(in oklch, #006d4a, transparent 70%);
 }
 
 /* ============================================================
