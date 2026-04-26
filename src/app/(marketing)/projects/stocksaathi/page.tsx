@@ -170,20 +170,13 @@ export default function StockSaathiPage() {
       </section>
 
       {/* § 04 — ORIGIN (problem · why me · learned + pull-quote) */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
-        <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 04
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Origin
-          </p>
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
+        <div className="col-span-12 flex flex-col gap-1 md:col-span-2">
+          <p data-ss-section-number>§ 04</p>
+          <p data-ss-section-label>Origin</p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <div
-            data-ss-card-hover
-            className="border-2 border-[var(--color-border)] p-8 transition-colors"
-          >
+          <div data-ss-rounded-card className="px-8 py-8 transition-colors">
             <OriginBlock slug="stocksaathi" />
           </div>
         </div>
