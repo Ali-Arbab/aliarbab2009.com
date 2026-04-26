@@ -118,6 +118,12 @@ export default function BolHisaabPage() {
               className="border-b-2 border-[var(--color-border)] p-6 md:border-r-2 md:border-b-0"
             >
               <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
+                <span
+                  data-bh-icon-badge
+                  className="mr-2 inline-flex h-6 w-6 items-center justify-center align-middle"
+                >
+                  🛒
+                </span>
                 Production
               </p>
               <p className="mt-2 font-mono text-lg font-medium text-[var(--color-muted)]">
@@ -129,6 +135,12 @@ export default function BolHisaabPage() {
             </li>
             <li data-bh-rounded-card className="p-6">
               <p className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase">
+                <span
+                  data-bh-icon-badge
+                  className="mr-2 inline-flex h-6 w-6 items-center justify-center align-middle"
+                >
+                  🐙
+                </span>
                 Source
               </p>
               <Link
@@ -182,7 +194,9 @@ export default function BolHisaabPage() {
           </p>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <OriginBlock slug="bolhisaab" />
+          <div data-bh-rounded-card className="p-8">
+            <OriginBlock slug="bolhisaab" />
+          </div>
         </div>
       </section>
 
