@@ -164,22 +164,17 @@ export default function BolHisaabPage() {
       </section>
 
       {/* § 03 — STACK */}
-      <section className="mb-20 grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section className="mb-20 grid grid-cols-12 gap-4 pt-10">
         <div className="col-span-12 md:col-span-2">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
-            § 03
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-primary)] uppercase">
-            Stack
-          </p>
+          <div data-bh-section-header>
+            <span data-bh-section-badge>03</span>
+            <span data-bh-section-label>Stack</span>
+          </div>
         </div>
         <div className="col-span-12 md:col-span-10">
-          <ul className="flex flex-wrap gap-0">
+          <ul className="flex flex-wrap gap-2">
             {project.stack.map((tech) => (
-              <li
-                key={tech}
-                className="-mr-px -mb-px rounded-2xl border border-[var(--color-border)] px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-fg)]"
-              >
+              <li key={tech} data-bh-stack-pill>
                 {tech}
               </li>
             ))}
