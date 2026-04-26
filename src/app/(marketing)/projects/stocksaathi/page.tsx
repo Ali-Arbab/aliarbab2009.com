@@ -75,8 +75,8 @@ export default function StockSaathiPage() {
         </div>
         <div className="col-span-12 flex flex-col gap-8 md:col-span-10">
           <h1
-            className="text-[clamp(3rem,7vw,6rem)] leading-[0.9] font-medium tracking-[-0.02em] text-[var(--color-primary)]"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(3.5rem,8vw,7rem)] leading-[0.9] font-medium tracking-[-0.02em] text-[var(--color-primary)]"
+            style={{ fontFamily: "var(--font-display)", fontFeatureSettings: '"ss01" 1' }}
           >
             {project.name}
           </h1>
@@ -121,6 +121,9 @@ export default function StockSaathiPage() {
               </Link>
               <p className="mt-2 font-mono text-[10px] tracking-[0.2em] text-[var(--color-muted)] uppercase">
                 Live at Vercel · 3,000+ BSE/NSE stocks
+                <span data-ss-saffron-badge className="ml-2">
+                  India
+                </span>
               </p>
             </li>
             <li data-ss-card-hover className="p-6">
@@ -418,7 +421,10 @@ meta.indexDrop = Math.round(realDropPct * 10) / 10;`}
             className="text-[clamp(1.75rem,3vw,2.75rem)] leading-tight font-medium tracking-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            2,686 NSE equities and 13,969 mutual funds, refreshed before market open.
+            2,686 NSE equities and 13,969 mutual funds, refreshed before market open.{" "}
+            <span data-ss-saffron-badge className="ml-2 align-middle">
+              AMFI India
+            </span>
           </h2>
           <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             The instrument universe is built daily by two pure-Node (zero deps) scripts. The equity
