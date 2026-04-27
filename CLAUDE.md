@@ -30,6 +30,8 @@ The mode is controlled by `data-theme="dark"` / `data-theme="light"` on `<html>`
 
 Tokens live in `src/app/globals.css` as a root `@theme` block (dark) plus `:root[data-theme="light"]` override.
 
+`<ThemeToggle>` is a **pure-DOM server component (v3)** — no `"use client"`, no `useState`, no `useEffect`. It renders a static `<button>` followed by `<ThemeToggleScript>`, an async server component that emits an inline `<script nonce={...}>` (CSP-compliant) which binds the click handler via `document.currentScript.previousElementSibling` at HTML parse time. This means the toggle is interactive from first paint with zero hydration window — earlier React-driven implementations had a 50-300ms cold-load window where the button was painted but not interactive, causing first clicks to silently no-op. Both SVG icons render always; CSS picks the visible one via `:root[data-theme]` so first paint is always correct. The script also dispatches a `themechange` CustomEvent + listens for `storage` events so palette-driven flips and cross-tab flips both keep the aria-label fresh. Do NOT re-introduce React state to `<ThemeToggle>` — the hydration race it creates is exactly why this rewrite exists.
+
 ### Per-project theming
 
 Project detail pages (`/projects/<slug>`) each wrap their `<main>` in a `.theme-<slug>` class that overrides the brutalist tokens. Three project worlds live in `src/app/globals.css`: `.theme-stocksaathi` (teal on deep-black), `.theme-bolhisaab` (indigo on cream), `.theme-maglock` (neon green on pure black). Shell (nav, footer) stays on the site-default brutalist tokens, so visitors feel "inside Ali's site but now in a project's world."
