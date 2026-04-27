@@ -22,7 +22,14 @@ export function ThemeToggle() {
   }, []);
 
   const toggle = () => {
-    const next: Theme = theme === "dark" ? "light" : "dark";
+    // Read the LIVE data-theme attribute at click time rather than relying
+    // on React state. ThemeScript writes data-theme pre-paint and any
+    // intermediate route navigation can mutate it; relying on closure
+    // state introduced a 2-click bug where the first click "computed"
+    // the next theme from a stale value, set it to the SAME visual state,
+    // and only the second click actually flipped.
+    const current: Theme = (document.documentElement.dataset.theme as Theme) || (theme ?? "dark");
+    const next: Theme = current === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     try {
       localStorage.setItem("theme", next);
