@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,20 +21,25 @@ import { cn } from "@/lib/utils";
  *   idle → submitting → (success | error)
  *   error allows retry; success holds the success copy.
  *
+ * Error UX:
+ *   - The API returns { error, fieldErrors? } where fieldErrors is
+ *     keyed by name/email/message with a friendly per-field message.
+ *   - We surface those inline under each field (red hairline border +
+ *     <p role="alert">) AND keep the top-level error banner for any
+ *     non-field error (network, 503 no-resend, etc.).
+ *   - Editing a field clears its inline error so the user gets fast
+ *     feedback that they're heading in the right direction.
+ *
  * Privacy: no field values are logged or persisted client-side
  * beyond what the user types into the form. On success, the form
  * resets so the message isn't held in DOM/state.
  *
- * A11y:
- *   - Each input has a <label> with for/id
- *   - aria-invalid on field error
- *   - role=\"status\" / role=\"alert\" on success/error blocks
- *   - aria-live=\"polite\" so screen readers announce state changes
- *   - Honeypot has tabIndex=-1 and aria-hidden=\"true\" so keyboard users
- *     and SR users skip it entirely
+ * A11y: <label> with for/id + aria-invalid + aria-describedby on
+ * fields with errors; role=status / role=alert; honeypot off-screen.
  */
 
 type FormState = "idle" | "submitting" | "success" | "error";
+type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
 
 const inputClass = cn(
   "w-full border-2 border-[var(--color-border)] bg-[var(--color-bg)]",
@@ -50,11 +54,23 @@ const labelClass = "font-mono text-[10px] tracking-[0.25em] text-[var(--color-mu
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  function clearFieldError(field: keyof FieldErrors) {
+    setFieldErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+    if (state === "error") setState("idle");
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState("submitting");
     setErrorMsg("");
+    setFieldErrors({});
 
     const formData = new FormData(e.currentTarget);
     const body = {
@@ -70,7 +86,11 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        fieldErrors?: FieldErrors;
+      };
 
       if (res.ok && data.ok) {
         setState("success");
@@ -78,10 +98,13 @@ export function ContactForm() {
         return;
       }
 
+      if (data.fieldErrors && Object.keys(data.fieldErrors).length > 0) {
+        setFieldErrors(data.fieldErrors);
+      }
       setErrorMsg(data.error ?? "Something went wrong. Please try again.");
       setState("error");
     } catch {
-      setErrorMsg(`Network error. Try emailing me directly at ${siteConfig.email}.`);
+      setErrorMsg("Network error. Please check your connection and try again.");
       setState("error");
     }
   }
@@ -104,8 +127,11 @@ export function ContactForm() {
     );
   }
 
+  const isSubmitting = state === "submitting";
+
   return (
     <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5">
+      {/* NAME */}
       <div className="flex flex-col gap-2">
         <label htmlFor="contact-name" className={labelClass}>
           Name
@@ -119,10 +145,23 @@ export function ContactForm() {
           maxLength={100}
           autoComplete="name"
           className={inputClass}
-          disabled={state === "submitting"}
+          disabled={isSubmitting}
+          aria-invalid={fieldErrors.name ? true : undefined}
+          aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
+          onInput={() => clearFieldError("name")}
         />
+        {fieldErrors.name && (
+          <p
+            id="contact-name-error"
+            role="alert"
+            className="font-mono text-xs text-[var(--color-danger)]"
+          >
+            {fieldErrors.name}
+          </p>
+        )}
       </div>
 
+      {/* EMAIL */}
       <div className="flex flex-col gap-2">
         <label htmlFor="contact-email" className={labelClass}>
           Email
@@ -135,10 +174,23 @@ export function ContactForm() {
           maxLength={254}
           autoComplete="email"
           className={inputClass}
-          disabled={state === "submitting"}
+          disabled={isSubmitting}
+          aria-invalid={fieldErrors.email ? true : undefined}
+          aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
+          onInput={() => clearFieldError("email")}
         />
+        {fieldErrors.email && (
+          <p
+            id="contact-email-error"
+            role="alert"
+            className="font-mono text-xs text-[var(--color-danger)]"
+          >
+            {fieldErrors.email}
+          </p>
+        )}
       </div>
 
+      {/* MESSAGE */}
       <div className="flex flex-col gap-2">
         <label htmlFor="contact-message" className={labelClass}>
           Message
@@ -151,8 +203,27 @@ export function ContactForm() {
           maxLength={5000}
           rows={6}
           className={cn(inputClass, "resize-y")}
-          disabled={state === "submitting"}
+          disabled={isSubmitting}
+          aria-invalid={fieldErrors.message ? true : undefined}
+          aria-describedby={fieldErrors.message ? "contact-message-error" : "contact-message-hint"}
+          onInput={() => clearFieldError("message")}
         />
+        {fieldErrors.message ? (
+          <p
+            id="contact-message-error"
+            role="alert"
+            className="font-mono text-xs text-[var(--color-danger)]"
+          >
+            {fieldErrors.message}
+          </p>
+        ) : (
+          <p
+            id="contact-message-hint"
+            className="font-mono text-[10px] tracking-[0.15em] text-[var(--color-muted)] uppercase"
+          >
+            10–5000 characters · be specific so I can reply with something useful
+          </p>
+        )}
       </div>
 
       {/* Honeypot — hidden via off-screen positioning. Bots fill it,
@@ -167,7 +238,9 @@ export function ContactForm() {
         </label>
       </div>
 
-      {state === "error" && (
+      {/* Top-level error banner — only when we have a non-field error
+          (network, 503, etc.). Field-level errors render inline above. */}
+      {state === "error" && errorMsg && Object.keys(fieldErrors).length === 0 && (
         <p
           role="alert"
           aria-live="polite"
@@ -183,7 +256,7 @@ export function ContactForm() {
         </p>
         <button
           type="submit"
-          disabled={state === "submitting"}
+          disabled={isSubmitting}
           className={cn(
             "inline-flex items-center gap-3 border-2 border-[var(--color-border)]",
             "bg-[var(--color-primary)] px-5 py-3",
@@ -192,7 +265,7 @@ export function ContactForm() {
             "disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60",
           )}
         >
-          {state === "submitting" ? "Sending…" : "Send message"}
+          {isSubmitting ? "Sending…" : "Send message"}
         </button>
       </div>
     </form>
