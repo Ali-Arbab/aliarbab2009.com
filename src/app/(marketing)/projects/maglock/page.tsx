@@ -3,7 +3,10 @@ import Link from "next/link";
 
 import { getProjectBySlug } from "@/config/projects";
 import { siteConfig } from "@/config/site";
+import { MaglockCameraFeed } from "@/components/project/maglock-camera-feed";
 import MagLockControlPanel from "@/components/project/maglock-control-panel";
+import { MaglockMaggyVoice } from "@/components/project/maglock-maggy-voice";
+import { MaglockParticleField } from "@/components/project/maglock-particle-field";
 import { OriginBlock } from "@/components/project/origin-block";
 import { JsonLd } from "@/components/seo/json-ld";
 import { projectJsonLd } from "@/lib/json-ld";
@@ -84,23 +87,36 @@ export default function MagLockPage() {
           <div
             data-maglock-brackets
             data-maglock-neon-card
-            className="flex flex-col gap-8 p-8 md:p-10"
+            className="relative flex flex-col gap-8 overflow-hidden p-8 md:p-10"
           >
+            {/* Ambient particle field behind the headline — port of the
+                Flutter ParticleBackground. Pure decoration, aria-hidden,
+                pointer-events:none so it doesn't block clicks on the
+                control panel below. Reduced-motion drops to 15 static
+                particles + no scan-line sweep. */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-0"
+              style={{ opacity: 0.7 }}
+            >
+              <MaglockParticleField />
+            </div>
+
             <h1
               data-maglock-hud-heading
-              className="text-[clamp(3rem,7vw,6rem)] leading-[0.9] font-medium text-[var(--color-primary)]"
+              className="relative z-10 text-[clamp(3rem,7vw,6rem)] leading-[0.9] font-medium text-[var(--color-primary)]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {project.name}
             </h1>
             <p
               data-maglock-hud-heading
-              className="max-w-3xl text-[clamp(1.25rem,2vw,1.75rem)] leading-snug font-medium text-[var(--color-fg)]"
+              className="relative z-10 max-w-3xl text-[clamp(1.25rem,2vw,1.75rem)] leading-snug font-medium text-[var(--color-fg)]"
               style={{ fontFamily: "var(--font-display)", letterSpacing: "0.04em" }}
             >
               {project.tagline}.
             </p>
-            <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
+            <p className="relative z-10 max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
               {project.description}
             </p>
 
@@ -108,7 +124,7 @@ export default function MagLockPage() {
                 first thing past the headline is something the visitor can
                 actually click. State + countdown + activity log all run on
                 the client; no network. */}
-            <div className="mt-2">
+            <div className="relative z-10 mt-2">
               <MagLockControlPanel />
             </div>
           </div>
@@ -337,7 +353,8 @@ export default function MagLockPage() {
             </div>
           </div>
 
-          {/* Source link — kept as a smaller third panel */}
+          {/* Source link — kept as a smaller third panel. CTAs use the
+              ported NeonButton for tactile parity with the Flutter app. */}
           <div
             data-maglock-brackets
             className="flex flex-wrap items-center justify-between gap-3 border-2 p-4"
@@ -349,20 +366,52 @@ export default function MagLockPage() {
             <p data-maglock-uppercase-label data-size="sm">
               Source · Flutter · Dart · ESP32 · Arduino C++
             </p>
-            <Link
-              href={project.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-baseline gap-2 font-medium text-[var(--color-primary)] hover:opacity-80"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "14px",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-              }}
-            >
-              github.com/Ali-Arbab/MagLock-Protocol <span aria-hidden>↗</span>
-            </Link>
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2"
+                style={{
+                  fontFamily: "var(--font-orbitron), var(--font-display)",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  padding: "6px 12px",
+                  borderRadius: "2px",
+                  border: "1px solid color-mix(in srgb, var(--color-primary) 50%, transparent)",
+                  background: "color-mix(in srgb, var(--color-primary) 12%, transparent)",
+                  color: "var(--color-primary)",
+                  boxShadow: "0 0 6px color-mix(in srgb, var(--color-primary) 30%, transparent)",
+                  transition:
+                    "background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease",
+                }}
+              >
+                View source ↗
+              </Link>
+              <Link
+                href="#section-maggy"
+                className="inline-flex items-center gap-2"
+                style={{
+                  fontFamily: "var(--font-orbitron), var(--font-display)",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  padding: "6px 12px",
+                  borderRadius: "2px",
+                  border: "1px solid color-mix(in srgb, var(--color-secondary) 50%, transparent)",
+                  background: "color-mix(in srgb, var(--color-secondary) 12%, transparent)",
+                  color: "var(--color-secondary)",
+                  boxShadow: "0 0 6px color-mix(in srgb, var(--color-secondary) 30%, transparent)",
+                  transition:
+                    "background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease",
+                }}
+              >
+                Try Maggy ↓
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -583,7 +632,17 @@ export default function MagLockPage() {
             Init large, drop small. Three flags coordinate stream + snapshot.
           </h2>
 
-          {/* § 07 — MJPEG STREAM VIEWPORT MOCKUP */}
+          {/* § 07 — INTERACTIVE CAMERA-FEED MOCKUP — ports the
+              Flutter app's CameraFeedWidget. Snap, fullscreen, flash
+              brightness slider, periodic reconnect flicker — all
+              local state, no MJPEG over the wire. The static frame
+              mockup further down is kept for the explainer about
+              the "init large, drop small" buffer trick. */}
+          <div className="mx-auto mb-10 w-full max-w-[640px]">
+            <MaglockCameraFeed />
+          </div>
+
+          {/* § 07 — MJPEG STREAM VIEWPORT MOCKUP (static reference) */}
           <div
             data-maglock-brackets
             className="relative mx-auto w-full max-w-[640px] overflow-hidden border-2 bg-black"
@@ -910,7 +969,7 @@ _streamSub = res.stream.listen((chunk) {
       <div data-maglock-double-rule className="mb-10"></div>
 
       {/* § 09 — MAGGY VOICE ASSISTANT */}
-      <section className="mb-20 grid grid-cols-12 gap-4">
+      <section id="section-maggy" className="mb-20 grid grid-cols-12 gap-4">
         <div data-maglock-section-label className="col-span-12 md:col-span-2">
           <span>§ 09</span>
           <span>Maggy</span>
@@ -926,6 +985,15 @@ _streamSub = res.stream.listen((chunk) {
           >
             The lock is the system. The AI is icing.
           </h2>
+
+          {/* Interactive Maggy demo — port of the Flutter
+              MaggyVoiceWidget. Tap the mic to cycle through canned
+              Hinglish exchanges (lock door, query history, camera off,
+              status report). No real STT/TTS, all local state. */}
+          <div className="mx-auto mb-2 w-full max-w-xl">
+            <MaglockMaggyVoice />
+          </div>
+
           <p className="max-w-prose text-base leading-relaxed text-[var(--color-fg)]">
             <strong className="font-medium">Status: staged, mid-integration.</strong> Maggy lives in
             a sibling <code className="font-mono text-sm">maggy raw/</code> folder, not yet
