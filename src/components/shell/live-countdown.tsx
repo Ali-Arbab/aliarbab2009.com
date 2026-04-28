@@ -16,13 +16,22 @@ type Props = {
  * LiveCountdown — ticks purely from the client's local clock against
  * the ISO string baked into the bundle. No fetches, ever.
  *
- * - On mount, starts a 1s setInterval (60s under reduced-motion).
+ * - Initial render: shows the absolute date as text. Server and client
+ *   both compute this from the static ISO string, so it's identical
+ *   on both sides → no hydration text mismatch (which used to fire
+ *   React error #418 because useState's initializer ran with
+ *   different `new Date()` values on server vs. on client).
+ * - On mount, swaps to the live ticker (1s interval, 60s under
+ *   reduced-motion).
  * - On unmount, clears the interval.
  * - Past events render as "✓".
  * - Absolute date lives in a <time> tooltip so users can verify.
  */
 export function LiveCountdown({ iso, label, seconds = true, className }: Props) {
-  const [remaining, setRemaining] = useState(() => timeUntil(iso));
+  // Start with `null` so server and client render identically. The
+  // useEffect below fills it in after hydration commits — no
+  // hydration mismatch, no error #418.
+  const [remaining, setRemaining] = useState<ReturnType<typeof timeUntil> | null>(null);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -35,7 +44,10 @@ export function LiveCountdown({ iso, label, seconds = true, className }: Props) 
   }, [iso]);
 
   const absolute = formatAbsoluteDate(iso);
-  const formatted = formatTimeRemaining(remaining, { seconds });
+  // Pre-hydration / pre-mount: render the absolute date so server and
+  // client always emit the same string. After mount, swap to the
+  // ticking countdown.
+  const formatted = remaining ? formatTimeRemaining(remaining, { seconds }) : absolute;
 
   return (
     <time
@@ -43,7 +55,7 @@ export function LiveCountdown({ iso, label, seconds = true, className }: Props) 
       title={absolute}
       className={cn(
         "inline-flex items-baseline gap-1.5 font-mono tabular-nums",
-        remaining.past && "text-[var(--color-success)]",
+        remaining?.past && "text-[var(--color-success)]",
         className,
       )}
     >
