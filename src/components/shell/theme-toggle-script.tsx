@@ -1,5 +1,3 @@
-import { headers } from "next/headers";
-
 /**
  * Inline-script body for the ThemeToggle button.
  *
@@ -59,19 +57,24 @@ export const THEME_TOGGLE_SCRIPT = `(function(){
 })();`;
 
 /**
- * <ThemeToggleScript /> — server component that emits the inline
- * <script> tag stamped with the per-request CSP nonce from middleware.
+ * <ThemeToggleScript /> — synchronous server component that emits the
+ * inline <script> tag stamped with the per-request CSP nonce.
  *
- * Must be rendered IMMEDIATELY AFTER a <button data-theme-toggle> in the
- * DOM tree — the inline script binds to the script's
- * previousElementSibling. Render order matters; do not interleave other
- * elements between the button and this component.
+ * The nonce is passed in as a prop instead of awaited via headers()
+ * inside this component. Reason: async server components in Next 15 /
+ * React 19 stream their output via RSC (`self.__next_f.push(...)`),
+ * which encodes the script content as JSON inside an RSC payload
+ * instead of rendering a real executable <script> tag pre-paint. The
+ * earlier async version meant the toggle's click handler only got
+ * bound AFTER hydration — first clicks during the cold-load hydration
+ * window silently no-op'd. The nonce comes from the topmost layout
+ * (root or marketing) which awaits headers() once and passes the
+ * value down through props.
  *
- * Reads the nonce the same way <ThemeScript> does. Strict CSP allows
- * nonce-attributed inline scripts via 'strict-dynamic' + 'nonce-...'
- * source expressions in middleware.ts.
+ * Must be rendered IMMEDIATELY AFTER a <button data-theme-toggle> in
+ * the DOM tree — the inline script binds via currentScript's
+ * previousElementSibling. Don't interleave anything between them.
  */
-export async function ThemeToggleScript() {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
+export function ThemeToggleScript({ nonce }: { nonce?: string }) {
   return <script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_TOGGLE_SCRIPT }} />;
 }
