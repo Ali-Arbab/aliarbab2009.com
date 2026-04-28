@@ -63,7 +63,7 @@ When AP scores release in July 2026, adding `score: 5` to the relevant milestone
 
 ## Privacy
 
-The deployed site publishes only: Ali Arbab (name), GitHub handle `aliarbab2009`, Class XII status, the three projects, AP exam countdowns, the HTML resume.
+The deployed site publishes only: Ali Arbab (name), GitHub handle `Ali-Arbab`, Class XII status, the three projects, AP exam countdowns, the HTML resume.
 
 It does **not** publish: city, school, phone, timezone, raw Gmail, any specific college name, any application deadline, any decision date. The `privacy-audit` script enforces this on every build by grepping `.next/server`, `.next/static`, and `public/` for a forbidden-token list (with three severity tiers — HIGH always fails, MEDIUM fails under `STRICT_PRIVACY=1`, LOW reports only).
 
