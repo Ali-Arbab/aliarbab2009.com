@@ -361,7 +361,7 @@ export default function MagLockPage() {
                 textTransform: "uppercase",
               }}
             >
-              github.com/aliarbab2009/MagLock-Protocol <span aria-hidden>↗</span>
+              github.com/Ali-Arbab/MagLock-Protocol <span aria-hidden>↗</span>
             </Link>
           </div>
         </div>

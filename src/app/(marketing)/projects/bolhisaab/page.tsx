@@ -149,7 +149,7 @@ export default function BolHisaabPage() {
                 rel="noreferrer"
                 className="mt-4 inline-flex items-baseline gap-2 font-mono text-lg font-medium hover:text-[var(--color-primary)]"
               >
-                github.com/aliarbab2009/BolHisaab <span aria-hidden>↗</span>
+                github.com/Ali-Arbab/BolHisaab <span aria-hidden>↗</span>
               </Link>
               <p className="mt-2 text-xs text-[var(--color-muted)]">
                 Next 16 · Supabase · Sarvam · Groq Llama 3.1 / 3.3

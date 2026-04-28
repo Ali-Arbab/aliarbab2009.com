@@ -135,7 +135,7 @@ export default function StockSaathiPage() {
                 rel="noreferrer"
                 className="inline-flex items-baseline gap-2 font-mono text-lg font-semibold text-[var(--color-fg)] hover:text-[var(--color-primary)]"
               >
-                github.com/aliarbab2009/StockSaathi <span aria-hidden>↗</span>
+                github.com/Ali-Arbab/StockSaathi <span aria-hidden>↗</span>
               </Link>
               <p className="text-[12px] text-[var(--color-muted)]">
                 Vanilla ES Modules · Python · Supabase · Multi-provider LLM
