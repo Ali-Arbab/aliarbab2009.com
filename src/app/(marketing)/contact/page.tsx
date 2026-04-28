@@ -89,20 +89,27 @@ export default function ContactPage() {
           </p>
         </div>
         <div className="col-span-12 md:col-span-10">
+          {/* Channels — the primary path is the form below. The
+              "Email" channel is a same-page anchor to the form (NOT
+              a mailto: link) because mailto opens the OS's default
+              mail app and the user explicitly does not want that
+              popup as part of the flow. The form delivers via Resend
+              with no client-side handoff. The GitHub channel stays
+              external because it actually goes to a different site. */}
           <ul className="grid grid-cols-1 gap-0 border-2 border-[var(--color-border)] md:grid-cols-2">
             <li className="border-b-2 border-[var(--color-border)] md:border-r-2 md:border-b-0">
               <a
-                href={`mailto:${siteConfig.email}`}
+                href="#contact-form"
                 className="group flex items-baseline justify-between p-6 transition-colors hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-fg)]"
               >
                 <span className="flex flex-col gap-1">
                   <span className="font-mono text-[10px] tracking-[0.25em] text-[var(--color-muted)] uppercase group-hover:text-[var(--color-primary-fg)]">
-                    Email
+                    Send a message
                   </span>
-                  <span className="font-mono text-lg font-medium">{siteConfig.email}</span>
+                  <span className="font-mono text-lg font-medium">→ Use the form below</span>
                 </span>
                 <span aria-hidden className="font-mono text-lg">
-                  →
+                  ↓
                 </span>
               </a>
             </li>
@@ -129,7 +136,10 @@ export default function ContactPage() {
       </section>
 
       {/* § 03 — CONTACT FORM */}
-      <section className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10">
+      <section
+        id="contact-form"
+        className="grid grid-cols-12 gap-4 border-t-2 border-[var(--color-border)] pt-10"
+      >
         <div className="col-span-12 md:col-span-2">
           <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-muted)] uppercase">
             § 03
