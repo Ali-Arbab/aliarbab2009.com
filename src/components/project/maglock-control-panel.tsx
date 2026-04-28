@@ -369,6 +369,13 @@ export default function MagLockControlPanel() {
         />
       </div>
 
+      {/* Auto-lock timer slider — ports the Flutter app's settings dial */}
+      <AutoLockSlider
+        value={state.autoLockSeconds}
+        active={state.door1 === "unlocked" || state.door2 === "unlocked"}
+        onChange={(v) => dispatch({ type: "SET_AUTO_LOCK_SECONDS", value: v })}
+      />
+
       {/* Activity log strip */}
       <div
         className="border-t-2 px-4 py-2"
@@ -541,6 +548,97 @@ function DoorCard({ id, state, countdown, onToggle, reducedMotion, isFirst }: Do
       >
         {buttonLabel}
       </button>
+    </div>
+  );
+}
+
+type AutoLockSliderProps = {
+  value: number;
+  active: boolean;
+  onChange: (value: number) => void;
+};
+
+/**
+ * <AutoLockSlider /> — porting the Flutter app's "◈ AUTO-LOCK TIMER"
+ * dial (lib/widgets/timer_dial_widget.dart) to a web range input.
+ *
+ * Behaviour:
+ *   - Range matches the Flutter slider: [3, 120] seconds, step 1.
+ *   - Header label + current value are always visible.
+ *   - Default colour is neon-green (var(--color-primary)). When `active`
+ *     is true (any door currently unlocked + counting down), the
+ *     header + thumb fill flip to amber to mirror the Flutter dial's
+ *     "active" state. Implemented by toggling [data-maglock-slider-active].
+ *   - The visual track styling lives in globals.css under
+ *     [data-maglock-slider]; this component only renders semantic markup.
+ */
+function AutoLockSlider({ value, active, onChange }: AutoLockSliderProps) {
+  const labelColor = active ? "var(--color-warning)" : "var(--color-primary)";
+  return (
+    <div
+      data-maglock-slider
+      data-maglock-slider-active={active ? "" : undefined}
+      className="px-4 py-3"
+      style={{
+        borderTop: `2px solid color-mix(in srgb, ${labelColor} 40%, transparent)`,
+        background: `color-mix(in srgb, ${labelColor} 4%, transparent)`,
+      }}
+    >
+      <div className="mb-2 flex items-center justify-between">
+        <label
+          htmlFor="maglock-autolock-slider"
+          style={{
+            fontFamily: "var(--font-orbitron), var(--font-display)",
+            fontSize: "10px",
+            fontWeight: 700,
+            letterSpacing: "0.4em",
+            textTransform: "uppercase",
+            color: labelColor,
+            transition: "color 240ms ease",
+          }}
+        >
+          ◈ AUTO-LOCK TIMER
+        </label>
+        <span
+          aria-live="polite"
+          style={{
+            fontFamily: "var(--font-vt323), var(--font-mono)",
+            fontSize: "16px",
+            color: labelColor,
+            letterSpacing: "0.05em",
+            transition: "color 240ms ease",
+          }}
+        >
+          {value}s
+        </span>
+      </div>
+      <input
+        id="maglock-autolock-slider"
+        type="range"
+        min={AUTO_LOCK_MIN_SECONDS}
+        max={AUTO_LOCK_MAX_SECONDS}
+        step={1}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        aria-label="Auto-lock timer in seconds"
+        aria-valuemin={AUTO_LOCK_MIN_SECONDS}
+        aria-valuemax={AUTO_LOCK_MAX_SECONDS}
+        aria-valuenow={value}
+        className="w-full"
+      />
+      <div
+        className="mt-1 flex justify-between"
+        style={{
+          fontFamily: "var(--font-vt323), var(--font-mono)",
+          fontSize: "11px",
+          color: "color-mix(in srgb, var(--color-primary) 50%, var(--color-muted))",
+          letterSpacing: "0.1em",
+        }}
+        aria-hidden
+      >
+        <span>{AUTO_LOCK_MIN_SECONDS}s</span>
+        <span>{AUTO_LOCK_MAX_SECONDS}s</span>
+      </div>
     </div>
   );
 }
