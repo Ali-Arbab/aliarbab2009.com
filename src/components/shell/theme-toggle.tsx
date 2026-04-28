@@ -12,8 +12,13 @@ import { ThemeToggleScript } from "@/components/shell/theme-toggle-script";
  * Icons are CSS-driven: both SVGs always render, globals.css picks the
  * visible one based on :root[data-theme]. aria-label specialises after
  * the inline script binds (via syncLabel()) without going through React.
+ *
+ * `nonce` is the per-request CSP nonce, plumbed in as a prop from the
+ * marketing layout (which awaits headers() once at the top of its
+ * subtree). Don't add a default — if it's missing, the inline script
+ * will be silently CSP-blocked and the toggle will appear dead.
  */
-export function ThemeToggle() {
+export function ThemeToggle({ nonce }: { nonce?: string }) {
   return (
     <>
       <button
@@ -51,7 +56,7 @@ export function ThemeToggle() {
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
       </button>
-      <ThemeToggleScript />
+      <ThemeToggleScript nonce={nonce} />
     </>
   );
 }

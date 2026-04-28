@@ -5,7 +5,15 @@ import { ThemeToggle } from "@/components/shell/theme-toggle";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-export function Nav() {
+/**
+ * Site nav. Receives `nonce` and forwards it to <ThemeToggle> so the
+ * inline theme-flip <script> can be CSP-allowed. The nonce comes from
+ * the marketing layout, which awaits headers() at the top of its
+ * server subtree. We deliberately don't read headers() here — that
+ * would push <Nav> into RSC streaming and the toggle's inline script
+ * would arrive AFTER hydration (silent first-click no-op on cold load).
+ */
+export function Nav({ nonce }: { nonce?: string }) {
   return (
     <header
       className={cn(
@@ -39,7 +47,7 @@ export function Nav() {
             ))}
           </ul>
           <CommandPaletteTrigger />
-          <ThemeToggle />
+          <ThemeToggle nonce={nonce} />
         </div>
       </nav>
     </header>
