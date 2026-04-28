@@ -33,7 +33,7 @@ describe("siteConfig", () => {
 
   it("github + githubHandle agree on the same handle", () => {
     expect(siteConfig.github).toBe(`https://github.com/${siteConfig.githubHandle}`);
-    expect(siteConfig.githubHandle).toBe("aliarbab2009");
+    expect(siteConfig.githubHandle).toBe("Ali-Arbab");
   });
 
   it("lastReviewedISO is YYYY-MM-DD shaped", () => {
